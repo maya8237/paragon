@@ -84,7 +84,13 @@ function line(from: Location['id'], to: Location['id']): string {
  * be a dead end. Real <a href> elements rather than click handlers, so the
  * nodes are keyboard-operable and the browser handles the scroll itself.
  */
-export function CorridorMap({ linked = false }: { linked?: boolean }) {
+export function CorridorMap({
+  linked = false,
+  onNodeClick,
+}: {
+  linked?: boolean
+  onNodeClick?: (id: Location['id']) => void
+}) {
   const { t } = useT()
   const nodes = t.home.networkNodes
 
@@ -162,6 +168,7 @@ export function CorridorMap({ linked = false }: { linked?: boolean }) {
                     <a
                       href={`#${node.id}`}
                       className={s.nodeLink}
+                      onClick={linked ? () => onNodeClick?.(node.id) : undefined}
                       aria-label={`${node.name} — ${node.role}. ${t.common.jumpToLocation}`}
                     >
                       {marks}
@@ -183,7 +190,11 @@ export function CorridorMap({ linked = false }: { linked?: boolean }) {
           const Row = linked ? 'a' : 'div'
           return (
             <li key={node.id} className={s.nodeListItem}>
-              <Row className={s.nodeListRow} href={linked ? `#${node.id}` : undefined}>
+              <Row
+                className={s.nodeListRow}
+                href={linked ? `#${node.id}` : undefined}
+                onClick={linked ? () => onNodeClick?.(node.id) : undefined}
+              >
                 <span className={s.nodeListDot} aria-hidden="true" />
                 <span className={s.nodeListName}>{node.name}</span>
                 <span className={s.nodeListRole}>{node.role}</span>

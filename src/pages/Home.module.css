@@ -36,6 +36,12 @@
   font-size: var(--step-5);
 }
 
+:global(:root:lang(he)) .heroTitle {
+  max-inline-size: 7ch;
+  font-size: var(--step-4);
+  line-height: 0.95;
+}
+
 .heroLede {
   color: var(--slate);
   font-size: var(--step-1);

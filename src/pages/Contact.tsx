@@ -1,13 +1,27 @@
+import { useEffect, useState } from 'react'
 import { Grid, PageHeader, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, LocationCard, ModeTag } from '../components/bits'
 import { CorridorMap } from '../components/CorridorMap'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
+import type { Location } from '../content/types'
 
 export default function Contact() {
+  const [flashedLocation, setFlashedLocation] = useState<Location['id'] | null>(null)
   const { t } = useT()
   const c = t.contact
   usePageMeta(c.meta)
+
+  useEffect(() => {
+    if (!flashedLocation) return
+    const timeout = window.setTimeout(() => setFlashedLocation(null), 1000)
+    return () => window.clearTimeout(timeout)
+  }, [flashedLocation])
+
+  function flashLocation(id: Location['id']) {
+    setFlashedLocation(null)
+    window.requestAnimationFrame(() => setFlashedLocation(id))
+  }
 
   return (
     <>
@@ -15,14 +29,18 @@ export default function Contact() {
 
       {/* The same five nodes the hero draws — this page is where their data lives. */}
       <Section tight>
-        <CorridorMap />
+        <CorridorMap linked onNodeClick={flashLocation} />
       </Section>
 
       <Section tight labelledBy="locations-heading">
         <SectionHead heading={c.intro} id="locations-heading" />
         <Grid wide>
           {c.locations.map((location) => (
-            <LocationCard key={location.id} location={location} />
+            <LocationCard
+              key={location.id}
+              location={location}
+              flash={flashedLocation === location.id}
+            />
           ))}
         </Grid>
       </Section>

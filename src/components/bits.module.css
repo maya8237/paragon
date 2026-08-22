@@ -153,6 +153,17 @@
   gap: var(--space-xs);
 }
 
+.locationFlash {
+  animation: contactLocationFlash 1000ms var(--ease);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locationFlash {
+    animation: none;
+    border-color: var(--transit);
+  }
+}
+
 .locationHead {
   display: flex;
   align-items: baseline;

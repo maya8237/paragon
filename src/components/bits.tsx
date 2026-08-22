@@ -111,10 +111,10 @@ function telHref(value: string): string {
   return `tel:${digits.startsWith('+') ? digits : `+972${digits.replace(/^0/, '')}`}`
 }
 
-export function LocationCard({ location }: { location: Location }) {
+export function LocationCard({ location, flash = false }: { location: Location; flash?: boolean }) {
   const { t } = useT()
   return (
-    <article className={s.location} id={location.id}>
+    <article className={flash ? `${s.location} ${s.locationFlash}` : s.location} id={location.id}>
       <div className={s.locationHead}>
         <h3 className={s.locationName}>{location.name}</h3>
       </div>

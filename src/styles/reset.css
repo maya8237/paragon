@@ -90,6 +90,20 @@ a:hover {
   scroll-margin-block-start: 6rem;
 }
 
+@keyframes contactLocationFlash {
+  0%,
+  100% {
+    border-color: var(--hairline);
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  35%,
+  65% {
+    border-color: var(--transit);
+    box-shadow: 0 0 0 3px rgb(79 194 107 / 0.28);
+  }
+}
+
 /* Utility: visible only to assistive tech. */
 .sr-only {
   position: absolute;
