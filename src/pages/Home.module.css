@@ -33,11 +33,12 @@
 }
 
 .heroTitle {
-  font-size: var(--step-5);
+  font-size: var(--step-4);
 }
 
 :global(:root:lang(he)) .heroTitle {
-  max-inline-size: 7ch;
+  max-inline-size: none;
+  white-space: nowrap;
   font-size: var(--step-4);
   line-height: 0.95;
 }
