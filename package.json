@@ -7,7 +7,7 @@
     "dev": "bun --hot ./dev.ts",
     "build": "bun run typecheck && bun build ./index.html --outdir=dist --minify --sourcemap=linked && bun run build:public",
     "build:public": "bun --eval \"const{cpSync}=require('node:fs');cpSync('public','dist',{recursive:true})\"",
-    "build:pages": "bun run build && bun --eval \"const{readFileSync,writeFileSync,copyFileSync}=require('node:fs');const base=(process.env.GITHUB_REPOSITORY??process.env.CI_PROJECT_NAME??'').split('/').pop();if(base){const file='dist/index.html';writeFileSync(file,readFileSync(file,'utf8').replaceAll('=\\\"./','=\\\"/'+base+'/'));}copyFileSync('dist/index.html','dist/404.html')\"",
+    "build:pages": "bun run build && bun --eval \"const{readFileSync,writeFileSync}=require('node:fs');const base=(process.env.GITHUB_REPOSITORY??process.env.CI_PROJECT_NAME??'').split('/').pop();if(base){const file='dist/index.html';writeFileSync(file,readFileSync(file,'utf8').replaceAll('=\\\"./','=\\\"/'+base+'/'));}\"",
     "typecheck": "tsc --noEmit",
     "preview": "bun run ./serve-dist.ts"
   },
