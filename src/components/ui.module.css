@@ -1,0 +1,388 @@
+/* Shared layout primitives. Everything here uses logical properties so RTL
+   mirrors without a single direction-specific rule. */
+
+.container {
+  inline-size: 100%;
+  max-inline-size: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.narrow {
+  max-inline-size: var(--container-narrow);
+}
+
+.section {
+  padding-block: var(--space-2xl);
+}
+
+.sectionTight {
+  padding-block: var(--space-xl);
+}
+
+/* The page's single value inversion — Tracking and Nippon ride in this band. */
+.inverted {
+  background: var(--ink);
+  color: var(--ink-text);
+}
+
+.inverted h1,
+.inverted h2,
+.inverted h3,
+.inverted h4 {
+  color: var(--white);
+}
+
+.inverted .sectionLede,
+.inverted p {
+  color: var(--ink-text);
+}
+
+.inverted a {
+  color: #8ec7f5;
+}
+
+.inverted a:hover {
+  color: var(--white);
+}
+
+.inverted .divider {
+  background: var(--ink-hairline);
+}
+
+/*
+ * Everything below re-colours a component for the dark band. Each selector is
+ * deliberately at least as specific as the light-mode rule it overrides —
+ * `.prose p:first-of-type` and `.inverted a` both used to win here and left
+ * text at 1.0:1 and 3.5:1 respectively.
+ */
+.inverted .prose p,
+.inverted .prose p:first-of-type {
+  color: var(--ink-text);
+}
+
+.inverted .ticks li,
+.inverted .steps li {
+  color: var(--ink-text);
+}
+
+.inverted .steps li::before {
+  color: #8ec7f5;
+}
+
+.inverted .btnPrimary {
+  background: var(--paragon);
+  color: var(--white);
+}
+
+/* Full inversion on hover — a darker blue would disappear into the band. */
+.inverted .btnPrimary:hover {
+  background: var(--white);
+  color: var(--ink);
+}
+
+.inverted .btnGhost {
+  color: var(--paragon);
+}
+
+.sectionHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-block-end: var(--space-l);
+}
+
+.sectionLede {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--slate);
+  max-inline-size: var(--measure);
+}
+
+.divider {
+  block-size: 1px;
+  background: var(--hairline);
+  border: 0;
+  margin-block: var(--space-xl);
+}
+
+/* Flat card: white on --paper, hairline border, no shadow ever. */
+.card {
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.cardLink:hover {
+  border-color: var(--signal);
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.cardLink:hover .cardTitle {
+  color: var(--paragon);
+}
+
+.cardTitle {
+  transition: color var(--dur) var(--ease);
+}
+
+.cardBody {
+  color: var(--slate);
+  font-size: var(--step-0);
+  max-inline-size: none;
+}
+
+/* Arrow that points along the reading direction in both scripts. */
+.cardArrow {
+  margin-block-start: auto;
+  padding-block-start: var(--space-s);
+  color: var(--paragon);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+.cardArrow::after {
+  content: '→';
+  margin-inline-start: 0.4em;
+  display: inline-block;
+}
+
+:global(:dir(rtl)) .cardArrow::after {
+  content: '←';
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+.grid2 {
+  display: grid;
+  gap: var(--space-l);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+
+/* Prose block: heading plus paragraphs. */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.prose h2,
+.prose h3 {
+  margin-block-end: var(--space-3xs);
+}
+
+.prose p {
+  color: var(--slate);
+}
+
+.prose p:first-of-type {
+  color: var(--text);
+}
+
+/* Ticked list used for every bullet set on the site. */
+.ticks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.ticks li {
+  position: relative;
+  padding-inline-start: 1.75rem;
+  color: var(--slate);
+}
+
+.ticks li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.5em;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: var(--transit);
+}
+
+/* Two-column dense list for the 13 logistics services. */
+.chips {
+  display: grid;
+  gap: var(--space-2xs) var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.chips li {
+  padding-block: var(--space-2xs);
+  border-block-end: var(--border);
+  color: var(--text);
+  font-size: var(--step-0);
+}
+
+/* Ordered framework list — numbers here are real sequence, unlike section tags. */
+.steps {
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-inline-start: 2.75rem;
+  color: var(--slate);
+  min-block-size: 1.75rem;
+}
+
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--paragon);
+  padding-block-start: 0.15em;
+}
+
+.pageHeader {
+  padding-block: var(--space-2xl) var(--space-l);
+  border-block-end: var(--border);
+  background: var(--surface);
+}
+
+.pageHeaderInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  align-items: center;
+  font-size: var(--step--1);
+  color: var(--slate);
+}
+
+.breadcrumb a {
+  color: var(--slate);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--paragon);
+  text-decoration: underline;
+}
+
+/* Sub-navigation for the Global Trade tree. */
+.subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-block-start: var(--space-s);
+}
+
+.subnavLink {
+  display: inline-block;
+  padding: var(--space-2xs) var(--space-s);
+  border: var(--border);
+  border-radius: 999px;
+  font-size: var(--step--1);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--slate);
+  background: var(--surface);
+  transition:
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.subnavLink:hover {
+  border-color: var(--signal);
+  color: var(--paragon);
+}
+
+.subnavLink[aria-current='page'] {
+  border-color: var(--transit);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+/* Buttons */
+.btnRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  margin-block-start: var(--space-m);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: var(--step-0);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.btnPrimary {
+  background: var(--paragon);
+  color: var(--white);
+}
+
+.btnPrimary:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.btnGhost {
+  border-color: var(--mist);
+  color: var(--paragon);
+  background: var(--surface);
+}
+
+.btnGhost:hover {
+  border-color: var(--signal);
+  color: var(--paragon);
+}
+
+/* Figure strip */
+.figures {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  border-block-start: var(--border);
+  padding-block-start: var(--space-l);
+}
+
+.inverted .figures {
+  border-block-start-color: var(--ink-hairline);
+}

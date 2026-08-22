@@ -1,0 +1,221 @@
+/*
+ * Structural device: mode tags, not numbers. Sections are typed by what they
+ * are (AIR / OCEAN / ROAD / WAREHOUSE / CUSTOMS), because the content is not
+ * a sequence and numbering it would be a lie.
+ */
+.modeTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--slate);
+  align-self: flex-start;
+}
+
+:global(:lang(he)) .modeTag {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.modeTag::before {
+  content: '';
+  inline-size: 1.5rem;
+  block-size: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/*
+ * `inverted` is a global class set by <Section inverted>, so it has to be
+ * escaped here — as a module-scoped selector this silently never matched and
+ * mode tags stayed --slate on the navy band at 2.99:1.
+ */
+:global(.inverted) .modeTag {
+  color: var(--ink-muted);
+}
+
+/* Figure: the number carries the credibility, so it is set large and tabular. */
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.figureValue {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-3);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+:global(:lang(he)) .figureValue {
+  letter-spacing: 0;
+}
+
+.figureLabel {
+  font-size: var(--step--1);
+  line-height: 1.35;
+  color: var(--slate);
+}
+
+:global(.inverted) .figureValue {
+  color: var(--white);
+}
+
+:global(.inverted) .figureLabel {
+  color: var(--ink-muted);
+}
+
+/* External link — always announces that it leaves the site. */
+.external {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4em;
+  font-weight: 500;
+}
+
+.externalIcon {
+  font-size: 0.8em;
+  opacity: 0.7;
+  /* The glyph points away from the page in LTR; mirror it for RTL. */
+  display: inline-block;
+}
+
+:global(:dir(rtl)) .externalIcon {
+  transform: scaleX(-1);
+}
+
+/* Certification list */
+.certList {
+  display: flex;
+  flex-direction: column;
+  border-block-start: var(--border);
+}
+
+.certItem {
+  border-block-end: var(--border);
+}
+
+.certLink {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-s);
+  padding-block: var(--space-s);
+  text-decoration: none;
+  color: var(--text);
+  transition: color var(--dur) var(--ease);
+}
+
+.certLink:hover {
+  color: var(--paragon);
+}
+
+.certLink:hover .certLabel {
+  text-decoration: underline;
+}
+
+/* --brass is reserved for credential marks and used nowhere else. */
+.certMark {
+  flex: none;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  color: var(--brass);
+  align-self: center;
+}
+
+.certLabel {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.certMeta {
+  flex: none;
+  font-size: var(--step--1);
+  color: var(--slate);
+}
+
+/* Location card */
+.location {
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.locationHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2xs);
+  flex-wrap: wrap;
+}
+
+.locationName {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-2);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.locationAddress {
+  font-style: normal;
+  color: var(--slate);
+  line-height: 1.55;
+}
+
+.contactList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3xs) var(--space-s);
+  align-items: baseline;
+  margin: 0;
+}
+
+.contactLabel {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--slate);
+  white-space: nowrap;
+}
+
+/*
+ * Below ~30em the two-column label/value grid cannot hold a long label —
+ * "נייד לתגובה מהירה (ארנסט)" pushed the Hebrew contact page to 336px on a
+ * 320px viewport. Stack instead and let the label wrap.
+ */
+@media (max-width: 30em) {
+  .contactList {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .contactLabel {
+    white-space: normal;
+    margin-block-start: var(--space-2xs);
+  }
+}
+
+.contactValue {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.contactValue a {
+  text-decoration: none;
+}
+
+.contactValue a:hover {
+  text-decoration: underline;
+}

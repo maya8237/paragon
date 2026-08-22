@@ -30,7 +30,7 @@ Corporate marketing/informational site for **Paragon Logistics Ltd.**, an Israel
 
 ### 2. About → Company Profile (`/63206.html`, nav target `/63205.html` redirects here)
 Sub-nav: *Company profile* | *Environmental awareness*
-- Long-form company profile: who Paragon is, personnel/personal attention (CEO **Marcello Iellin**, founder), description of the 3,000 sqm logistic center in central Israel, "expanding your global reach," consulting/SCM cycle, closing pitch ("a hand in hand partnership").
+- Long-form company profile: who Paragon is, personnel/personal attention (CEO **Marcelo Iellin**, founder), description of the 3,000 sqm logistic center in central Israel, "expanding your global reach," consulting/SCM cycle, closing pitch ("a hand in hand partnership").
 - **Certifications** list, each linking out to a Google Drive–hosted PDF:
   - AEO Certification – Customs Broker and International Shipping
   - AEO Certification – Warehouse

@@ -1,0 +1,310 @@
+/*
+ * The corridor map — the page's one loud element.
+ *
+ * Five real sites, abstracted to nodes, with air / ocean / road corridors
+ * between them. On load the corridors draw in sequence and a single shipment
+ * pip runs one corridor once, then rests.
+ *
+ * Cascade rule for this file: the *base* state is the finished state. Every
+ * animation lives inside `@media (prefers-reduced-motion: no-preference)` and
+ * only ever adds a starting position. If animations never run — reduced
+ * motion, an old engine, a screenshot tool — the diagram is still fully
+ * visible, because nothing here is invisible by default.
+ */
+
+.wrap {
+  position: relative;
+  inline-size: 100%;
+}
+
+/* Portrait panel — the real cluster is far taller than it is wide. */
+.figure {
+  inline-size: 100%;
+  max-inline-size: 22rem;
+  margin-inline: auto;
+}
+
+.svg {
+  inline-size: 100%;
+  block-size: auto;
+  /* Guarantees a box even before the intrinsic ratio is resolved. */
+  aspect-ratio: 400 / 606;
+  overflow: visible;
+  /*
+   * The diagram is a map, so it must not mirror with the reading direction —
+   * Haifa stays north-east of Ashdod in Hebrew exactly as it does in English.
+   * Forcing LTR here also keeps `text-anchor` resolving the same way in both
+   * languages; the labels themselves are centre-anchored and isolated, so
+   * Hebrew still shapes correctly inside them.
+   */
+  direction: ltr;
+}
+
+.nodeLabel,
+.nodeRole {
+  unicode-bidi: isolate;
+}
+
+/*
+ * Corridors.
+ *
+ * Both tones clear WCAG 1.4.11's 3:1 non-text contrast against the white hero
+ * ground (#6E8AAC ≈ 3.6:1, #7A94B6 ≈ 3.1:1). They started two steps lighter and
+ * were effectively invisible — the accessibility statement claims this level,
+ * so the diagram has to actually meet it.
+ */
+.corridor {
+  fill: none;
+  stroke: #6e8aac;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.corridorRoad {
+  stroke: #7a94b6;
+}
+
+/* Air corridors read as dashed — the only corridor that is not a solid line. */
+.corridorAir {
+  stroke-dasharray: 7 6;
+}
+
+/* Nodes */
+.nodeRing {
+  fill: var(--paper);
+  stroke: var(--paragon);
+  stroke-width: 1.5;
+}
+
+.nodeCore {
+  fill: var(--paragon);
+}
+
+/* The HQ node is the only filled one — it reads as the centre of the network. */
+.nodeHq .nodeRing {
+  fill: var(--paragon);
+}
+
+.nodeHq .nodeCore {
+  fill: var(--white);
+}
+
+/*
+ * The Contact page turns nodes into links down to their card. The hit area is
+ * a plain circle, invisible until hover/focus, standing in for the 18px ring —
+ * far under a usable pointer/touch target on its own.
+ */
+.nodeLink {
+  cursor: pointer;
+}
+
+.nodeHit {
+  fill: transparent;
+  stroke: none;
+  transition: fill var(--dur-fast) cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.nodeLink:hover .nodeHit,
+.nodeLink:focus-visible .nodeHit {
+  fill: rgb(11 99 168 / 0.08);
+}
+
+.nodeLink:hover .nodeRing,
+.nodeLink:focus-visible .nodeRing {
+  stroke: var(--signal);
+}
+
+.nodeLink:hover .nodeLabel,
+.nodeLink:focus-visible .nodeLabel {
+  fill: var(--paragon);
+}
+
+/* SVG has no outline-offset equivalent that reads well on a filled circle. */
+.nodeLink:focus-visible {
+  outline: none;
+}
+
+.nodeLink:focus-visible .nodeHit {
+  stroke: var(--signal);
+  stroke-width: 2;
+}
+
+.nodeLabel {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  fill: var(--ink);
+  transition: fill var(--dur-fast) cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.nodeRole {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--slate);
+}
+
+/*
+ * The shipment pip, at rest on its destination node. --transit marks the thing
+ * that is currently moving or currently selected, and nothing else.
+ */
+.pip {
+  fill: var(--transit);
+  offset-path: path('M 105 560 L 315 480');
+  offset-distance: 100%;
+}
+
+.pipHalo {
+  fill: var(--transit);
+  opacity: 0.18;
+  offset-path: path('M 105 560 L 315 480');
+  offset-distance: 100%;
+}
+
+/* ---- Motion, added only when the visitor has not asked us not to ---- */
+@media (prefers-reduced-motion: no-preference) {
+  /* pathLength="1" on every path normalises the draw-in regardless of length. */
+  .corridorDraw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 620ms cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+  }
+
+  /* The air corridors draw solid, then take their dashed pattern at the end. */
+  .corridorAir.corridorDraw {
+    animation:
+      draw 620ms cubic-bezier(0.2, 0.6, 0.2, 1) forwards,
+      dashOut 1ms linear 620ms forwards;
+  }
+
+  .node {
+    opacity: 0;
+    animation: fadeIn 260ms cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+  }
+
+  .pip {
+    opacity: 0;
+    animation:
+      travel 2200ms cubic-bezier(0.2, 0.6, 0.2, 1) 900ms forwards,
+      pipIn 200ms linear 900ms forwards;
+  }
+
+  .pipHalo {
+    opacity: 0;
+    animation:
+      travel 2200ms cubic-bezier(0.2, 0.6, 0.2, 1) 900ms forwards,
+      haloPulse 200ms linear 900ms forwards;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dashOut {
+  to {
+    stroke-dasharray: 7 6;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes pipIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes haloPulse {
+  to {
+    opacity: 0.18;
+  }
+}
+
+/* Mobile: the diagram degrades to a stacked node list. */
+.nodeList {
+  display: flex;
+  flex-direction: column;
+  border-block-start: var(--border);
+}
+
+.nodeListItem {
+  border-block-end: var(--border);
+}
+
+/* .nodeListRow is the always-present row wrapper — a plain <div> on the home
+   page, an <a> on the Contact page — so the row is styled once regardless of
+   which element it renders as. */
+.nodeListRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-s);
+  padding-block: var(--space-s);
+  inline-size: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.nodeListRow {
+  border-radius: var(--radius);
+  transition: color var(--dur-fast) cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+a.nodeListRow:hover,
+a.nodeListRow:hover .nodeListName {
+  color: var(--paragon);
+}
+
+.nodeListLink:hover,
+.nodeListLink:hover .nodeListName {
+  color: var(--paragon);
+}
+
+.nodeListDot {
+  flex: none;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: var(--paragon);
+  align-self: center;
+}
+
+.nodeListName {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-1);
+  color: var(--ink);
+}
+
+.nodeListRole {
+  font-size: var(--step--1);
+  color: var(--slate);
+  margin-inline-start: auto;
+  text-align: end;
+}
+
+@media (max-width: 47.99em) {
+  .svg {
+    display: none;
+  }
+}
+
+@media (min-width: 48em) {
+  .nodeList {
+    display: none;
+  }
+}

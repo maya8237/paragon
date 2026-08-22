@@ -1,0 +1,103 @@
+/*
+ * The hero is a corridor diagram, not a headline slab. Copy sits on one side,
+ * the network on the other; below 60em the diagram drops under the copy.
+ */
+.hero {
+  background: var(--surface);
+  border-block-end: var(--border);
+  padding-block: var(--space-2xl) var(--space-xl);
+  overflow: hidden;
+}
+
+.heroGrid {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+
+/* The map is a portrait panel, so the copy takes the larger share. */
+@media (min-width: 60em) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: start;
+}
+
+.heroTitle {
+  font-size: var(--step-5);
+}
+
+.heroLede {
+  color: var(--slate);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.heroLede + .heroLede {
+  font-size: var(--step-0);
+}
+
+/* Scroll-reveal on section headers — the whole motion budget beyond the hero. */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
+}
+
+.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.teaserGrid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48em) {
+  .teaserGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.teaser {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: start;
+}
+
+.certBand {
+  display: grid;
+  gap: var(--space-l);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 56em) {
+  .certBand {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "paragon-logistics",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot ./dev.ts",
+    "build": "bun run typecheck && bun build ./index.html --outdir=dist --minify --sourcemap=linked && bun run build:public",
+    "build:public": "bun --eval \"const{cpSync}=require('node:fs');cpSync('public','dist',{recursive:true})\"",
+    "typecheck": "tsc --noEmit",
+    "preview": "bun run ./serve-dist.ts"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "typescript": "^5.8.0"
+  }
+}

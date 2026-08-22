@@ -1,0 +1,111 @@
+/*
+ * Type system.
+ *
+ * The signature is Medium-weight display at line-height 1.0 — headings get
+ * their presence from size, not weight. That rule carries to both languages.
+ */
+
+.display,
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+
+/* Hebrew does not take Latin-style negative tracking, and Rubik needs a touch
+   more leading than Figtree at the same optical size. */
+:lang(he) .display,
+:lang(he) h1,
+:lang(he) h2,
+:lang(he) h3 {
+  letter-spacing: 0;
+  line-height: 1.12;
+}
+
+h1 {
+  font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-2);
+  letter-spacing: -0.012em;
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--step-1);
+  line-height: 1.15;
+}
+
+p,
+li,
+dd,
+dt {
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+p {
+  max-inline-size: var(--measure);
+}
+
+/* Small caps-ish label used for mode tags, eyebrows and field labels. */
+.label {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--slate);
+}
+
+:lang(he) .label {
+  letter-spacing: 0.04em;
+  /* Hebrew has no case, so uppercasing is a no-op that only hurts spacing. */
+  text-transform: none;
+}
+
+/*
+ * Deliberate cut: no separate mono face. Figures, phone numbers and reference
+ * codes use the body face with tabular numerals plus tracking — one fewer
+ * family, and closer to the reference's restraint.
+ */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/*
+ * Phone numbers, emails and Latin-script codes are forced LTR so their digit
+ * groups never reorder inside RTL copy.
+ */
+.ltr-inline {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/*
+ * Figures are only isolated, not forced. A value like "3,000 מ״ר" mixes digits
+ * with a Hebrew unit, and the bidi algorithm already lays that out correctly
+ * for whichever direction the page is in — forcing LTR would put the unit on
+ * the wrong side in Hebrew.
+ */
+.bidi-isolate {
+  unicode-bidi: isolate;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--slate);
+}

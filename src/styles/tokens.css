@@ -1,0 +1,99 @@
+/*
+ * Design tokens.
+ *
+ * Colours descend from the old site's live CSS, deepened and desaturated:
+ * navies darker, blues lifted for contrast, the logo green pulled off its
+ * dated yellow cast. Still unmistakably the same brand.
+ *
+ * --transit is the one saturated colour on the page and it never decorates:
+ * it marks the thing that is currently moving or currently selected.
+ */
+
+:root {
+  /* Core */
+  --ink: #0a2137;
+  --harbor: #153050;
+  --paragon: #0b63a8;
+  --signal: #2f8fd4;
+  --transit: #4fc26b;
+
+  /* Neutrals & accent */
+  --paper: #f6f8fb;
+  --mist: #e4eaf2;
+  --slate: #5a6b80;
+  --brass: #c9a961;
+  --white: #ffffff;
+
+  /* Derived surfaces. Depth comes from white on --paper with --mist hairlines,
+     never from drop shadows. */
+  --surface: var(--white);
+  --surface-sunk: var(--paper);
+  --hairline: var(--mist);
+  --text: var(--ink);
+  --text-muted: var(--slate);
+
+  /* Inverted band (Tracking + Nippon) — the page's single value inversion. */
+  --ink-text: #dce6f2;
+  --ink-muted: #93a8c0;
+  --ink-hairline: #234261;
+
+  /* Type */
+  --font-display: 'Figtree', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+
+  /* Scale — display sizes clamp so the hero never overflows 375px. */
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
+  --step-4: clamp(2.25rem, 1.7rem + 2.6vw, 3.75rem);
+  --step-5: clamp(2.75rem, 1.8rem + 4.4vw, 5.5rem);
+
+  /* Space */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-s: 1rem;
+  --space-m: 1.5rem;
+  --space-l: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  /* Layout */
+  --measure: 68ch;
+  --container: 76rem;
+  --container-narrow: 58rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+
+  --radius: 4px;
+  --radius-lg: 8px;
+
+  --border: 1px solid var(--hairline);
+  --focus-ring: 2px solid var(--signal);
+
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur-fast: 140ms;
+  --dur: 260ms;
+  --dur-slow: 620ms;
+}
+
+/*
+ * Font stack is driven off the [lang] attribute so no component needs to know
+ * which language it is rendering. Rubik sets both display and body on the
+ * Hebrew side — it is the closest free Hebrew face to Degular's feel, and it
+ * is matched to Figtree on x-height so EN and HE read as one system.
+ */
+:root:lang(he) {
+  --font-display: 'Rubik', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Rubik', 'Segoe UI', system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur: 0ms;
+    --dur-slow: 0ms;
+  }
+}

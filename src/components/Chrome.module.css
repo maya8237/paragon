@@ -1,0 +1,332 @@
+/* Header, nav, language switch and footer. */
+
+.skip {
+  position: absolute;
+  inset-block-start: -100%;
+  inset-inline-start: var(--space-s);
+  z-index: 100;
+  background: var(--ink);
+  color: var(--white);
+  padding: var(--space-2xs) var(--space-s);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+
+.skip:focus {
+  inset-block-start: var(--space-2xs);
+  color: var(--white);
+}
+
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 50;
+  background: rgb(255 255 255 / 0.92);
+  backdrop-filter: blur(8px);
+  border-block-end: var(--border);
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-m);
+  min-block-size: 4.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  text-decoration: none;
+  flex: none;
+}
+
+/*
+ * Both marks are sized by height with the width left to the aspect ratio, and
+ * both opt out of the reset's `max-inline-size: 100%`. Without `flex: none` on
+ * the wrapper they are flex items that shrink to fit whatever space the nav
+ * leaves — which differs between English and Hebrew, and squashed the Nippon
+ * badge on the Hebrew pages.
+ */
+.logo {
+  block-size: 2rem;
+  inline-size: auto;
+  max-inline-size: none;
+}
+
+.badge {
+  display: none;
+  flex: none;
+  padding-inline-start: var(--space-s);
+  border-inline-start: var(--border);
+}
+
+.badgeImg {
+  block-size: 1.75rem;
+  inline-size: auto;
+  max-inline-size: none;
+}
+
+@media (min-width: 60em) {
+  .badge {
+    display: block;
+  }
+}
+
+.nav {
+  display: none;
+  margin-inline-start: auto;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xs);
+}
+
+.navLink {
+  display: block;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--slate);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
+}
+
+.navLink:hover {
+  color: var(--paragon);
+  background: var(--paper);
+}
+
+/* --transit marks the currently selected item, and nothing else. */
+.navLink[aria-current='page'] {
+  color: var(--ink);
+  position: relative;
+}
+
+.navLink[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--space-xs);
+  inset-block-end: -1px;
+  block-size: 2px;
+  background: var(--transit);
+  border-radius: 1px;
+}
+
+@media (min-width: 64em) {
+  .nav {
+    display: block;
+  }
+}
+
+/* Language switch */
+.langSwitch {
+  flex: none;
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+@media (min-width: 64em) {
+  .langSwitch {
+    margin-inline-start: 0;
+    padding-inline-start: var(--space-s);
+    border-inline-start: var(--border);
+  }
+}
+
+.langLink {
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--paragon);
+  text-decoration: none;
+  padding: var(--space-3xs) var(--space-2xs);
+  border-radius: var(--radius);
+}
+
+.langLink:hover {
+  background: var(--paper);
+}
+
+/* Mobile menu */
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: var(--space-2xs) var(--space-xs);
+  border: var(--border);
+  border-radius: var(--radius);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--surface);
+}
+
+@media (min-width: 64em) {
+  .menuButton {
+    display: none;
+  }
+}
+
+.mobileNav {
+  border-block-start: var(--border);
+  background: var(--surface);
+  padding-block: var(--space-s);
+}
+
+.mobileList {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileLink {
+  display: block;
+  padding: var(--space-s) 0;
+  border-block-end: var(--border);
+  font-size: var(--step-1);
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.mobileLink[aria-current='page'] {
+  color: var(--paragon);
+  border-inline-start: 3px solid var(--transit);
+  padding-inline-start: var(--space-s);
+}
+
+@media (min-width: 64em) {
+  .mobileNav {
+    display: none;
+  }
+}
+
+/* Footer */
+.footer {
+  background: var(--ink);
+  color: var(--ink-text);
+  padding-block: var(--space-2xl) var(--space-l);
+  margin-block-start: auto;
+}
+
+.footerTop {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  padding-block-end: var(--space-l);
+  border-block-end: 1px solid var(--ink-hairline);
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: start;
+}
+
+.footerLogo {
+  block-size: 2.25rem;
+  inline-size: auto;
+  /* The logo is dark artwork on a transparent ground; invert it on the navy. */
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+.footerTagline {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  line-height: 1.5;
+  max-inline-size: 22rem;
+}
+
+.footerHeading {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-block-end: var(--space-s);
+}
+
+:global(:lang(he)) .footerHeading {
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.footerList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.footerLink {
+  color: var(--ink-text);
+  text-decoration: none;
+  font-size: var(--step-0);
+}
+
+.footerLink:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.social {
+  display: flex;
+  gap: var(--space-2xs);
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border: 1px solid var(--ink-hairline);
+  border-radius: var(--radius);
+  color: var(--ink-text);
+  transition:
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.socialLink:hover {
+  border-color: var(--transit);
+  color: var(--white);
+}
+
+.socialLink svg {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+}
+
+.footerBottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s) var(--space-m);
+  align-items: center;
+  padding-block-start: var(--space-l);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+.footerBottom a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.footerBottom a:hover {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+.footerBottomEnd {
+  margin-inline-start: auto;
+}
