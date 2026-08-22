@@ -12,6 +12,12 @@ const SOCIAL = {
   nippon: 'http://www.nipponexpress.com',
 }
 
+const firstPathSegment = window.location.pathname.split('/').filter(Boolean)[0] ?? ''
+const assetPath = (fileName: string) => {
+  const base = ['en', 'he'].includes(firstPathSegment) ? '' : firstPathSegment ? `/${firstPathSegment}` : ''
+  return `${base}/${fileName}`
+}
+
 /** Social marks redrawn as inline SVG — the old site used 42px JPEGs. */
 const ICONS = {
   facebook: (
@@ -59,7 +65,7 @@ export function Header() {
         <Container>
           <div className={s.headerInner}>
             <Link to={path('/')} className={s.brand} aria-label={t.meta.companyName}>
-              <img className={s.logo} src="/logo.png" alt={t.meta.companyName} width={435} height={136} />
+              <img className={s.logo} src={assetPath('logo.png')} alt={t.meta.companyName} width={435} height={136} />
             </Link>
 
             <a
@@ -70,7 +76,7 @@ export function Header() {
             >
               <img
                 className={s.badgeImg}
-                src="/nippon-badge.jpg"
+                src={assetPath('nippon-badge.jpg')}
                 alt={t.footer.nipponBadgeAlt}
                 width={212}
                 height={32}
@@ -144,7 +150,7 @@ export function Footer() {
           <div className={s.footerBrand}>
             <img
               className={s.footerLogo}
-              src="/logo.png"
+              src={assetPath('logo.png')}
               alt={t.meta.companyName}
               width={435}
               height={136}
@@ -152,7 +158,7 @@ export function Footer() {
             <p className={s.footerTagline}>{t.meta.tagline}</p>
             <a href={SOCIAL.nippon} target="_blank" rel="noopener noreferrer">
               <img
-                src="/nippon-badge.jpg"
+                src={assetPath('nippon-badge.jpg')}
                 alt={t.footer.nipponBadgeAlt}
                 width={212}
                 height={32}
