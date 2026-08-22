@@ -7,6 +7,7 @@
     "dev": "bun --hot ./dev.ts",
     "build": "bun run typecheck && bun build ./index.html --outdir=dist --minify --sourcemap=linked && bun run build:public",
     "build:public": "bun --eval \"const{cpSync}=require('node:fs');cpSync('public','dist',{recursive:true})\"",
+    "build:pages": "bun run build && bun --eval \"const{copyFileSync}=require('node:fs');copyFileSync('dist/index.html','dist/404.html')\"",
     "typecheck": "tsc --noEmit",
     "preview": "bun run ./serve-dist.ts"
   },
