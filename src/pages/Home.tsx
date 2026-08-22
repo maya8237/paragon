@@ -1,4 +1,5 @@
 import s from './Home.module.css'
+import { useHref } from 'react-router-dom'
 import {
   ButtonLink,
   ButtonRow,
@@ -13,11 +14,13 @@ import {
 import { CertList, ExternalLink, FigureStat, ModeTag } from '../components/bits'
 import { CorridorMap } from '../components/CorridorMap'
 import { Reveal } from '../components/Reveal'
-import { useT } from '../i18n/useT'
+import { useLangPath, useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
 export default function Home() {
   const { t } = useT()
+  const langPath = useLangPath()
+  const contactPath = useHref(langPath('/contact'))
   const home = t.home
   usePageMeta(home.meta, { isHome: true })
 
@@ -50,7 +53,7 @@ export default function Home() {
               </ButtonRow>
             </div>
 
-            <CorridorMap />
+            <CorridorMap linked hrefForNode={(id) => `${contactPath}#${id}`} />
           </div>
 
           <FigureRow>

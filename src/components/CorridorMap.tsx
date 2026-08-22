@@ -79,17 +79,19 @@ function line(from: Location['id'], to: Location['id']): string {
  * screen reader gets via the description on the figure.
  *
  * `linked` turns every node into an anchor pointing at that site's card
- * further down the page. It is on for the Contact page, which has those cards,
- * and off on the home page, which does not — a link to a missing `#hq` would
- * be a dead end. Real <a href> elements rather than click handlers, so the
- * nodes are keyboard-operable and the browser handles the scroll itself.
+ * further down the page. The Contact page uses local hash links; the home page
+ * supplies a localized contact-page URL through `hrefForNode`. Real <a href>
+ * elements rather than click handlers keep the nodes keyboard-operable, while
+ * the optional callback supports contact-card highlighting after navigation.
  */
 export function CorridorMap({
   linked = false,
   onNodeClick,
+  hrefForNode = (id) => `#${id}`,
 }: {
   linked?: boolean
   onNodeClick?: (id: Location['id']) => void
+  hrefForNode?: (id: Location['id']) => string
 }) {
   const { t } = useT()
   const nodes = t.home.networkNodes
@@ -166,7 +168,7 @@ export function CorridorMap({
                 >
                   {linked ? (
                     <a
-                      href={`#${node.id}`}
+                      href={hrefForNode(node.id)}
                       className={s.nodeLink}
                       onClick={linked ? () => onNodeClick?.(node.id) : undefined}
                       aria-label={`${node.name} — ${node.role}. ${t.common.jumpToLocation}`}
@@ -192,7 +194,7 @@ export function CorridorMap({
             <li key={node.id} className={s.nodeListItem}>
               <Row
                 className={s.nodeListRow}
-                href={linked ? `#${node.id}` : undefined}
+                href={linked ? hrefForNode(node.id) : undefined}
                 onClick={linked ? () => onNodeClick?.(node.id) : undefined}
               >
                 <span className={s.nodeListDot} aria-hidden="true" />

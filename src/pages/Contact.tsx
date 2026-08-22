@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { Grid, PageHeader, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, LocationCard, ModeTag } from '../components/bits'
 import { CorridorMap } from '../components/CorridorMap'
@@ -8,9 +9,16 @@ import type { Location } from '../content/types'
 
 export default function Contact() {
   const [flashedLocation, setFlashedLocation] = useState<Location['id'] | null>(null)
+  const { hash } = useLocation()
   const { t } = useT()
   const c = t.contact
   usePageMeta(c.meta)
+
+  useEffect(() => {
+    const id = hash.slice(1)
+    const isLocationId = c.locations.some((location) => location.id === id)
+    setFlashedLocation(isLocationId ? (id as Location['id']) : null)
+  }, [c.locations, hash])
 
   useEffect(() => {
     if (!flashedLocation) return

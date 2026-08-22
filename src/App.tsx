@@ -20,18 +20,25 @@ import NotFound from './pages/NotFound'
 
 /**
  * Scrolls to the top on route change, but leaves in-page anchors alone so
- * `/en/about#certifications` still lands on the certifications block.
+ * `/en/about#certifications` still lands on the certifications block. The
+ * explicit offset avoids native hash scrolling landing at the wrong position
+ * when a routed page finishes laying out after the browser handles the hash.
  */
 function ScrollManager() {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
     if (hash) {
-      const target = document.querySelector(hash)
-      if (target) {
-        target.scrollIntoView({ behavior: 'auto', block: 'start' })
-        return
-      }
+      let frame = window.requestAnimationFrame(() => {
+        frame = window.requestAnimationFrame(() => {
+          const target = document.getElementById(hash.slice(1))
+          if (!target) return
+          const headerOffset = document.querySelector('header')?.getBoundingClientRect().height ?? 0
+          const targetTop = target.getBoundingClientRect().top + window.scrollY
+          window.scrollTo({ top: Math.max(0, targetTop - headerOffset - 16), behavior: 'auto' })
+        })
+      })
+      return () => window.cancelAnimationFrame(frame)
     }
     window.scrollTo(0, 0)
   }, [pathname, hash])
