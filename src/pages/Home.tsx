@@ -27,7 +27,7 @@ export default function Home() {
         <Container>
           <div className={s.heroGrid}>
             <div className={s.heroCopy}>
-              <ModeTag mode="NETWORK" label={home.hero.eyebrow} />
+              {/* <ModeTag mode="NETWORK" label={home.hero.eyebrow} /> */}
               <h1 id="hero-title" className={s.heroTitle}>
                 {home.hero.heading}
               </h1>

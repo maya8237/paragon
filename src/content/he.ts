@@ -19,7 +19,7 @@ import type { SiteContent } from './types'
 const content: SiteContent = {
   meta: {
     companyName: 'פראגון לוגיסטיקה בע"מ',
-    tagline: 'לוגיסטיקה, שרשרת אספקה ושילוח בינלאומי.',
+    tagline: 'לוגיסטיקה, שרשרת אספקה ושילוח בינלאומי',
     otherLangLabel: 'English',
     switchToOtherLang: 'מעבר לאנגלית',
   },

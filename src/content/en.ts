@@ -12,7 +12,7 @@ import type { SiteContent } from './types'
 const content: SiteContent = {
   meta: {
     companyName: 'Paragon Logistics Ltd.',
-    tagline: 'Logistics, supply chain management and freight operations.',
+    tagline: 'Logistics, supply chain management and freight operations',
     otherLangLabel: 'עברית',
     switchToOtherLang: 'Switch to Hebrew',
   },
