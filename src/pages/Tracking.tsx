@@ -1,5 +1,5 @@
 import { PageHeader, Section, SectionHead, TickList, ui } from '../components/ui'
-import { ExternalLink, ModeTag } from '../components/bits'
+import { ExternalLink } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -10,11 +10,7 @@ export default function Tracking() {
 
   return (
     <>
-      <PageHeader
-        tag={<ModeTag mode="NETWORK" />}
-        title={tr.body.heading}
-        lede={tr.body.paragraphs[0]}
-      />
+      <PageHeader title={tr.body.heading} lede={tr.body.paragraphs[0]} />
 
       <Section narrow>
         {tr.body.paragraphs.slice(1).map((p) => (

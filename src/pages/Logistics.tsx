@@ -8,7 +8,7 @@ import {
   SectionHead,
   StepList,
 } from '../components/ui'
-import { FigureStat, ModeTag } from '../components/bits'
+import { FigureStat } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -19,11 +19,7 @@ export default function Logistics() {
 
   return (
     <>
-      <PageHeader
-        tag={<ModeTag mode="WAREHOUSE" />}
-        title={l.intro.heading}
-        lede={l.intro.paragraphs[0]}
-      />
+      <PageHeader title={l.intro.heading} lede={l.intro.paragraphs[0]} />
 
       <Section narrow labelledBy="center-heading">
         <SectionHead heading={l.center.heading} id="center-heading" />
@@ -42,7 +38,6 @@ export default function Logistics() {
 
       <Section tight labelledBy="services-heading">
         <SectionHead
-          tag={<ModeTag mode="NETWORK" />}
           heading={l.services.heading}
           lede={l.services.blurb}
           id="services-heading"
@@ -56,7 +51,6 @@ export default function Logistics() {
 
       <Section id="exhibitions" narrow inverted labelledBy="exhibitions-heading">
         <SectionHead
-          tag={<ModeTag mode="AIR" />}
           heading={l.exhibitions.heading}
           lede={l.exhibitions.paragraphs[0]}
           id="exhibitions-heading"

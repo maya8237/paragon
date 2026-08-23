@@ -1,5 +1,5 @@
 import { Divider, Grid, PageHeader, Prose, Section, SectionHead } from '../components/ui'
-import { CertList, ModeTag } from '../components/bits'
+import { CertList } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -10,11 +10,7 @@ export default function About() {
 
   return (
     <>
-      <PageHeader
-        tag={<ModeTag mode="NETWORK" />}
-        title={about.profile.heading}
-        lede={about.profile.paragraphs[0]}
-      />
+      <PageHeader title={about.profile.heading} lede={about.profile.paragraphs[0]} />
 
       <Section narrow>
         {about.profile.paragraphs.slice(1).map((p) => (
@@ -34,7 +30,6 @@ export default function About() {
 
       <Section id="certifications" narrow labelledBy="certifications-heading">
         <SectionHead
-          tag={<ModeTag mode="CUSTOMS" />}
           heading={about.certifications.heading}
           lede={about.certifications.blurb}
           id="certifications-heading"
@@ -43,11 +38,7 @@ export default function About() {
       </Section>
 
       <Section id="environment" narrow inverted labelledBy="environment-heading">
-        <SectionHead
-          tag={<ModeTag mode="ROAD" />}
-          heading={about.environment.heading}
-          id="environment-heading"
-        />
+        <SectionHead heading={about.environment.heading} id="environment-heading" />
         {about.environment.paragraphs.map((p) => (
           <p key={p} style={{ marginBlockEnd: 'var(--space-s)' }}>
             {p}

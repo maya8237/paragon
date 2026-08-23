@@ -1,5 +1,4 @@
 import { CardLink, Grid, PageHeader, Prose, Section, SectionHead, SubNav } from '../components/ui'
-import { ModeTag } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -24,7 +23,7 @@ export default function GlobalTrade() {
 
   return (
     <>
-      <PageHeader tag={<ModeTag mode="OCEAN" />} title={gt.intro.heading} lede={gt.intro.paragraphs[0]}>
+      <PageHeader title={gt.intro.heading} lede={gt.intro.paragraphs[0]}>
         <GlobalTradeNav />
       </PageHeader>
 
@@ -40,13 +39,7 @@ export default function GlobalTrade() {
         <SectionHead heading={gt.philosophy.heading} id="modes-heading" />
         <Grid>
           {gt.modes.map((mode) => (
-            <CardLink
-              key={mode.to}
-              to={mode.to}
-              title={mode.title}
-              body={mode.blurb}
-              tag={<ModeTag mode={mode.mode} />}
-            />
+            <CardLink key={mode.to} to={mode.to} title={mode.title} body={mode.blurb} />
           ))}
         </Grid>
       </Section>
@@ -60,11 +53,7 @@ export default function GlobalTrade() {
       </Section>
 
       <Section id="insurance" narrow inverted labelledBy="insurance-heading">
-        <SectionHead
-          tag={<ModeTag mode="CUSTOMS" />}
-          heading={gt.insurance.heading}
-          id="insurance-heading"
-        />
+        <SectionHead heading={gt.insurance.heading} id="insurance-heading" />
         {gt.insurance.paragraphs.map((p) => (
           <p key={p} style={{ marginBlockEnd: 'var(--space-s)' }}>
             {p}
@@ -81,18 +70,16 @@ export default function GlobalTrade() {
  */
 export function FreightPage({
   data,
-  mode,
   extra,
 }: {
   data: { meta: import('../content/types').PageMeta; body: import('../content/types').Prose }
-  mode: import('../content/types').Mode
   extra?: import('../content/types').Prose
 }) {
   usePageMeta(data.meta)
 
   return (
     <>
-      <PageHeader tag={<ModeTag mode={mode} />} title={data.body.heading}>
+      <PageHeader title={data.body.heading}>
         <GlobalTradeNav />
       </PageHeader>
 

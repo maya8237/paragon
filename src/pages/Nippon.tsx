@@ -1,5 +1,5 @@
 import { Divider, FigureRow, PageHeader, Prose, Section, SectionHead, ui } from '../components/ui'
-import { ExternalLink, FigureStat, ModeTag } from '../components/bits'
+import { ExternalLink, FigureStat } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -10,7 +10,7 @@ export default function Nippon() {
 
   return (
     <>
-      <PageHeader tag={<ModeTag mode="OCEAN" />} title={n.body.heading} lede={n.body.paragraphs[0]} />
+      <PageHeader title={n.body.heading} lede={n.body.paragraphs[0]} />
 
       <Section narrow>
         {n.body.paragraphs.slice(1).map((p) => (

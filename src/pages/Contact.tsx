@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Grid, PageHeader, Section, SectionHead, ui } from '../components/ui'
-import { ExternalLink, LocationCard, ModeTag } from '../components/bits'
+import { ExternalLink, LocationCard } from '../components/bits'
 import { CorridorMap } from '../components/CorridorMap'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
@@ -33,7 +33,7 @@ export default function Contact() {
 
   return (
     <>
-      <PageHeader tag={<ModeTag mode="NETWORK" />} title={c.meta.title} lede={c.intro} />
+      <PageHeader title={c.meta.title} lede={c.intro} />
 
       {/* The same five nodes the hero draws — this page is where their data lives. */}
       <Section tight>

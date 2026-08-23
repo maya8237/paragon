@@ -25,9 +25,6 @@ export interface Figure {
   label: string
 }
 
-/** The transport/mode label that types a section instead of numbering it. */
-export type Mode = 'AIR' | 'OCEAN' | 'ROAD' | 'WAREHOUSE' | 'CUSTOMS' | 'NETWORK'
-
 export interface NavItem {
   label: string
   to: string
@@ -85,12 +82,6 @@ export interface SiteContent {
   }
 
   common: {
-    /**
-     * Display text for each mode tag. The `Mode` union is an internal key, not
-     * a label — every tag on the page renders through this map so nothing ever
-     * falls back to the raw English enum.
-     */
-    modes: Record<Mode, string>
     /** Suffix announced on links that leave the site. */
     externalLink: string
     opensExternalSystem: string
@@ -129,10 +120,10 @@ export interface SiteContent {
       quoteCta: ExternalLink
     }
     /** The five real network nodes rendered by the corridor map. */
-    networkNodes: { id: Location['id']; name: string; role: string; mode: Mode }[]
+    networkNodes: { id: Location['id']; name: string; role: string }[]
     figures: Figure[]
     /** The three service pillars the old home page linked as image tiles. */
-    pillars: { mode: Mode; title: string; blurb: string; to: string }[]
+    pillars: { title: string; blurb: string; to: string }[]
     certificationsTeaser: { heading: string; blurb: string; cta: NavItem }
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
@@ -168,7 +159,7 @@ export interface SiteContent {
     philosophy: Prose
     insurance: Prose
     /** Cards linking to the four freight-mode pages. */
-    modes: { mode: Mode; title: string; blurb: string; to: string }[]
+    modes: { title: string; blurb: string; to: string }[]
     ocean: { meta: PageMeta; body: Prose }
     air: { meta: PageMeta; body: Prose; timeCritical: Prose }
     dropShipments: { meta: PageMeta; body: Prose }

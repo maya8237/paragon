@@ -1,5 +1,4 @@
 import { PageHeader, Section, SectionHead, TickList } from '../components/ui'
-import { ModeTag } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -10,11 +9,7 @@ export default function Accessibility() {
 
   return (
     <>
-      <PageHeader
-        tag={<ModeTag mode="NETWORK" />}
-        title={a.commitment.heading}
-        lede={a.commitment.paragraphs[0]}
-      />
+      <PageHeader title={a.commitment.heading} lede={a.commitment.paragraphs[0]} />
 
       <Section narrow>
         {a.commitment.paragraphs.slice(1).map((p) => (

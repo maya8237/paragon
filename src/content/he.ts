@@ -62,14 +62,6 @@ const content: SiteContent = {
   },
 
   common: {
-    modes: {
-      AIR: 'אוויר',
-      OCEAN: 'ים',
-      ROAD: 'יבשה',
-      WAREHOUSE: 'אחסנה',
-      CUSTOMS: 'מכס',
-      NETWORK: 'רשת',
-    },
     externalLink: 'נפתח בלשונית חדשה',
     opensExternalSystem: 'נפתחת מערכת חיצונית בלשונית חדשה',
     readMore: 'קראו עוד',
@@ -109,11 +101,11 @@ const content: SiteContent = {
       },
     },
     networkNodes: [
-      { id: 'hq', name: 'אור יהודה', role: 'משרדים ראשיים', mode: 'NETWORK' },
-      { id: 'ramla', name: 'רמלה', role: 'מרכז לוגיסטי · 3,000 מ״ר', mode: 'WAREHOUSE' },
-      { id: 'tlv', name: 'נתב״ג', role: 'נציגות אוויר · TLV', mode: 'AIR' },
-      { id: 'ashdod', name: 'אשדוד', role: 'נציגות ים · נמל', mode: 'OCEAN' },
-      { id: 'haifa', name: 'חיפה', role: 'נציגות ים · נמל', mode: 'OCEAN' },
+      { id: 'hq', name: 'אור יהודה', role: 'משרדים ראשיים' },
+      { id: 'ramla', name: 'רמלה', role: 'מרכז לוגיסטי · 3,000 מ״ר' },
+      { id: 'tlv', name: 'נתב״ג', role: 'נציגות אוויר · TLV' },
+      { id: 'ashdod', name: 'אשדוד', role: 'נציגות ים · נמל' },
+      { id: 'haifa', name: 'חיפה', role: 'נציגות ים · נמל' },
     ],
     figures: [
       { value: '3,000 מ"ר', label: 'מרכז לוגיסטי במרכז הארץ' },
@@ -123,21 +115,18 @@ const content: SiteContent = {
     ],
     pillars: [
       {
-        mode: 'CUSTOMS',
         title: 'שרשרת אספקה גלובלית',
         blurb:
           'אנשי מקצוע מיומנים באתר הלקוח, וייעוץ לוגיסטי המכסה את כל שלבי שרשרת האספקה — מניתוח היעדים ועד בניית התשתית שתתמוך בהם.',
         to: '/scm',
       },
       {
-        mode: 'OCEAN',
         title: 'סחר בינלאומי',
         blurb:
           'הובלה ימית ואווירית, משלוחי צד ג׳, פתרונות צ׳ארטר ועמילות מכס — בליווי כיסוי ביטוחי מחברות הביטוח המובילות בענף.',
         to: '/global-trade',
       },
       {
-        mode: 'WAREHOUSE',
         title: 'שירותי לוגיסטיקה',
         blurb:
           'מרכז לוגיסטי בן 3,000 מ״ר לניהול מלאי והפצה, וכן פתרונות לוגיסטיים כוללים לתערוכות ולפרוייקטים מיוחדים.',
@@ -353,28 +342,24 @@ const content: SiteContent = {
     },
     modes: [
       {
-        mode: 'OCEAN',
         title: 'הובלה ימית',
         blurb:
           'כל סוגי המשלוחים הימיים – FCL, LCL וקונסולידציות – עם רשת סוכנים גלובלית ושירות מדלת לדלת.',
         to: '/global-trade/ocean',
       },
       {
-        mode: 'AIR',
         title: 'הובלה אוירית',
         blurb:
           'קשרים עם חברות הובלה אווירית מהשורה הראשונה, מעקב 24/7 ומחירים המותאמים לסוג המטען, לדחיפות וליעד.',
         to: '/global-trade/air',
       },
       {
-        mode: 'ROAD',
         title: 'משלוחי צד ג׳ (DROP)',
         blurb:
           'תיאום משלוחים מורכבים בין יעדים, עם בקיאות בחוקי הייבוא והייצוא ובניירת הנדרשת בכל מדינה.',
         to: '/global-trade/drop-shipments',
       },
       {
-        mode: 'AIR',
         title: 'טיסות/אניות שכר (צ׳ארטר)',
         blurb:
           'משלוחי שכר ממפעילים עצמאיים במטוסים ואוניות מטען, למטענים חריגים וליעדים קשים לגישה.',

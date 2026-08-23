@@ -8,7 +8,6 @@ import {
   StepList,
   TickList,
 } from '../components/ui'
-import { ModeTag } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -19,11 +18,7 @@ export default function Scm() {
 
   return (
     <>
-      <PageHeader
-        tag={<ModeTag mode="CUSTOMS" />}
-        title={scm.intro.heading}
-        lede={scm.intro.paragraphs[0]}
-      />
+      <PageHeader title={scm.intro.heading} lede={scm.intro.paragraphs[0]} />
 
       <Section labelledBy="sync-heading">
         <SectionHead heading={scm.synchronizing.heading} id="sync-heading" />
@@ -38,11 +33,7 @@ export default function Scm() {
       </Section>
 
       <Section id="on-site" narrow tight labelledBy="onsite-heading">
-        <SectionHead
-          tag={<ModeTag mode="WAREHOUSE" />}
-          heading={scm.onSite.heading}
-          id="onsite-heading"
-        />
+        <SectionHead heading={scm.onSite.heading} id="onsite-heading" />
         {scm.onSite.paragraphs.map((p) => (
           <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
             {p}
@@ -56,11 +47,7 @@ export default function Scm() {
       </Section>
 
       <Section id="consulting" narrow labelledBy="consulting-heading">
-        <SectionHead
-          tag={<ModeTag mode="NETWORK" />}
-          heading={scm.consulting.heading}
-          id="consulting-heading"
-        />
+        <SectionHead heading={scm.consulting.heading} id="consulting-heading" />
         {scm.consulting.paragraphs.map((p) => (
           <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
             {p}

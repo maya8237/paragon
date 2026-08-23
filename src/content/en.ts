@@ -54,14 +54,6 @@ const content: SiteContent = {
   },
 
   common: {
-    modes: {
-      AIR: 'Air',
-      OCEAN: 'Ocean',
-      ROAD: 'Road',
-      WAREHOUSE: 'Warehouse',
-      CUSTOMS: 'Customs',
-      NETWORK: 'Network',
-    },
     externalLink: 'opens in a new tab',
     opensExternalSystem: 'Opens an external system in a new tab',
     readMore: 'Read more',
@@ -98,11 +90,11 @@ const content: SiteContent = {
       },
     },
     networkNodes: [
-      { id: 'hq', name: 'Or Yehuda', role: 'Headquarters', mode: 'NETWORK' },
-      { id: 'ramla', name: 'Ramla', role: 'Logistics centre · 3,000 m²', mode: 'WAREHOUSE' },
-      { id: 'tlv', name: 'Ben Gurion', role: 'Air branch · TLV', mode: 'AIR' },
-      { id: 'ashdod', name: 'Ashdod', role: 'Ocean branch · port', mode: 'OCEAN' },
-      { id: 'haifa', name: 'Haifa', role: 'Ocean representative · port', mode: 'OCEAN' },
+      { id: 'hq', name: 'Or Yehuda', role: 'Headquarters' },
+      { id: 'ramla', name: 'Ramla', role: 'Logistics centre · 3,000 m²' },
+      { id: 'tlv', name: 'Ben Gurion', role: 'Air branch · TLV' },
+      { id: 'ashdod', name: 'Ashdod', role: 'Ocean branch · port' },
+      { id: 'haifa', name: 'Haifa', role: 'Ocean representative · port' },
     ],
     figures: [
       { value: '3,000 m²', label: 'Logistics centre in central Israel' },
@@ -112,21 +104,18 @@ const content: SiteContent = {
     ],
     pillars: [
       {
-        mode: 'CUSTOMS',
         title: 'Supply Chain Management',
         blurb:
           'On-site personnel embedded in your operation, and consulting across the complete SCM cycle — from analysing goals to building the infrastructure that supports them.',
         to: '/scm',
       },
       {
-        mode: 'OCEAN',
         title: 'Global Trade',
         blurb:
           'Ocean, air, drop shipments and charter solutions, with customs clearance at departure and destination and insurance cover from leading houses.',
         to: '/global-trade',
       },
       {
-        mode: 'WAREHOUSE',
         title: 'Logistics Services',
         blurb:
           'A 3,000 m² logistics centre for material management and distribution, plus turnkey logistics for exhibitions and special projects.',
@@ -344,28 +333,24 @@ const content: SiteContent = {
     },
     modes: [
       {
-        mode: 'OCEAN',
         title: 'Ocean Freight',
         blurb:
           'FCL, LCL and consolidations with leading international carriers, plus flexible door-to-door multimodal solutions.',
         to: '/global-trade/ocean',
       },
       {
-        mode: 'AIR',
         title: 'Air Freight',
         blurb:
           'The entire scope of airfreight, traced 24/7, priced to cargo type, urgency and destination — including time critical shipments.',
         to: '/global-trade/air',
       },
       {
-        mode: 'ROAD',
         title: 'Drop Shipments',
         blurb:
           'Coordination of complex multi-origin drop shipments, with the documentation and customs expertise they demand.',
         to: '/global-trade/drop-shipments',
       },
       {
-        mode: 'AIR',
         title: 'Charter Solutions',
         blurb:
           'Tailored charter shipments with independent operators for irregular cargo and hard-to-reach destinations.',

@@ -10,7 +10,7 @@ import {
   SectionHead,
   ui,
 } from '../components/ui'
-import { CertList, ExternalLink, FigureStat, ModeTag } from '../components/bits'
+import { CertList, ExternalLink, FigureStat } from '../components/bits'
 import { CorridorMap } from '../components/CorridorMap'
 import { Reveal } from '../components/Reveal'
 import { useLangPath, useT } from '../i18n/useT'
@@ -28,7 +28,6 @@ export default function Home() {
         <Container>
           <div className={s.heroGrid}>
             <div className={s.heroCopy}>
-              {/* <ModeTag mode="NETWORK" label={home.hero.eyebrow} /> */}
               <h1 id="hero-title" className={s.heroTitle}>
                 {home.hero.heading}
               </h1>
@@ -71,13 +70,7 @@ export default function Home() {
         </Reveal>
         <Grid>
           {home.pillars.map((pillar) => (
-            <CardLink
-              key={pillar.to}
-              to={pillar.to}
-              title={pillar.title}
-              body={pillar.blurb}
-              tag={<ModeTag mode={pillar.mode} />}
-            />
+            <CardLink key={pillar.to} to={pillar.to} title={pillar.title} body={pillar.blurb} />
           ))}
         </Grid>
       </Section>
@@ -86,7 +79,6 @@ export default function Home() {
         <div className={s.certBand}>
           <Reveal className={s.reveal} revealedClassName={s.revealed}>
             <SectionHead
-              tag={<ModeTag mode="CUSTOMS" />}
               heading={home.certificationsTeaser.heading}
               lede={home.certificationsTeaser.blurb}
               id="certs-heading"
@@ -105,7 +97,6 @@ export default function Home() {
       <Section inverted labelledBy="tracking-heading">
         <div className={s.teaserGrid}>
           <div className={s.teaser}>
-            <ModeTag mode="NETWORK" />
             <h2 id="tracking-heading">{home.trackingTeaser.heading}</h2>
             <p>{home.trackingTeaser.blurb}</p>
             <ButtonRow>
@@ -116,7 +107,6 @@ export default function Home() {
           </div>
 
           <div className={s.teaser}>
-            <ModeTag mode="OCEAN" />
             <h2>{home.nipponTeaser.heading}</h2>
             <p>{home.nipponTeaser.blurb}</p>
             <FigureRow>

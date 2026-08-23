@@ -1,19 +1,7 @@
 import type { ReactNode } from 'react'
 import s from './bits.module.css'
-import type { ExternalLink as ExternalLinkData, Figure, Location, Mode } from '../content/types'
+import type { ExternalLink as ExternalLinkData, Figure, Location } from '../content/types'
 import { useT } from '../i18n/useT'
-
-/**
- * Mode tag. The label is a transport/function type, never a sequence number —
- * the sections of this site are typed, not ordered.
- *
- * `mode` is an internal key; the visible text always comes from the content
- * tree, so the tag is translated like everything else.
- */
-export function ModeTag({ mode, label }: { mode: Mode; label?: string }) {
-  const { t } = useT()
-  return <span className={s.modeTag}>{label ?? t.common.modes[mode]}</span>
-}
 
 export function FigureStat({ figure }: { figure: Figure }) {
   return (
