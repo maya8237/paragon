@@ -25,7 +25,7 @@ import NotFound from './pages/NotFound'
  * when a routed page finishes laying out after the browser handles the hash.
  */
 function ScrollManager() {
-  const { pathname, hash } = useLocation()
+  const { pathname, hash, key } = useLocation()
 
   useEffect(() => {
     if (hash) {
@@ -41,7 +41,11 @@ function ScrollManager() {
       return () => window.cancelAnimationFrame(frame)
     }
     window.scrollTo(0, 0)
-  }, [pathname, hash])
+    // `key` is unique per navigation entry, even when pathname and hash are
+    // unchanged — without it, clicking the same map node twice in a row (once
+    // to arrive, then again after scrolling away) wouldn't re-scroll, since
+    // pathname/hash alone look identical to the effect's dependency check.
+  }, [pathname, hash, key])
 
   return null
 }

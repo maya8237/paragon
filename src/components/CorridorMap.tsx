@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import type { To } from 'react-router-dom'
 import s from './CorridorMap.module.css'
 import { useT } from '../i18n/useT'
 import type { Location } from '../content/types'
@@ -79,19 +81,25 @@ function line(from: Location['id'], to: Location['id']): string {
  * screen reader gets via the description on the figure.
  *
  * `linked` turns every node into an anchor pointing at that site's card
- * further down the page. The Contact page uses local hash links; the home page
- * supplies a localized contact-page URL through `hrefForNode`. Real <a href>
- * elements rather than click handlers keep the nodes keyboard-operable, while
- * the optional callback supports contact-card highlighting after navigation.
+ * further down the page. The default `hrefForNode` jumps to the node's id on
+ * the *current* route — a router `To` with only `hash` set, so it resolves
+ * against whatever pathname is already active — while the home page supplies
+ * a full `{ pathname, hash }` pointing at the localized contact page instead.
+ * These must go through router `Link`s rather than a hand-built `#id` string:
+ * this app runs a `HashRouter`, where the entire URL fragment *is* the route,
+ * so a bare `<a href="#hq">` doesn't add an anchor to the current route, it
+ * replaces the whole route with `/hq` and 404s. Real anchor elements (which
+ * `Link` renders under the hood) keep the nodes keyboard-operable, while the
+ * optional callback supports contact-card highlighting after navigation.
  */
 export function CorridorMap({
   linked = false,
   onNodeClick,
-  hrefForNode = (id) => `#${id}`,
+  hrefForNode = (id) => ({ hash: `#${id}` }),
 }: {
   linked?: boolean
   onNodeClick?: (id: Location['id']) => void
-  hrefForNode?: (id: Location['id']) => string
+  hrefForNode?: (id: Location['id']) => To
 }) {
   const { t } = useT()
   const nodes = t.home.networkNodes
@@ -167,14 +175,14 @@ export function CorridorMap({
                   style={{ animationDelay: `${300 + i * 90}ms` }}
                 >
                   {linked ? (
-                    <a
-                      href={hrefForNode(node.id)}
+                    <Link
+                      to={hrefForNode(node.id)}
                       className={s.nodeLink}
-                      onClick={linked ? () => onNodeClick?.(node.id) : undefined}
+                      onClick={() => onNodeClick?.(node.id)}
                       aria-label={`${node.name} — ${node.role}. ${t.common.jumpToLocation}`}
                     >
                       {marks}
-                    </a>
+                    </Link>
                   ) : (
                     marks
                   )}
@@ -188,19 +196,26 @@ export function CorridorMap({
       {/* Mobile fallback — same five nodes, no diagram. */}
       <ul className={s.nodeList}>
         {nodes.map((node) => {
-          // Same row markup either way; only the wrapping element changes.
-          const Row = linked ? 'a' : 'div'
+          const rowContent = (
+            <>
+              <span className={s.nodeListDot} aria-hidden="true" />
+              <span className={s.nodeListName}>{node.name}</span>
+              <span className={s.nodeListRole}>{node.role}</span>
+            </>
+          )
           return (
             <li key={node.id} className={s.nodeListItem}>
-              <Row
-                className={s.nodeListRow}
-                href={linked ? hrefForNode(node.id) : undefined}
-                onClick={linked ? () => onNodeClick?.(node.id) : undefined}
-              >
-                <span className={s.nodeListDot} aria-hidden="true" />
-                <span className={s.nodeListName}>{node.name}</span>
-                <span className={s.nodeListRole}>{node.role}</span>
-              </Row>
+              {linked ? (
+                <Link
+                  className={s.nodeListRow}
+                  to={hrefForNode(node.id)}
+                  onClick={() => onNodeClick?.(node.id)}
+                >
+                  {rowContent}
+                </Link>
+              ) : (
+                <div className={s.nodeListRow}>{rowContent}</div>
+              )}
             </li>
           )
         })}
