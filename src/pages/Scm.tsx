@@ -5,9 +5,11 @@ import {
   PageHeader,
   Section,
   SectionHead,
+  Split,
   StepList,
   TickList,
 } from '../components/ui'
+import { ArchivePlate } from '../components/ArchivePlate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -34,11 +36,13 @@ export default function Scm() {
 
       <Section id="on-site" narrow tight labelledBy="onsite-heading">
         <SectionHead heading={scm.onSite.heading} id="onsite-heading" />
-        {scm.onSite.paragraphs.map((p) => (
-          <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
-            {p}
-          </p>
-        ))}
+        <Split aside={<ArchivePlate name="scm" alt={scm.photo.alt} caption={scm.photo.caption} />}>
+          {scm.onSite.paragraphs.map((p) => (
+            <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
+              {p}
+            </p>
+          ))}
+        </Split>
 
         <Divider />
 

@@ -1,4 +1,14 @@
-import { CardLink, Grid, PageHeader, Prose, Section, SectionHead, SubNav } from '../components/ui'
+import {
+  CardLink,
+  Grid,
+  PageHeader,
+  Prose,
+  Section,
+  SectionHead,
+  Split,
+  SubNav,
+} from '../components/ui'
+import { ArchivePlate } from '../components/ArchivePlate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -28,11 +38,21 @@ export default function GlobalTrade() {
       </PageHeader>
 
       <Section narrow>
-        {gt.intro.paragraphs.slice(1).map((p) => (
-          <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
-            {p}
-          </p>
-        ))}
+        <Split
+          aside={
+            <ArchivePlate
+              name="global-trade"
+              alt={gt.photo.alt}
+              caption={gt.photo.caption}
+            />
+          }
+        >
+          {gt.intro.paragraphs.slice(1).map((p) => (
+            <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
+              {p}
+            </p>
+          ))}
+        </Split>
       </Section>
 
       <Section tight labelledBy="modes-heading">

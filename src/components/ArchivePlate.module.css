@@ -1,0 +1,104 @@
+/*
+ * Archive plate — the mount for photographs carried over from the old site.
+ *
+ * The constraint that shapes this component: three of the four surviving
+ * photographs are 184x115. They cannot be enlarged to fill a card without
+ * visibly falling apart, so the *mount* does the layout work and the image is
+ * capped near its native width and centred inside it. Empty mount is deliberate.
+ *
+ * Depth follows the house rule — hairline on paper, never a drop shadow.
+ */
+
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.mount {
+  /* `isolation` keeps the duotone blend off whatever sits behind the plate —
+     without it `screen` would composite against the card and the page band. */
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  padding: var(--space-s);
+  background: var(--surface-sunk);
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* Inside a card, the card already draws the edge and the corner. */
+.flush {
+  border: 0;
+  border-radius: 0;
+}
+
+.img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: 2px;
+}
+
+/*
+ * Duotone. The four old photographs have clashing casts — a cold blue render, a
+ * warehouse of red jackets, a beige office — and read as clip art side by side.
+ * Flattening them to a navy floor makes them one set, and lets the low
+ * resolution read as age rather than as a defect.
+ *
+ * `screen` over --ink maps black to navy and leaves highlights near white.
+ */
+.duotone {
+  background: var(--ink);
+}
+
+.duotone .img {
+  mix-blend-mode: screen;
+  filter: grayscale(1) contrast(1.06) brightness(1.02);
+}
+
+/* Without blend-mode support the tint is unreachable; plain grayscale still
+   unifies the set, which is the point of the treatment. */
+@supports not (mix-blend-mode: screen) {
+  .duotone {
+    background: var(--surface-sunk);
+  }
+
+  .duotone .img {
+    filter: grayscale(1) contrast(1.06);
+  }
+}
+
+/*
+ * Sizes are capped at (or just above) native resolution. `tile` allows a small
+ * amount of upscale — the duotone hides the softness — while `anchor` is the
+ * one photograph with enough pixels to carry a page.
+ */
+.tile .img {
+  max-inline-size: 260px;
+}
+
+.anchor .img {
+  max-inline-size: 500px;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--slate);
+}
+
+:lang(he) .caption {
+  letter-spacing: 0.04em;
+  /* Hebrew has no case, so uppercasing only damages spacing. */
+  text-transform: none;
+}
+
+:global(.inverted) .caption {
+  color: var(--ink-muted);
+}

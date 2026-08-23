@@ -115,6 +115,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2xs);
+  /* Clips edge-to-edge media to the card's corners. The card is itself the
+     link, so its own focus outline is drawn outside this box and survives. */
+  overflow: hidden;
 }
 
 .cardLink {
@@ -133,6 +136,43 @@
 
 .cardLink:hover .cardTitle {
   color: var(--paragon);
+}
+
+/*
+ * Prose + aside. The aside is capped near the archive plates' native width so
+ * the photographs are never asked to stretch to fill a column.
+ */
+.split {
+  display: grid;
+  gap: var(--space-l);
+  align-items: start;
+}
+
+@media (min-width: 48em) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 17rem);
+    gap: var(--space-xl);
+  }
+}
+
+.splitAside {
+  position: sticky;
+  top: var(--space-l);
+}
+
+@media (max-width: 47.99em) {
+  .splitAside {
+    position: static;
+  }
+}
+
+/*
+ * Media slot. The plate is pulled out to the card's edges so the mount reads as
+ * part of the card rather than as a picture sitting inside it, and given a
+ * little breathing room before the title.
+ */
+.cardMedia {
+  margin: calc(var(--space-m) * -1) calc(var(--space-m) * -1) var(--space-2xs);
 }
 
 .cardTitle {

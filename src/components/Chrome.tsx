@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import s from './Chrome.module.css'
 import { Container } from './ui'
 import { useT, useLangPath } from '../i18n/useT'
+import { assetPath } from '../lib/assetPath'
 
 const SOCIAL = {
   facebook:
@@ -10,12 +11,6 @@ const SOCIAL = {
   linkedin: 'https://www.linkedin.com/company/paragon-logistics-ltd.',
   pinterest: 'https://www.pinterest.com/paragonlogistic/',
   nippon: 'http://www.nipponexpress.com',
-}
-
-const firstPathSegment = window.location.pathname.split('/').filter(Boolean)[0] ?? ''
-const assetPath = (fileName: string) => {
-  const base = ['en', 'he'].includes(firstPathSegment) ? '' : firstPathSegment ? `/${firstPathSegment}` : ''
-  return `${base}/${fileName}`
 }
 
 /** Social marks redrawn as inline SVG — the old site used 42px JPEGs. */

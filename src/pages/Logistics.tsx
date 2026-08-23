@@ -6,9 +6,11 @@ import {
   Prose,
   Section,
   SectionHead,
+  Split,
   StepList,
 } from '../components/ui'
 import { FigureStat } from '../components/bits'
+import { ArchivePlate } from '../components/ArchivePlate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -23,17 +25,21 @@ export default function Logistics() {
 
       <Section narrow labelledBy="center-heading">
         <SectionHead heading={l.center.heading} id="center-heading" />
-        {l.center.paragraphs.map((p) => (
-          <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
-            {p}
-          </p>
-        ))}
-
-        <FigureRow>
-          {t.home.figures.slice(0, 2).map((figure) => (
-            <FigureStat key={figure.label} figure={figure} />
+        <Split
+          aside={<ArchivePlate name="logistics" alt={l.photo.alt} caption={l.photo.caption} />}
+        >
+          {l.center.paragraphs.map((p) => (
+            <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
+              {p}
+            </p>
           ))}
-        </FigureRow>
+
+          <FigureRow>
+            {t.home.figures.slice(0, 2).map((figure) => (
+              <FigureStat key={figure.label} figure={figure} />
+            ))}
+          </FigureRow>
+        </Split>
       </Section>
 
       <Section tight labelledBy="services-heading">

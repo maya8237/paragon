@@ -108,18 +108,21 @@ const content: SiteContent = {
         blurb:
           'On-site personnel embedded in your operation, and consulting across the complete SCM cycle — from analysing goals to building the infrastructure that supports them.',
         to: '/scm',
+        imageAlt: 'Interlocking steel chain links.',
       },
       {
         title: 'Global Trade',
         blurb:
           'Ocean, air, drop shipments and charter solutions, with customs clearance at departure and destination and insurance cover from leading houses.',
         to: '/global-trade',
+        imageAlt: 'Forwarding staff at their desks, working the phones.',
       },
       {
         title: 'Logistics Services',
         blurb:
           'A 3,000 m² logistics centre for material management and distribution, plus turnkey logistics for exhibitions and special projects.',
         to: '/logistics',
+        imageAlt: 'Warehouse staff moving palletised cartons between racking.',
       },
     ],
     certificationsTeaser: {
@@ -238,6 +241,10 @@ const content: SiteContent = {
       description:
         'On-site logistics personnel and full-cycle supply chain consulting — analysing needs and resources, identifying weak links, and building the infrastructure to support growth.',
     },
+    photo: {
+      alt: 'Interlocking steel chain links.',
+      caption: 'From the Paragon archive',
+    },
     intro: {
       heading: 'Supply Chain Management',
       paragraphs: [
@@ -309,6 +316,10 @@ const content: SiteContent = {
       title: 'Global Trade',
       description:
         'Ocean freight, air freight, drop shipments and charter solutions, with customs clearance at departure and destination and professional insurance coverage.',
+    },
+    photo: {
+      alt: 'Forwarding staff at their desks, working the phones.',
+      caption: 'From the Paragon archive',
     },
     intro: {
       heading: 'Global Trade',
@@ -431,6 +442,10 @@ const content: SiteContent = {
       description:
         'A 3,000 m² logistics centre for material management and distribution, plus turnkey logistics for exhibitions and special projects.',
     },
+    photo: {
+      alt: 'Warehouse staff moving palletised cartons between racking.',
+      caption: 'From the Paragon archive',
+    },
     intro: {
       heading: 'Material Management & Distribution',
       paragraphs: ['Profit from experience — save on resources.'],
@@ -526,6 +541,10 @@ const content: SiteContent = {
       title: 'Nippon Express',
       description:
         'Paragon Logistics Ltd. is proud to be an agent of Nippon Express in Israel — founded 1872, with 1,400 offices worldwide and 60,000 employees.',
+    },
+    photo: {
+      alt: 'A Nippon Cargo Airlines Boeing 747 freighter on the taxiway.',
+      caption: 'Nippon Cargo Airlines freighter',
     },
     body: {
       heading: 'Nippon Express',

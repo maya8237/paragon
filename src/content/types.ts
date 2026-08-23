@@ -25,6 +25,19 @@ export interface Figure {
   label: string
 }
 
+/**
+ * A photograph carried over from the old site.
+ *
+ * Only the words live here — the filename is an asset, not copy, so it is
+ * mapped in the component. These are content images rather than decoration,
+ * so `alt` is required and must describe the photograph, not name it.
+ */
+export interface ArchiveImage {
+  alt: string
+  /** Short line set under the plate, in the utility face. */
+  caption: string
+}
+
 export interface NavItem {
   label: string
   to: string
@@ -122,8 +135,12 @@ export interface SiteContent {
     /** The five real network nodes rendered by the corridor map. */
     networkNodes: { id: Location['id']; name: string; role: string }[]
     figures: Figure[]
-    /** The three service pillars the old home page linked as image tiles. */
-    pillars: { title: string; blurb: string; to: string }[]
+    /**
+     * The three service pillars the old home page linked as image tiles. The
+     * photographs are those same tiles, returned to the pillars they belonged
+     * to — captionless, because the card's own title already names them.
+     */
+    pillars: { title: string; blurb: string; to: string; imageAlt: string }[]
     certificationsTeaser: { heading: string; blurb: string; cta: NavItem }
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
@@ -144,6 +161,7 @@ export interface SiteContent {
 
   scm: {
     meta: PageMeta
+    photo: ArchiveImage
     intro: Prose
     /** "Synchronizing Global Operations" — the SCM landing bullets. */
     synchronizing: { heading: string; items: { title: string; body: string }[] }
@@ -155,6 +173,7 @@ export interface SiteContent {
 
   globalTrade: {
     meta: PageMeta
+    photo: ArchiveImage
     intro: Prose
     philosophy: Prose
     insurance: Prose
@@ -168,6 +187,7 @@ export interface SiteContent {
 
   logistics: {
     meta: PageMeta
+    photo: ArchiveImage
     intro: Prose
     center: Prose
     services: { heading: string; blurb: string; items: string[] }
@@ -187,6 +207,8 @@ export interface SiteContent {
 
   nippon: {
     meta: PageMeta
+    /** Kept in full colour — the livery is content, not texture. */
+    photo: ArchiveImage
     body: Prose
     figures: Figure[]
     history: Prose
