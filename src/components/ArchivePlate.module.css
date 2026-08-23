@@ -16,9 +16,6 @@
 }
 
 .mount {
-  /* `isolation` keeps the duotone blend off whatever sits behind the plate —
-     without it `screen` would composite against the card and the page band. */
-  isolation: isolate;
   display: grid;
   place-items: center;
   padding: var(--space-s);
@@ -28,9 +25,13 @@
   overflow: hidden;
 }
 
-/* Inside a card, the card already draws the edge and the corner. */
+/*
+ * Inside a card the card already draws the edge and the corner, but mount and
+ * card body are both light, so one hairline stays to divide picture from text.
+ */
 .flush {
   border: 0;
+  border-block-end: var(--border);
   border-radius: 0;
 }
 
@@ -42,32 +43,17 @@
 }
 
 /*
- * Duotone. The four old photographs have clashing casts — a cold blue render, a
- * warehouse of red jackets, a beige office — and read as clip art side by side.
- * Flattening them to a navy floor makes them one set, and lets the low
- * resolution read as age rather than as a defect.
+ * The four old photographs have clashing casts — a cold blue render, a warehouse
+ * of red jackets, a beige office — and read as clip art side by side. Draining
+ * them to grey makes them one set and lets the low resolution read as age.
  *
- * `screen` over --ink maps black to navy and leaves highlights near white.
+ * The mount stays on paper rather than a dark field. These photographs mostly
+ * have white backgrounds, so a dark mount turns each one into a glaring white
+ * stamp on a heavy block — and three such blocks shout louder than the hero,
+ * which is wrong for what is secondary content.
  */
-.duotone {
-  background: var(--ink);
-}
-
 .duotone .img {
-  mix-blend-mode: screen;
-  filter: grayscale(1) contrast(1.06) brightness(1.02);
-}
-
-/* Without blend-mode support the tint is unreachable; plain grayscale still
-   unifies the set, which is the point of the treatment. */
-@supports not (mix-blend-mode: screen) {
-  .duotone {
-    background: var(--surface-sunk);
-  }
-
-  .duotone .img {
-    filter: grayscale(1) contrast(1.06);
-  }
+  filter: grayscale(1) contrast(1.04);
 }
 
 /*
@@ -79,11 +65,23 @@
   max-inline-size: 260px;
 }
 
+/*
+ * The anchor mount hugs its photograph instead of running the full measure, so
+ * the caption below lines up with the picture's edge rather than floating out
+ * to the left of it.
+ */
+.anchor {
+  inline-size: fit-content;
+  max-inline-size: 100%;
+}
+
 .anchor .img {
   max-inline-size: 500px;
 }
 
 .caption {
+  /* Matches the mount's padding so the caption sits under the picture's edge. */
+  padding-inline: var(--space-s);
   font-family: var(--font-body);
   font-size: var(--step--1);
   font-weight: 500;
