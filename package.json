@@ -11,6 +11,7 @@
     "typecheck": "tsc --noEmit",
     "nx:figures": "bun run scripts/fetch-nx-figures.ts",
     "nx:figures:check": "bun run scripts/fetch-nx-figures.ts --check",
+    "verify:translations": "bun run scripts/verify-translations.ts",
     "preview": "bun run ./serve-dist.ts"
   },
   "dependencies": {

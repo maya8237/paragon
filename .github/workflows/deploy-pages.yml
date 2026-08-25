@@ -16,6 +16,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Reports whether the NX Group information on the site is current and carried
+  # in both languages, and opens a pull request when it is not.
+  #
+  # continue-on-error, and independent of `build` and `deploy`, on purpose:
+  # nothing NX publishes upstream can make our built site wrong, so nothing NX
+  # publishes should stop it shipping. The weekly run in nx-information.yml is
+  # the same check without the safety net, and that is what sends the reminder.
+  nx-validation:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate NX Group information
+        uses: ./.github/actions/nx-validation
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   # The github-pages environment only allows deployments from `main`, so a
   # push to any other branch can't deploy directly — it asks a fresh run on
   # `main` to do it instead, which rebuilds every branch anyway.
