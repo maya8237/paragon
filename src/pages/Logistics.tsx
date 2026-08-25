@@ -21,10 +21,18 @@ export default function Logistics() {
 
   return (
     <>
-      <PageHeader title={l.intro.heading} lede={l.intro.paragraphs[0]} />
+      {/*
+        The page is titled for the thing the nav, the tab and the footer all
+        call it. The old site headed this page "Material Management &
+        Distribution" while linking to it as "Logistics Services", so arriving
+        from the menu you landed on what looked like a different page. That
+        phrase is really a section title, and it heads its section below.
+      */}
+      <PageHeader title={l.meta.title} lede={l.intro.paragraphs[0]} />
 
-      <Section narrow labelledBy="center-heading">
-        <SectionHead heading={l.center.heading} id="center-heading" />
+      <Section narrow labelledBy="materials-heading">
+        <SectionHead heading={l.intro.heading} id="materials-heading" />
+        <h3 style={{ marginBlockEnd: 'var(--space-m)' }}>{l.center.heading}</h3>
         <Split
           aside={<Plate name="logistics" alt={l.photo.alt} caption={l.photo.caption} />}
         >
