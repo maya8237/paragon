@@ -250,7 +250,6 @@ const content: SiteContent = {
     },
     photo: {
       alt: 'חוליות שרשרת פלדה שלובות זו בזו.',
-      caption: 'מארכיון פראגון',
     },
     intro: {
       heading: 'שרשרת אספקה גלובלית',
@@ -327,7 +326,6 @@ const content: SiteContent = {
     },
     photo: {
       alt: 'צוות השילוח במשרד, בשיחות טלפון מול עמדות העבודה.',
-      caption: 'מארכיון פראגון',
     },
     intro: {
       heading: 'סחר בינלאומי',
@@ -456,7 +454,6 @@ const content: SiteContent = {
     },
     photo: {
       alt: 'עובדי מחסן מעבירים קרטונים על משטחים בין מדפי האחסון.',
-      caption: 'מארכיון פראגון',
     },
     intro: {
       heading: 'ניהול מלאי והפצה',

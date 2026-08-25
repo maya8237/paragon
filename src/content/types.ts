@@ -34,8 +34,8 @@ export interface Figure {
  */
 export interface ArchiveImage {
   alt: string
-  /** Short line set under the plate, in the utility face. */
-  caption: string
+  /** Short line set under the plate, in the utility face. Omitted where a nearby heading already names the photo. */
+  caption?: string
 }
 
 export interface NavItem {

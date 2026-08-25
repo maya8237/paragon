@@ -243,7 +243,6 @@ const content: SiteContent = {
     },
     photo: {
       alt: 'Interlocking steel chain links.',
-      caption: 'From the Paragon archive',
     },
     intro: {
       heading: 'Supply Chain Management',
@@ -319,7 +318,6 @@ const content: SiteContent = {
     },
     photo: {
       alt: 'Forwarding staff at their desks, working the phones.',
-      caption: 'From the Paragon archive',
     },
     intro: {
       heading: 'Global Trade',
@@ -444,7 +442,6 @@ const content: SiteContent = {
     },
     photo: {
       alt: 'Warehouse staff moving palletised cartons between racking.',
-      caption: 'From the Paragon archive',
     },
     intro: {
       heading: 'Material Management & Distribution',

@@ -10,10 +10,10 @@ import { assetPath } from '../lib/assetPath'
  * the reason the stylesheet refuses to stretch a tile to card width.
  */
 const ARCHIVE = {
-  'nippon-cargo': { file: 'archive/nippon-cargo.jpg', width: 500, height: 333 },
-  scm: { file: 'archive/scm.jpg', width: 184, height: 115 },
-  'global-trade': { file: 'archive/global-trade.jpg', width: 184, height: 115 },
-  logistics: { file: 'archive/logistics.jpg', width: 184, height: 115 },
+  'nippon-cargo': { file: 'photos/nippon-cargo.jpg', width: 500, height: 333 },
+  scm: { file: 'photos/scm.jpg', width: 184, height: 115 },
+  'global-trade': { file: 'photos/global-trade.jpg', width: 184, height: 115 },
+  logistics: { file: 'photos/logistics.jpg', width: 184, height: 115 },
 } as const
 
 export type ArchiveName = keyof typeof ARCHIVE
