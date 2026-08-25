@@ -15,6 +15,13 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+env:
+  # Repository variable (Settings → Secrets and variables → Actions → Variables).
+  # Unset means "false": a figure NX Group publishes that the site does not
+  # carry in both languages stops the deploy. Set it to "true" only to force a
+  # release out while the translation is still outstanding.
+  IGNORE_NX_INFORMATION: ${{ vars.IGNORE_NX_INFORMATION || 'false' }}
+
 jobs:
   # The github-pages environment only allows deployments from `main`, so a
   # push to any other branch can't deploy directly — it asks a fresh run on
@@ -43,6 +50,15 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      # Gates the deploy on the branch actually being published. Runs before
+      # anything is built so the failure is the first thing in the log, and
+      # runs offline against committed files, so nipponexpress.com being slow
+      # or unreachable can never stop a release.
+      - name: Check Nippon Express content is translated
+        run: |
+          bun install --silent
+          bun run verify:translations
 
       - name: Build every branch
         run: |

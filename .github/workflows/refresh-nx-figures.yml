@@ -22,6 +22,12 @@ permissions:
   contents: write
   pull-requests: write
 
+env:
+  # Deliberately ignored *here*, unlike in the deploy. Surfacing a figure NX has
+  # newly published is the whole point of this job, so it must be able to finish
+  # and open the pull request. The deploy is what refuses to ship it untranslated.
+  IGNORE_NX_INFORMATION: 'true'
+
 concurrency:
   group: refresh-nx-figures
   cancel-in-progress: false
@@ -77,20 +83,43 @@ jobs:
           git commit -m "Refresh NX Group figures from nipponexpress.com"
           git push --force -u origin "$branch"
 
+          {
+            echo "NX Group has changed the headline numbers published on"
+            echo "<https://www.nipponexpress.com/about/>."
+            echo
+            echo "Scraped by \`scripts/fetch-nx-figures.ts\` into \`src/content/nx-figures.json\`."
+            echo "Both language files interpolate these values, so please read the Nippon"
+            echo "Express page in **both** languages before merging — in particular, check"
+            echo "that surrounding wording still agrees with the new numbers (an ordinal"
+            echo "like \"4th\", or a phrase such as \"over\")."
+            echo
+          } > /tmp/pr-body.md
+
+          # An untracked figure means NX publishes something the site has no
+          # translation for. Merging this as-is will stop the next deploy, by
+          # design — so say that here rather than letting main go red unexplained.
+          untracked="$(bun --print 'require("./src/content/nx-figures.json").untracked.map(u => `- **${u.label}**: ${u.value}`).join("\n")')"
+          if [ -n "$untracked" ]; then
+            {
+              echo "> [!WARNING]"
+              echo "> **This will fail the deploy until it is translated.**"
+              echo
+              echo "NX now publishes figures this site does not carry:"
+              echo
+              echo "$untracked"
+              echo
+              echo "Before merging, carry each one — add it to \`WANTED\` in"
+              echo "\`scripts/fetch-nx-figures.ts\`, expose it in \`src/content/nx.ts\`, and write"
+              echo "a label in **both** \`en.ts\` and \`he.ts\`. If these figures should not"
+              echo "appear on the site at all, set the \`IGNORE_NX_INFORMATION\` repository"
+              echo "variable to \`true\` instead."
+            } >> /tmp/pr-body.md
+          fi
+
           if [ -z "$(gh pr list --head "$branch" --state open --json number --jq '.[].number')" ]; then
             gh pr create \
               --base main \
               --head "$branch" \
               --title "Refresh NX Group figures from nipponexpress.com" \
-              --body "$(cat <<'BODY'
-          NX Group has changed one or more of the headline numbers published on
-          https://www.nipponexpress.com/about/.
-
-          Scraped by `scripts/fetch-nx-figures.ts` into `src/content/nx-figures.json`.
-          The English and Hebrew pages interpolate these values, so please read the
-          rendered Nippon Express page in **both** languages before merging — in
-          particular, check that any surrounding wording still agrees with the new
-          numbers (for example an ordinal like "4th", or a phrase such as "over").
-          BODY
-          )"
+              --body-file /tmp/pr-body.md
           fi

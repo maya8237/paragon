@@ -49,9 +49,17 @@ interface Figure {
   note: string
 }
 
+/** A figure NX publishes that the site does not carry, recorded so the deploy gate can see it offline. */
+interface Untracked {
+  label: string
+  value: string
+}
+
 interface NxFigures {
   source: string
   figures: Record<FigureKey, Figure>
+  /** Empty in the healthy case. Anything here fails `verify:translations`. */
+  untracked: Untracked[]
 }
 
 /** One column of the numbers block, as scraped. */
@@ -190,13 +198,18 @@ async function scrape(): Promise<NxFigures> {
   // A figure NX has started publishing that we do not carry. It is deliberately
   // not added to the site — a scraped English label has no Hebrew translation,
   // and inventing one is a person's decision, not this script's. So it is
-  // reported instead of used, loudly enough that someone can choose.
+  // recorded instead of used, and `verify:translations` fails the deploy on it.
   const unrecognised = columns.filter((c) => !matched.has(c) && c.value !== '')
   if (unrecognised.length > 0) {
     report(unrecognised)
   }
 
-  return { source: SOURCE, figures }
+  const untracked = unrecognised.map((c) => ({
+    label: c.label || c.prefix || '(unlabelled)',
+    value: c.value,
+  }))
+
+  return { source: SOURCE, figures, untracked }
 }
 
 /** Surfaces figures NX publishes that this script does not track. */
@@ -206,9 +219,8 @@ function report(unrecognised: Column[]): void {
   console.warn(
     `\nNX now publishes ${unrecognised.length} figure(s) the site does not carry:\n` +
       lines.map((l) => `  ${l}`).join('\n') +
-      `\nTo add one: give it a key in WANTED here, then write a label for it in\n` +
-      `BOTH src/content/en.ts and src/content/he.ts. Nothing is added automatically,\n` +
-      `because a scraped English label has no Hebrew equivalent.\n`,
+      `\nRecorded under "untracked" in the output file, which fails the deploy until\n` +
+      `someone acts on it. See scripts/verify-translations.ts for the fix.\n`,
   )
 
   // Makes the same information visible in the Actions run, not just the log.
