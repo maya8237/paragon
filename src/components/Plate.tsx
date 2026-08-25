@@ -19,19 +19,17 @@ const PHOTOS = {
 export type PhotoName = keyof typeof PHOTOS
 
 /**
- * A photograph from the old site, mounted.
+ * A company photograph, mounted.
  *
- * `tone` is a judgement per photograph, not a global effect: the three 184px
- * service tiles are duotoned because that is what makes four mismatched stock
- * images read as one set, and the Nippon freighter is left in colour because it
- * is the one real, specific photograph in the set and its livery is content.
+ * Photographs are always shown in their original colours — the livery, the
+ * high-vis jackets and the sea are the content, and draining them to grey
+ * throws that away.
  */
 export function Plate({
   name,
   alt,
   caption,
   size = 'tile',
-  tone = 'duotone',
   flush = false,
 }: {
   name: PhotoName
@@ -39,7 +37,6 @@ export function Plate({
   /** Omitted where the plate sits under a heading that already names it. */
   caption?: string
   size?: 'tile' | 'anchor'
-  tone?: 'duotone' | 'colour'
   /**
    * Drop the mount's own edge, for a container that already draws one — a card
    * supplies both the border and the corner, and two hairlines 1px apart read
@@ -50,11 +47,7 @@ export function Plate({
   const asset = PHOTOS[name]
 
   const mount = (
-    <div
-      className={[s.mount, s[size], tone === 'duotone' ? s.duotone : '', flush ? s.flush : '']
-        .filter(Boolean)
-        .join(' ')}
-    >
+    <div className={[s.mount, s[size], flush ? s.flush : ''].filter(Boolean).join(' ')}>
       {/*
         Not lazy-loaded on purpose: every plate sits at or near the first
         screen, the whole set is 228 KB across four files, and the width and

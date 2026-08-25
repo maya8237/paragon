@@ -43,23 +43,17 @@
 }
 
 /*
- * The four old photographs have clashing casts — a cold blue render, a warehouse
- * of red jackets, a beige office — and read as clip art side by side. Draining
- * them to grey makes them one set and lets the low resolution read as age.
+ * Photographs are shown in their original colours — no grayscale or duotone.
  *
  * The mount stays on paper rather than a dark field. These photographs mostly
  * have white backgrounds, so a dark mount turns each one into a glaring white
  * stamp on a heavy block — and three such blocks shout louder than the hero,
  * which is wrong for what is secondary content.
  */
-.duotone .img {
-  filter: grayscale(1) contrast(1.04);
-}
 
 /*
- * Sizes are capped at (or just above) native resolution. `tile` allows a small
- * amount of upscale — the duotone hides the softness — while `anchor` is the
- * one photograph with enough pixels to carry a page.
+ * Sizes are capped at (or just above) native resolution, so a photograph is
+ * never asked to stretch far past the pixels it actually has.
  */
 .tile .img {
   max-inline-size: 260px;
