@@ -121,9 +121,7 @@ export function FreightPage({
           </p>
         ))}
 
-        <PlateRow
-          photos={photos.map((name, i) => ({ name, alt: data.photoAlts[i] ?? '' }))}
-        />
+        <PlateRow photos={photos.map((name, i) => ({ name, alt: data.photoAlts[i] ?? '' }))} />
       </Section>
 
       {extra ? (
