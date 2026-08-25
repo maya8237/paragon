@@ -15,14 +15,30 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-env:
-  # Repository variable (Settings → Secrets and variables → Actions → Variables).
-  # Unset means "false": a figure NX Group publishes that the site does not
-  # carry in both languages stops the deploy. Set it to "true" only to force a
-  # release out while the translation is still outstanding.
-  IGNORE_NX_INFORMATION: ${{ vars.IGNORE_NX_INFORMATION || 'false' }}
-
 jobs:
+  # Reports whether the NX Group information on the site is current and carried
+  # in both languages, and opens a pull request when it is not.
+  #
+  # continue-on-error, and independent of `build` and `deploy`, on purpose:
+  # nothing NX publishes upstream can make our built site wrong, so nothing NX
+  # publishes should stop it shipping. The weekly run in nx-information.yml is
+  # the same check without the safety net, and that is what sends the reminder.
+  nx-validation:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate NX Group information
+        uses: ./.github/actions/nx-validation
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   # The github-pages environment only allows deployments from `main`, so a
   # push to any other branch can't deploy directly — it asks a fresh run on
   # `main` to do it instead, which rebuilds every branch anyway.
@@ -50,15 +66,6 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-
-      # Gates the deploy on the branch actually being published. Runs before
-      # anything is built so the failure is the first thing in the log, and
-      # runs offline against committed files, so nipponexpress.com being slow
-      # or unreachable can never stop a release.
-      - name: Check Nippon Express content is translated
-        run: |
-          bun install --silent
-          bun run verify:translations
 
       - name: Build every branch
         run: |

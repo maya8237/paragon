@@ -1,0 +1,194 @@
+# The one NX Group validation used by the whole project.
+#
+# It answers a single question — is the NX Group information on our site
+# current and carried in both languages? — and it answers it the same way
+# wherever it runs. What differs is who listens:
+#
+#   * deploy-pages.yml runs it with continue-on-error, so it reports without
+#     ever holding up a release. Nothing NX does upstream can make the built
+#     site wrong, so nothing NX does should stop it shipping.
+#   * nx-information.yml runs it weekly without continue-on-error, so a failure
+#     is a failed scheduled run and GitHub emails it out. That is the reminder.
+#
+# Either way, if there is something to act on it opens or updates one pull
+# request carrying the new numbers and what still needs translating by hand.
+name: NX Group validation
+description: Reports whether NX Group information is current and translated, and opens a pull request when it is not.
+
+inputs:
+  github-token:
+    description: Token used to push the branch and open the pull request.
+    required: true
+  open-pull-request:
+    description: Set to "false" to report only and leave the repository untouched.
+    required: false
+    default: 'true'
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Bun
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+
+    - name: Install dependencies
+      shell: bash
+      run: bun install --silent
+
+    # Our own defect: a figure wired into one language file and not the other.
+    # Reported rather than thrown, so the freshness check below still runs and
+    # the summary can carry both findings at once.
+    - name: Check both languages carry the same figures
+      id: languages
+      shell: bash
+      run: |
+        if bun run verify:translations; then
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "ok=false" >> "$GITHUB_OUTPUT"
+        fi
+
+    # Whether NX has moved a number, or started publishing one we do not carry.
+    - name: Check NX Group figures are current
+      id: figures
+      shell: bash
+      run: |
+        set -e
+        bun run nx:figures
+
+        if git diff --quiet -- src/content/nx-figures.json; then
+          echo "numbers-changed=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "numbers-changed=true" >> "$GITHUB_OUTPUT"
+          git --no-pager diff -- src/content/nx-figures.json
+        fi
+
+        untracked="$(bun --print 'require("./src/content/nx-figures.json").untracked.length')"
+        echo "untracked=$untracked" >> "$GITHUB_OUTPUT"
+
+    - name: Write the summary
+      shell: bash
+      env:
+        LANGUAGES_OK: ${{ steps.languages.outputs.ok }}
+        NUMBERS_CHANGED: ${{ steps.figures.outputs.numbers-changed }}
+        UNTRACKED: ${{ steps.figures.outputs.untracked }}
+      run: |
+        {
+          echo "## NX Group information"
+          echo
+          if [ "$NUMBERS_CHANGED" = "false" ] && [ "$UNTRACKED" = "0" ] && [ "$LANGUAGES_OK" = "true" ]; then
+            echo "Up to date. Every figure NX Group publishes is carried on the site, in both languages."
+          fi
+          if [ "$NUMBERS_CHANGED" = "true" ]; then
+            echo "- **Numbers have moved.** NX Group changed one or more published figures."
+          fi
+          if [ "$UNTRACKED" != "0" ]; then
+            echo "- **$UNTRACKED figure(s) are not carried.** NX Group publishes them; the site does not."
+            echo "  Needs a hand-written label in \`src/content/en.ts\` **and** \`src/content/he.ts\` —"
+            echo "  the Hebrew copy is separately authored, so no tool can generate it."
+          fi
+          if [ "$LANGUAGES_OK" = "false" ]; then
+            echo "- **A figure is in one language but not the other.** See the annotation above."
+          fi
+        } >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Open or update the pull request
+      if: inputs.open-pull-request == 'true' && (steps.figures.outputs.numbers-changed == 'true' || steps.figures.outputs.untracked != '0')
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        UNTRACKED: ${{ steps.figures.outputs.untracked }}
+        NUMBERS_CHANGED: ${{ steps.figures.outputs.numbers-changed }}
+      run: |
+        set -e
+        # One long-lived branch, so repeated runs update a single pull request
+        # instead of opening a new one on every deploy.
+        branch="nx-figures/update"
+
+        {
+          echo "NX Group's published figures have moved on <https://www.nipponexpress.com/about/>."
+          echo
+          echo "Scraped by \`scripts/fetch-nx-figures.ts\` into \`src/content/nx-figures.json\`."
+          echo "This branch is updated in place, so it always reflects the latest run."
+          echo
+        } > "$RUNNER_TEMP/pr-body.md"
+
+        if [ "$NUMBERS_CHANGED" = "true" ]; then
+          {
+            echo "### Numbers to review"
+            echo
+            echo "Both language files interpolate these values, so read the Nippon Express"
+            echo "page in **both** languages before merging — check that the wording around"
+            echo "them still agrees (an ordinal like \"4th\", or a phrase such as \"over\")."
+            echo
+          } >> "$RUNNER_TEMP/pr-body.md"
+        fi
+
+        if [ "$UNTRACKED" != "0" ]; then
+          list="$(bun --print 'require("./src/content/nx-figures.json").untracked.map(u => `- **${u.label}**: ${u.value}`).join("\n")')"
+          {
+            echo "### Not carried on the site yet"
+            echo
+            echo "NX Group publishes these; we do not show them:"
+            echo
+            echo "$list"
+            echo
+            echo "Merging this branch does **not** add them. To carry one:"
+            echo
+            echo "1. Add a key for it to \`WANTED\` in \`scripts/fetch-nx-figures.ts\`, matching its label."
+            echo "2. Expose it in \`src/content/nx.ts\`."
+            echo "3. Write a label in **both** \`src/content/en.ts\` and \`src/content/he.ts\`."
+            echo "4. Re-run \`bun run nx:figures\`."
+            echo
+            echo "Until then this check keeps reporting, and the weekly run keeps emailing."
+            echo
+          } >> "$RUNNER_TEMP/pr-body.md"
+        fi
+
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git checkout -B "$branch"
+        git add src/content/nx-figures.json
+        # Nothing to commit when only untracked figures changed, which are not
+        # written to the file; the pull request body is still worth refreshing.
+        git commit -m "Refresh NX Group figures from nipponexpress.com" || echo "No file change to commit."
+        git push --force -u origin "$branch"
+
+        existing="$(gh pr list --head "$branch" --state open --json number --jq '.[].number')"
+        if [ -z "$existing" ]; then
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "Refresh NX Group figures from nipponexpress.com" \
+            --body-file "$RUNNER_TEMP/pr-body.md"
+        else
+          gh pr edit "$existing" --body-file "$RUNNER_TEMP/pr-body.md"
+        fi
+
+    # Last, so the summary and the pull request are always produced first.
+    - name: Report status
+      shell: bash
+      env:
+        LANGUAGES_OK: ${{ steps.languages.outputs.ok }}
+        NUMBERS_CHANGED: ${{ steps.figures.outputs.numbers-changed }}
+        UNTRACKED: ${{ steps.figures.outputs.untracked }}
+      run: |
+        failed=0
+        if [ "$NUMBERS_CHANGED" = "true" ]; then
+          echo "::warning::NX Group has changed published figures — see the pull request."
+          failed=1
+        fi
+        if [ "$UNTRACKED" != "0" ]; then
+          echo "::warning::NX Group publishes $UNTRACKED figure(s) the site does not carry and cannot translate automatically."
+          failed=1
+        fi
+        if [ "$LANGUAGES_OK" = "false" ]; then
+          echo "::error::A NX figure appears in one language file but not the other."
+          failed=1
+        fi
+        if [ "$failed" -eq 1 ]; then
+          echo "NX Group information needs attention. Details above."
+          exit 1
+        fi
+        echo "NX Group information is current and carried in both languages."

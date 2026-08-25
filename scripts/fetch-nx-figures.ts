@@ -12,9 +12,8 @@
  *
  * This is deliberately NOT part of `bun run build`. A deploy that scrapes a
  * third party silently ships whatever that third party happened to serve, and
- * fails when they are down. Instead the scheduled workflow in
- * `.github/workflows/refresh-nx-figures.yml` runs this and opens a pull
- * request when the numbers move, so a person reviews the change.
+ * fails when they are down. It is run instead by `.github/actions/nx-validation`,
+ * which opens a pull request when the numbers move so a person reviews them.
  *
  *   bun run scripts/fetch-nx-figures.ts          # write if changed
  *   bun run scripts/fetch-nx-figures.ts --check  # exit 1 if stale, write nothing
@@ -219,8 +218,9 @@ function report(unrecognised: Column[]): void {
   console.warn(
     `\nNX now publishes ${unrecognised.length} figure(s) the site does not carry:\n` +
       lines.map((l) => `  ${l}`).join('\n') +
-      `\nRecorded under "untracked" in the output file, which fails the deploy until\n` +
-      `someone acts on it. See scripts/verify-translations.ts for the fix.\n`,
+      `\nRecorded under "untracked" in the output file. The NX validation job reports\n` +
+      `these and the weekly run keeps emailing until they are carried in both\n` +
+      `languages; neither ever blocks a deploy.\n`,
   )
 
   // Makes the same information visible in the Actions run, not just the log.

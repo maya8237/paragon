@@ -1,0 +1,35 @@
+# The weekly reminder that NX Group information needs attention.
+#
+# Runs exactly the same validation the deploy runs, with one difference: no
+# continue-on-error. A failure here is a failed scheduled run, which GitHub
+# emails to the repository's watchers — that email is the point of this
+# workflow. It keeps arriving every week until the information is carried and
+# translated, so nothing NX publishes can be quietly forgotten.
+name: NX information
+
+on:
+  schedule:
+    # Mondays at 06:17 UTC — off the hour, because every scheduled job on the
+    # platform piles onto :00 and GitHub delays the busiest slots.
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: nx-information
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate NX Group information
+        uses: ./.github/actions/nx-validation
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
