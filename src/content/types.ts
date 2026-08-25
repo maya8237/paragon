@@ -179,10 +179,15 @@ export interface SiteContent {
     insurance: Prose
     /** Cards linking to the four freight-mode pages. */
     modes: { title: string; blurb: string; to: string }[]
-    ocean: { meta: PageMeta; body: Prose }
-    air: { meta: PageMeta; body: Prose; timeCritical: Prose }
-    dropShipments: { meta: PageMeta; body: Prose }
-    charter: { meta: PageMeta; body: Prose }
+    /**
+     * Alt text for the photographs banded under each freight-mode heading, in
+     * the order they are shown. The filenames are assets and live in the Plate
+     * component; only the words belong here.
+     */
+    ocean: { meta: PageMeta; body: Prose; photoAlts: string[] }
+    air: { meta: PageMeta; body: Prose; timeCritical: Prose; photoAlts: string[] }
+    dropShipments: { meta: PageMeta; body: Prose; photoAlts: string[] }
+    charter: { meta: PageMeta; body: Prose; photoAlts: string[] }
   }
 
   logistics: {
@@ -190,9 +195,13 @@ export interface SiteContent {
     photo: PhotoMeta
     intro: Prose
     center: Prose
+    /** Alt text for the two photographs of the centre itself. */
+    centerPhotoAlts: string[]
     services: { heading: string; blurb: string; items: string[] }
     closing: Prose
     exhibitions: Prose
+    /** Alt text for the special-projects photographs, the barge first. */
+    exhibitionsPhotoAlts: string[]
     exhibitionsProcess: { heading: string; items: string[] }
     exhibitionsClosing: string
   }

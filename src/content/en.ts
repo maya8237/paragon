@@ -380,6 +380,11 @@ const content: SiteContent = {
           'Our ocean freight services include all customs clearance requirements at departure and destination ports.',
         ],
       },
+      photoAlts: [
+        'A bulk carrier alongside the quay, gantry cranes working over the hold.',
+        'Stacked containers across a port terminal, straddle cranes between the rows.',
+        'A crawler crane lifting a shipping container onto a barge.',
+      ],
     },
     air: {
       meta: {
@@ -402,6 +407,11 @@ const content: SiteContent = {
           'As part of our airfreight services portfolio we offer time critical delivery for sensitive or urgent shipments that cannot miss a deadline. These shipments receive special personal care and attention with an assigned agent following up on their operation and delivery.',
         ],
       },
+      photoAlts: [
+        'The wing and engines of a cargo aircraft above cloud.',
+        'A flatbed truck drawn up to the raised nose door of a freighter aircraft, cargo being loaded.',
+        'An aircraft climbing away after departure.',
+      ],
     },
     dropShipments: {
       meta: {
@@ -417,6 +427,10 @@ const content: SiteContent = {
           'Through a network of forwarding specialists we offer professional transport solutions and profound knowledge of the different customs regulations and documentation required for smooth delivery of complex shipments on time.',
         ],
       },
+      photoAlts: [
+        'A landing craft moored with its bow ramp down, sheeted cargo on deck.',
+        'A barge grounded off a beach, an excavator working alongside.',
+      ],
     },
     charter: {
       meta: {
@@ -431,6 +445,11 @@ const content: SiteContent = {
           'For such cases, and where economical and operational considerations are justified, we offer and operate — as part of our portfolio of services — tailored charter shipment with independent operators.',
         ],
       },
+      photoAlts: [
+        'A wide-body airliner in flight above cloud.',
+        'A truck backed up to the nose door of a freighter aircraft on the apron.',
+        'A fully laden container ship under way at sea.',
+      ],
     },
   },
 
@@ -455,6 +474,10 @@ const content: SiteContent = {
         'All our logistic services customers benefit from our technological infrastructure and human resources to do the job efficiently, cost-effectively and on schedule.',
       ],
     },
+    centerPhotoAlts: [
+      'A forklift moving a pallet down an aisle of the logistics centre.',
+      'Racking in the logistics centre, filled with cartons of picked stock.',
+    ],
     services: {
       heading: 'Services',
       blurb: 'The services below are offered to give customers exactly what they need:',
@@ -490,6 +513,10 @@ const content: SiteContent = {
         'Experience can significantly reduce the overall costs and contribute to the success in logistic terms — prioritize deliveries, split or consolidate exhibition elements, equipment and material and, most important, get all the inevitable last minute parts on time for the opening.',
       ],
     },
+    exhibitionsPhotoAlts: [
+      'A supply barge under Paragon’s banner, moored off a palm-lined shore.',
+      'A line of shipping containers standing open on the quayside, being unloaded.',
+    ],
     exhibitionsProcess: {
       heading: 'Paragon provides turnkey or specific solutions for any size project or exhibition',
       items: [

@@ -10,7 +10,7 @@ import {
   StepList,
 } from '../components/ui'
 import { FigureStat } from '../components/bits'
-import { Plate } from '../components/Plate'
+import { Plate, PlateRow } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -40,6 +40,18 @@ export default function Logistics() {
             ))}
           </FigureRow>
         </Split>
+
+        {/*
+          The centre photographed from inside. These are the lowest-resolution
+          photographs on the site, so they run as a row under the full measure
+          rather than being enlarged into the aside.
+        */}
+        <PlateRow
+          photos={[
+            { name: 'centre-forklift', alt: l.centerPhotoAlts[0] ?? '' },
+            { name: 'centre-racking', alt: l.centerPhotoAlts[1] ?? '' },
+          ]}
+        />
       </Section>
 
       <Section tight labelledBy="services-heading">
@@ -66,6 +78,14 @@ export default function Logistics() {
             {p}
           </p>
         ))}
+
+        {/* The barge leads: it is the one photograph that is unmistakably Paragon's own. */}
+        <PlateRow
+          photos={[
+            { name: 'projects-barge', alt: l.exhibitionsPhotoAlts[0] ?? '' },
+            { name: 'projects-quay', alt: l.exhibitionsPhotoAlts[1] ?? '' },
+          ]}
+        />
 
         <Divider />
 
