@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
   workflow_dispatch:
 
 permissions:
@@ -20,18 +20,47 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      - name: Install dependencies
-        run: bun install
-      - name: Build site
-        run: bun run build:pages
+
+      - name: Build every branch
+        run: |
+          set -e
+          mkdir -p output
+          for branch in $(git for-each-ref --format='%(refname:short)' refs/remotes/origin | sed 's#^origin/##' | grep -vx 'HEAD'); do
+            echo "::group::Building $branch"
+            worktree="$RUNNER_TEMP/build-$(echo "$branch" | tr '/' '-')"
+            git worktree add --detach "$worktree" "origin/$branch"
+
+            build_ok=1
+            if [ "$branch" = "main" ]; then
+              (cd "$worktree" && bun install --silent && bun run build:pages) || build_ok=0
+            else
+              (cd "$worktree" && bun install --silent && PAGES_BASE="${{ github.event.repository.name }}/$branch" bun run build:pages) || build_ok=0
+            fi
+
+            if [ "$build_ok" -eq 0 ]; then
+              echo "::warning::Skipping '$branch' — build failed"
+            elif [ "$branch" = "main" ]; then
+              cp -r "$worktree/dist/." output/
+            else
+              mkdir -p "output/$branch"
+              cp -r "$worktree/dist/." "output/$branch/"
+            fi
+
+            git worktree remove --force "$worktree"
+            echo "::endgroup::"
+          done
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: output
 
   deploy:
     needs: build
