@@ -6,9 +6,11 @@ import {
   Prose,
   Section,
   SectionHead,
+  Split,
   StepList,
 } from '../components/ui'
 import { FigureStat } from '../components/bits'
+import { Plate, PlateRow } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -19,21 +21,45 @@ export default function Logistics() {
 
   return (
     <>
-      <PageHeader title={l.intro.heading} lede={l.intro.paragraphs[0]} />
+      {/*
+        The page is titled for the thing the nav, the tab and the footer all
+        call it. The old site headed this page "Material Management &
+        Distribution" while linking to it as "Logistics Services", so arriving
+        from the menu you landed on what looked like a different page. That
+        phrase is really a section title, and it heads its section below.
+      */}
+      <PageHeader title={l.meta.title} lede={l.intro.paragraphs[0]} />
 
-      <Section narrow labelledBy="center-heading">
-        <SectionHead heading={l.center.heading} id="center-heading" />
-        {l.center.paragraphs.map((p) => (
-          <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
-            {p}
-          </p>
-        ))}
-
-        <FigureRow>
-          {t.home.figures.slice(0, 2).map((figure) => (
-            <FigureStat key={figure.label} figure={figure} />
+      <Section narrow labelledBy="materials-heading">
+        <SectionHead heading={l.intro.heading} id="materials-heading" />
+        <h3 style={{ marginBlockEnd: 'var(--space-m)' }}>{l.center.heading}</h3>
+        <Split
+          aside={<Plate name="logistics" alt={l.photo.alt} caption={l.photo.caption} />}
+        >
+          {l.center.paragraphs.map((p) => (
+            <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
+              {p}
+            </p>
           ))}
-        </FigureRow>
+
+          <FigureRow>
+            {t.home.figures.slice(0, 2).map((figure) => (
+              <FigureStat key={figure.label} figure={figure} />
+            ))}
+          </FigureRow>
+        </Split>
+
+        {/*
+          The centre photographed from inside. These are the lowest-resolution
+          photographs on the site, so they run as a row under the full measure
+          rather than being enlarged into the aside.
+        */}
+        <PlateRow
+          photos={[
+            { name: 'centre-forklift', alt: l.centerPhotoAlts[0] ?? '' },
+            { name: 'centre-racking', alt: l.centerPhotoAlts[1] ?? '' },
+          ]}
+        />
       </Section>
 
       <Section tight labelledBy="services-heading">
@@ -60,6 +86,14 @@ export default function Logistics() {
             {p}
           </p>
         ))}
+
+        {/* The barge leads: it is the one photograph that is unmistakably Paragon's own. */}
+        <PlateRow
+          photos={[
+            { name: 'projects-barge', alt: l.exhibitionsPhotoAlts[0] ?? '' },
+            { name: 'projects-quay', alt: l.exhibitionsPhotoAlts[1] ?? '' },
+          ]}
+        />
 
         <Divider />
 

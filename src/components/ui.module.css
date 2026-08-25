@@ -115,6 +115,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2xs);
+  /* Clips edge-to-edge media to the card's corners. The card is itself the
+     link, so its own focus outline is drawn outside this box and survives. */
+  overflow: hidden;
 }
 
 .cardLink {
@@ -133,6 +136,42 @@
 
 .cardLink:hover .cardTitle {
   color: var(--paragon);
+}
+
+/*
+ * Prose + aside. The aside is capped near the plates' native width so
+ * the photographs are never asked to stretch to fill a column.
+ */
+.split {
+  display: grid;
+  gap: var(--space-l);
+  align-items: start;
+}
+
+@media (min-width: 48em) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 17rem);
+    gap: var(--space-xl);
+  }
+}
+
+/*
+ * The aside scrolls with its prose rather than sticking.
+ *
+ * It used to be `position: sticky; top: var(--space-l)`, which detached the
+ * photograph and carried it down the page — and since the site header is
+ * sticky, 4.5rem tall and sits above everything on z-index 50, a 2rem offset
+ * parked the picture underneath it. It also meant the photograph drifted on
+ * past the section it belongs to, alongside content it has nothing to do with.
+ */
+
+/*
+ * Media slot. The plate is pulled out to the card's edges so the mount reads as
+ * part of the card rather than as a picture sitting inside it, and given a
+ * little breathing room before the title.
+ */
+.cardMedia {
+  margin: calc(var(--space-m) * -1) calc(var(--space-m) * -1) var(--space-2xs);
 }
 
 .cardTitle {

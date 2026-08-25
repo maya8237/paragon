@@ -1,4 +1,14 @@
-import { CardLink, Grid, PageHeader, Prose, Section, SectionHead, SubNav } from '../components/ui'
+import {
+  CardLink,
+  Grid,
+  PageHeader,
+  Prose,
+  Section,
+  SectionHead,
+  Split,
+  SubNav,
+} from '../components/ui'
+import { Plate, PlateRow, type PhotoName } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -28,11 +38,21 @@ export default function GlobalTrade() {
       </PageHeader>
 
       <Section narrow>
-        {gt.intro.paragraphs.slice(1).map((p) => (
-          <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
-            {p}
-          </p>
-        ))}
+        <Split
+          aside={
+            <Plate
+              name="global-trade"
+              alt={gt.photo.alt}
+              caption={gt.photo.caption}
+            />
+          }
+        >
+          {gt.intro.paragraphs.slice(1).map((p) => (
+            <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
+              {p}
+            </p>
+          ))}
+        </Split>
       </Section>
 
       <Section tight labelledBy="modes-heading">
@@ -70,9 +90,20 @@ export default function GlobalTrade() {
  */
 export function FreightPage({
   data,
+  photos,
   extra,
 }: {
-  data: { meta: import('../content/types').PageMeta; body: import('../content/types').Prose }
+  data: {
+    meta: import('../content/types').PageMeta
+    body: import('../content/types').Prose
+    photoAlts: string[]
+  }
+  /**
+   * The photographs for this mode, in the order their alt text is written.
+   * Filenames are assets, so the page names them and the copy supplies only
+   * the words.
+   */
+  photos: PhotoName[]
   extra?: import('../content/types').Prose
 }) {
   usePageMeta(data.meta)
@@ -89,6 +120,8 @@ export function FreightPage({
             {p}
           </p>
         ))}
+
+        <PlateRow photos={photos.map((name, i) => ({ name, alt: data.photoAlts[i] ?? '' }))} />
       </Section>
 
       {extra ? (

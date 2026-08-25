@@ -11,10 +11,21 @@ import {
   ui,
 } from '../components/ui'
 import { CertList, ExternalLink, FigureStat } from '../components/bits'
+import { Plate, type PhotoName } from '../components/Plate'
 import { CorridorMap } from '../components/CorridorMap'
 import { Reveal } from '../components/Reveal'
 import { useLangPath, useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
+
+/**
+ * The old home page linked each pillar as an image tile. These are those tiles,
+ * matched back to the routes they pointed at.
+ */
+const PILLAR_PHOTO: Record<string, PhotoName> = {
+  '/scm': 'scm',
+  '/global-trade': 'global-trade',
+  '/logistics': 'logistics',
+}
 
 export default function Home() {
   const { t } = useT()
@@ -70,7 +81,17 @@ export default function Home() {
         </Reveal>
         <Grid>
           {home.pillars.map((pillar) => (
-            <CardLink key={pillar.to} to={pillar.to} title={pillar.title} body={pillar.blurb} />
+            <CardLink
+              key={pillar.to}
+              to={pillar.to}
+              title={pillar.title}
+              body={pillar.blurb}
+              media={
+                PILLAR_PHOTO[pillar.to] ? (
+                  <Plate name={PILLAR_PHOTO[pillar.to]} alt={pillar.imageAlt} flush />
+                ) : null
+              }
+            />
           ))}
         </Grid>
       </Section>

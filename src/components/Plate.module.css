@@ -1,0 +1,196 @@
+/*
+ * Plate — the mount for photographs carried over from the old site.
+ *
+ * The constraint that shapes this component: three of the four surviving
+ * photographs are 184x115. They cannot be enlarged to fill a card without
+ * visibly falling apart, so the *mount* does the layout work and the image is
+ * capped near its native width and centred inside it. Empty mount is deliberate.
+ *
+ * Depth follows the house rule — hairline on paper, never a drop shadow.
+ */
+
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+/*
+ * The mount lays a photograph out; it does not frame it.
+ *
+ * The hairline belongs to the picture itself (see `.img`), never to the mount.
+ * A mount is often wider than the photograph it holds — it has to be, since the
+ * oldest tiles are 184px and cannot fill a card — and when the mount carried the
+ * edge, that produced a rectangle standing well clear of the photograph inside
+ * it. Against a page of the same colour it read as a picture with no border at
+ * all, sitting next to pictures that had one.
+ */
+.mount {
+  display: grid;
+  place-items: center;
+  padding: var(--space-s);
+  background: var(--surface-sunk);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/*
+ * A standalone plate aligns its picture to the text edge rather than centring
+ * it. A centred photograph sitting above a row of photographs starts at a
+ * different margin from the row, and since the mount itself is invisible the
+ * two simply look misaligned. `start` follows the writing direction, so this
+ * holds in Hebrew too.
+ */
+.mount:not(.flush) {
+  justify-items: start;
+  padding-inline: 0;
+}
+
+/*
+ * Inside a card the plate is a media band across the full width, so it loses
+ * its own corner and keeps a single rule dividing the picture from the text.
+ */
+.flush {
+  border-block-end: var(--border);
+  border-radius: 0;
+}
+
+.img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  /* Every photograph on the site carries its own hairline, and only its own. */
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+/*
+ * Photographs are shown in their original colours — no grayscale or duotone.
+ *
+ * The mount stays on paper rather than a dark field. These photographs mostly
+ * have white backgrounds, so a dark mount turns each one into a glaring white
+ * stamp on a heavy block — and three such blocks shout louder than the hero,
+ * which is wrong for what is secondary content.
+ */
+
+/*
+ * Sizes are capped at (or just above) native resolution, so a photograph is
+ * never asked to stretch far past the pixels it actually has.
+ */
+.tile .img {
+  max-inline-size: 260px;
+}
+
+/*
+ * The anchor mount hugs its photograph instead of running the full measure, so
+ * the caption below lines up with the picture's edge rather than floating out
+ * to the left of it.
+ */
+.anchor {
+  inline-size: fit-content;
+  max-inline-size: 100%;
+}
+
+.anchor .img {
+  max-inline-size: 500px;
+}
+
+/*
+ * A row of photographs, sharing one height.
+ *
+ * `flex-grow` is set per image to its aspect ratio, so the row divides the
+ * width in proportion to shape and every frame ends up the same height — the
+ * only way a set of mismatched crops reads as one band. Below 34em the row
+ * wraps and each photograph takes the full measure on its own.
+ */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-block-start: var(--space-l);
+}
+
+/*
+ * The plate a photograph arrives on. It carries the edge and the sunk paper so
+ * the space reads as deliberately empty while the picture is still loading,
+ * rather than as a hole with alt text in it.
+ */
+.rowFrame {
+  min-inline-size: 0;
+  background: var(--surface-sunk);
+  border: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.rowImg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  /*
+   * A flex row stretches its items to the tallest by default, which on an
+   * <img> squashes the picture rather than the box. `cover` makes that stretch
+   * a crop instead — and since the widths are already dealt out by aspect
+   * ratio, there is at most a pixel of rounding to absorb.
+   */
+  object-fit: cover;
+
+  /*
+   * No fade on arrival, deliberately. Hiding the photograph until a script
+   * says otherwise means any failure in that chain leaves a permanently blank
+   * plate, which is a worse fault than a picture that simply appears. The
+   * plate behind it is what stops the wait from looking broken.
+   */
+
+  /* Alt text, on the rare occasion it is what gets rendered. */
+  font-size: var(--step--1);
+  color: var(--slate);
+}
+
+
+/*
+ * Stacked on a phone, each photograph takes the whole column so every left and
+ * right edge lines up. `!important` is doing real work: the ratio sizing is set
+ * as an inline style, which a plain rule could not override.
+ */
+@media (max-width: 34em) {
+  /*
+   * `:not(.compact)` matters. A compact row must keep the per-image flex-grow
+   * set inline, and the `flex` shorthand below would overwrite it with 1 —
+   * giving every photograph the same width regardless of shape.
+   */
+  .row:not(.compact) > .rowFrame {
+    flex: 1 1 100% !important;
+    max-inline-size: 100% !important;
+  }
+
+  /*
+   * A compact row divides the column instead of wrapping: zeroing the basis
+   * leaves the inline flex-grow — the aspect ratio — as the only thing
+   * apportioning width, so the pair stays on one line and level.
+   */
+  .compact > .rowFrame {
+    flex-basis: 0 !important;
+  }
+}
+
+.caption {
+  /* The mount no longer insets a standalone picture, so neither does its caption. */
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--slate);
+}
+
+:lang(he) .caption {
+  letter-spacing: 0.04em;
+  /* Hebrew has no case, so uppercasing only damages spacing. */
+  text-transform: none;
+}
+
+:global(.inverted) .caption {
+  color: var(--ink-muted);
+}

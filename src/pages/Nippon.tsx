@@ -1,5 +1,6 @@
 import { Card, Divider, FigureRow, Grid, PageHeader, Prose, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, FigureStat } from '../components/bits'
+import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -12,9 +13,22 @@ export default function Nippon() {
     <>
       <PageHeader title={n.body.heading} lede={n.body.paragraphs[0]} />
 
+      {/*
+        The one photograph with the resolution to carry a page — the livery is
+        the subject, not texture.
+      */}
       <Section narrow>
+        <Plate name="nippon-cargo" alt={n.photo.alt} caption={n.photo.caption} size="anchor" />
+
         {n.body.paragraphs.slice(1).map((p) => (
-          <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
+          <p
+            key={p}
+            style={{
+              color: 'var(--slate)',
+              marginBlockEnd: 'var(--space-s)',
+              marginBlockStart: 'var(--space-l)',
+            }}
+          >
             {p}
           </p>
         ))}

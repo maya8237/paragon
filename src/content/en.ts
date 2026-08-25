@@ -108,18 +108,21 @@ const content: SiteContent = {
         blurb:
           'On-site personnel embedded in your operation, and consulting across the complete SCM cycle — from analysing goals to building the infrastructure that supports them.',
         to: '/scm',
+        imageAlt: 'Interlocking steel chain links.',
       },
       {
         title: 'Global Trade',
         blurb:
           'Ocean, air, drop shipments and charter solutions, with customs clearance at departure and destination and insurance cover from leading houses.',
         to: '/global-trade',
+        imageAlt: 'Forwarding staff at their desks, working the phones.',
       },
       {
         title: 'Logistics Services',
         blurb:
           'A 3,000 m² logistics centre for material management and distribution, plus turnkey logistics for exhibitions and special projects.',
         to: '/logistics',
+        imageAlt: 'Warehouse staff moving palletised cartons between racking.',
       },
     ],
     certificationsTeaser: {
@@ -238,6 +241,9 @@ const content: SiteContent = {
       description:
         'On-site logistics personnel and full-cycle supply chain consulting — analysing needs and resources, identifying weak links, and building the infrastructure to support growth.',
     },
+    photo: {
+      alt: 'Interlocking steel chain links.',
+    },
     intro: {
       heading: 'Supply Chain Management',
       paragraphs: [
@@ -310,6 +316,9 @@ const content: SiteContent = {
       description:
         'Ocean freight, air freight, drop shipments and charter solutions, with customs clearance at departure and destination and professional insurance coverage.',
     },
+    photo: {
+      alt: 'Forwarding staff at their desks, working the phones.',
+    },
     intro: {
       heading: 'Global Trade',
       paragraphs: [
@@ -371,6 +380,11 @@ const content: SiteContent = {
           'Our ocean freight services include all customs clearance requirements at departure and destination ports.',
         ],
       },
+      photoAlts: [
+        'A bulk carrier alongside the quay, gantry cranes working over the hold.',
+        'Stacked containers across a port terminal, straddle cranes between the rows.',
+        'A crawler crane lifting a shipping container onto a barge.',
+      ],
     },
     air: {
       meta: {
@@ -393,6 +407,11 @@ const content: SiteContent = {
           'As part of our airfreight services portfolio we offer time critical delivery for sensitive or urgent shipments that cannot miss a deadline. These shipments receive special personal care and attention with an assigned agent following up on their operation and delivery.',
         ],
       },
+      photoAlts: [
+        'The wing and engines of a cargo aircraft above cloud.',
+        'A flatbed truck drawn up to the raised nose door of a freighter aircraft, cargo being loaded.',
+        'An aircraft climbing away after departure.',
+      ],
     },
     dropShipments: {
       meta: {
@@ -408,6 +427,10 @@ const content: SiteContent = {
           'Through a network of forwarding specialists we offer professional transport solutions and profound knowledge of the different customs regulations and documentation required for smooth delivery of complex shipments on time.',
         ],
       },
+      photoAlts: [
+        'A landing craft moored with its bow ramp down, sheeted cargo on deck.',
+        'A barge grounded off a beach, an excavator working alongside.',
+      ],
     },
     charter: {
       meta: {
@@ -422,6 +445,11 @@ const content: SiteContent = {
           'For such cases, and where economical and operational considerations are justified, we offer and operate — as part of our portfolio of services — tailored charter shipment with independent operators.',
         ],
       },
+      photoAlts: [
+        'A wide-body airliner in flight above cloud.',
+        'A truck backed up to the nose door of a freighter aircraft on the apron.',
+        'A fully laden container ship under way at sea.',
+      ],
     },
   },
 
@@ -430,6 +458,9 @@ const content: SiteContent = {
       title: 'Logistics Services',
       description:
         'A 3,000 m² logistics centre for material management and distribution, plus turnkey logistics for exhibitions and special projects.',
+    },
+    photo: {
+      alt: 'Warehouse staff moving palletised cartons between racking.',
     },
     intro: {
       heading: 'Material Management & Distribution',
@@ -443,6 +474,10 @@ const content: SiteContent = {
         'All our logistic services customers benefit from our technological infrastructure and human resources to do the job efficiently, cost-effectively and on schedule.',
       ],
     },
+    centerPhotoAlts: [
+      'A forklift moving a pallet down an aisle of the logistics centre.',
+      'Racking in the logistics centre, filled with cartons of picked stock.',
+    ],
     services: {
       heading: 'Services',
       blurb: 'The services below are offered to give customers exactly what they need:',
@@ -478,6 +513,10 @@ const content: SiteContent = {
         'Experience can significantly reduce the overall costs and contribute to the success in logistic terms — prioritize deliveries, split or consolidate exhibition elements, equipment and material and, most important, get all the inevitable last minute parts on time for the opening.',
       ],
     },
+    exhibitionsPhotoAlts: [
+      'A supply barge under Paragon’s banner, moored off a palm-lined shore.',
+      'A line of shipping containers standing open on the quayside, being unloaded.',
+    ],
     exhibitionsProcess: {
       heading: 'Paragon provides turnkey or specific solutions for any size project or exhibition',
       items: [
@@ -525,6 +564,10 @@ const content: SiteContent = {
     meta: {
       title: 'Nippon Express',
       description: `Paragon Logistics Ltd. is proud to be an agent of NX Group (formerly Nippon Express Group) in Israel — tracing back to 1872, active in ${nx.countries} countries and regions with ${nx.employees} employees.`,
+    },
+    photo: {
+      alt: 'A Nippon Cargo Airlines Boeing 747 freighter on the taxiway.',
+      caption: 'Nippon Cargo Airlines freighter',
     },
     body: {
       heading: 'Nippon Express',

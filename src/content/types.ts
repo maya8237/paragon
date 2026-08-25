@@ -25,6 +25,19 @@ export interface Figure {
   label: string
 }
 
+/**
+ * A photograph carried over from the old site.
+ *
+ * Only the words live here — the filename is an asset, not copy, so it is
+ * mapped in the component. These are content images rather than decoration,
+ * so `alt` is required and must describe the photograph, not name it.
+ */
+export interface PhotoMeta {
+  alt: string
+  /** Short line set under the plate, in the utility face. Omitted where a nearby heading already names the photo. */
+  caption?: string
+}
+
 export interface NavItem {
   label: string
   to: string
@@ -121,8 +134,12 @@ export interface SiteContent {
     /** The five real network nodes rendered by the corridor map. */
     networkNodes: { id: Location['id']; name: string; role: string }[]
     figures: Figure[]
-    /** The three service pillars the old home page linked as image tiles. */
-    pillars: { title: string; blurb: string; to: string }[]
+    /**
+     * The three service pillars the old home page linked as image tiles. The
+     * photographs are those same tiles, returned to the pillars they belonged
+     * to — captionless, because the card's own title already names them.
+     */
+    pillars: { title: string; blurb: string; to: string; imageAlt: string }[]
     certificationsTeaser: { heading: string; blurb: string; cta: NavItem }
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
@@ -143,6 +160,7 @@ export interface SiteContent {
 
   scm: {
     meta: PageMeta
+    photo: PhotoMeta
     intro: Prose
     /** "Synchronizing Global Operations" — the SCM landing bullets. */
     synchronizing: { heading: string; items: { title: string; body: string }[] }
@@ -154,24 +172,35 @@ export interface SiteContent {
 
   globalTrade: {
     meta: PageMeta
+    photo: PhotoMeta
     intro: Prose
     philosophy: Prose
     insurance: Prose
     /** Cards linking to the four freight-mode pages. */
     modes: { title: string; blurb: string; to: string }[]
-    ocean: { meta: PageMeta; body: Prose }
-    air: { meta: PageMeta; body: Prose; timeCritical: Prose }
-    dropShipments: { meta: PageMeta; body: Prose }
-    charter: { meta: PageMeta; body: Prose }
+    /**
+     * Alt text for the photographs banded under each freight-mode heading, in
+     * the order they are shown. The filenames are assets and live in the Plate
+     * component; only the words belong here.
+     */
+    ocean: { meta: PageMeta; body: Prose; photoAlts: string[] }
+    air: { meta: PageMeta; body: Prose; timeCritical: Prose; photoAlts: string[] }
+    dropShipments: { meta: PageMeta; body: Prose; photoAlts: string[] }
+    charter: { meta: PageMeta; body: Prose; photoAlts: string[] }
   }
 
   logistics: {
     meta: PageMeta
+    photo: PhotoMeta
     intro: Prose
     center: Prose
+    /** Alt text for the two photographs of the centre itself. */
+    centerPhotoAlts: string[]
     services: { heading: string; blurb: string; items: string[] }
     closing: Prose
     exhibitions: Prose
+    /** Alt text for the special-projects photographs, the barge first. */
+    exhibitionsPhotoAlts: string[]
     exhibitionsProcess: { heading: string; items: string[] }
     exhibitionsClosing: string
   }
@@ -186,6 +215,8 @@ export interface SiteContent {
 
   nippon: {
     meta: PageMeta
+    /** Kept in full colour — the livery is content, not texture. */
+    photo: PhotoMeta
     body: Prose
     figures: Figure[]
     history: Prose
