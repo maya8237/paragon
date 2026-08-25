@@ -15,22 +15,42 @@
   gap: var(--space-2xs);
 }
 
+/*
+ * The mount lays a photograph out; it does not frame it.
+ *
+ * The hairline belongs to the picture itself (see `.img`), never to the mount.
+ * A mount is often wider than the photograph it holds — it has to be, since the
+ * oldest tiles are 184px and cannot fill a card — and when the mount carried the
+ * edge, that produced a rectangle standing well clear of the photograph inside
+ * it. Against a page of the same colour it read as a picture with no border at
+ * all, sitting next to pictures that had one.
+ */
 .mount {
   display: grid;
   place-items: center;
   padding: var(--space-s);
   background: var(--surface-sunk);
-  border: var(--border);
   border-radius: var(--radius);
   overflow: hidden;
 }
 
 /*
- * Inside a card the card already draws the edge and the corner, but mount and
- * card body are both light, so one hairline stays to divide picture from text.
+ * A standalone plate aligns its picture to the text edge rather than centring
+ * it. A centred photograph sitting above a row of photographs starts at a
+ * different margin from the row, and since the mount itself is invisible the
+ * two simply look misaligned. `start` follows the writing direction, so this
+ * holds in Hebrew too.
+ */
+.mount:not(.flush) {
+  justify-items: start;
+  padding-inline: 0;
+}
+
+/*
+ * Inside a card the plate is a media band across the full width, so it loses
+ * its own corner and keeps a single rule dividing the picture from the text.
  */
 .flush {
-  border: 0;
   border-block-end: var(--border);
   border-radius: 0;
 }
@@ -39,7 +59,9 @@
   display: block;
   inline-size: 100%;
   block-size: auto;
-  border-radius: 2px;
+  /* Every photograph on the site carries its own hairline, and only its own. */
+  border: var(--border);
+  border-radius: var(--radius);
 }
 
 /*
@@ -153,8 +175,7 @@
 }
 
 .caption {
-  /* Matches the mount's padding so the caption sits under the picture's edge. */
-  padding-inline: var(--space-s);
+  /* The mount no longer insets a standalone picture, so neither does its caption. */
   font-family: var(--font-body);
   font-size: var(--step--1);
   font-weight: 500;
