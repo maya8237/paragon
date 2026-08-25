@@ -10,7 +10,7 @@ import {
   StepList,
 } from '../components/ui'
 import { FigureStat } from '../components/bits'
-import { ArchivePlate } from '../components/ArchivePlate'
+import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -26,7 +26,7 @@ export default function Logistics() {
       <Section narrow labelledBy="center-heading">
         <SectionHead heading={l.center.heading} id="center-heading" />
         <Split
-          aside={<ArchivePlate name="logistics" alt={l.photo.alt} caption={l.photo.caption} />}
+          aside={<Plate name="logistics" alt={l.photo.alt} caption={l.photo.caption} />}
         >
           {l.center.paragraphs.map((p) => (
             <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>

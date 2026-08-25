@@ -9,7 +9,7 @@ import {
   StepList,
   TickList,
 } from '../components/ui'
-import { ArchivePlate } from '../components/ArchivePlate'
+import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -36,7 +36,7 @@ export default function Scm() {
 
       <Section id="on-site" narrow tight labelledBy="onsite-heading">
         <SectionHead heading={scm.onSite.heading} id="onsite-heading" />
-        <Split aside={<ArchivePlate name="scm" alt={scm.photo.alt} caption={scm.photo.caption} />}>
+        <Split aside={<Plate name="scm" alt={scm.photo.alt} caption={scm.photo.caption} />}>
           {scm.onSite.paragraphs.map((p) => (
             <p key={p} style={{ color: 'var(--slate)', marginBlockEnd: 'var(--space-s)' }}>
               {p}

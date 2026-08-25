@@ -1,6 +1,6 @@
 import { Divider, FigureRow, PageHeader, Prose, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, FigureStat } from '../components/bits'
-import { ArchivePlate } from '../components/ArchivePlate'
+import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -14,11 +14,11 @@ export default function Nippon() {
       <PageHeader title={n.body.heading} lede={n.body.paragraphs[0]} />
 
       {/*
-        The one photograph in the archive with the resolution to carry a page,
+        The one photograph in the set with the resolution to carry a page,
         and the only one left in colour — the livery is the subject, not texture.
       */}
       <Section narrow>
-        <ArchivePlate
+        <Plate
           name="nippon-cargo"
           alt={n.photo.alt}
           caption={n.photo.caption}

@@ -93,7 +93,7 @@ export function Grid({ children, wide }: { children: ReactNode; wide?: boolean }
 /**
  * Prose with a narrow aside beside it, stacking below 48em.
  *
- * The aside column is sized to the archive plates it carries — wide enough for
+ * The aside column is sized to the plates it carries — wide enough for
  * a photograph at its true resolution and no wider, so the prose keeps the
  * larger share of the measure.
  */

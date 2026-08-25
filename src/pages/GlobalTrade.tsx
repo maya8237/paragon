@@ -8,7 +8,7 @@ import {
   Split,
   SubNav,
 } from '../components/ui'
-import { ArchivePlate } from '../components/ArchivePlate'
+import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -40,7 +40,7 @@ export default function GlobalTrade() {
       <Section narrow>
         <Split
           aside={
-            <ArchivePlate
+            <Plate
               name="global-trade"
               alt={gt.photo.alt}
               caption={gt.photo.caption}

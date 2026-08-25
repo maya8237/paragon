@@ -1,4 +1,4 @@
-import s from './ArchivePlate.module.css'
+import s from './Plate.module.css'
 import { assetPath } from '../lib/assetPath'
 
 /**
@@ -9,14 +9,14 @@ import { assetPath } from '../lib/assetPath'
  * browser so the plate reserves its space before the image loads, and they are
  * the reason the stylesheet refuses to stretch a tile to card width.
  */
-const ARCHIVE = {
+const PHOTOS = {
   'nippon-cargo': { file: 'photos/nippon-cargo.jpg', width: 500, height: 333 },
   scm: { file: 'photos/scm.jpg', width: 184, height: 115 },
   'global-trade': { file: 'photos/global-trade.jpg', width: 184, height: 115 },
   logistics: { file: 'photos/logistics.jpg', width: 184, height: 115 },
 } as const
 
-export type ArchiveName = keyof typeof ARCHIVE
+export type PhotoName = keyof typeof PHOTOS
 
 /**
  * A photograph from the old site, mounted.
@@ -26,7 +26,7 @@ export type ArchiveName = keyof typeof ARCHIVE
  * images read as one set, and the Nippon freighter is left in colour because it
  * is the one real, specific photograph in the set and its livery is content.
  */
-export function ArchivePlate({
+export function Plate({
   name,
   alt,
   caption,
@@ -34,7 +34,7 @@ export function ArchivePlate({
   tone = 'duotone',
   flush = false,
 }: {
-  name: ArchiveName
+  name: PhotoName
   alt: string
   /** Omitted where the plate sits under a heading that already names it. */
   caption?: string
@@ -47,7 +47,7 @@ export function ArchivePlate({
    */
   flush?: boolean
 }) {
-  const asset = ARCHIVE[name]
+  const asset = PHOTOS[name]
 
   const mount = (
     <div
@@ -57,7 +57,7 @@ export function ArchivePlate({
     >
       {/*
         Not lazy-loaded on purpose: every plate sits at or near the first
-        screen, the whole archive is 228 KB across four files, and the width and
+        screen, the whole set is 228 KB across four files, and the width and
         height below already reserve the space. Deferring them would only buy a
         pop-in.
       */}

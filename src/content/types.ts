@@ -32,7 +32,7 @@ export interface Figure {
  * mapped in the component. These are content images rather than decoration,
  * so `alt` is required and must describe the photograph, not name it.
  */
-export interface ArchiveImage {
+export interface PhotoMeta {
   alt: string
   /** Short line set under the plate, in the utility face. Omitted where a nearby heading already names the photo. */
   caption?: string
@@ -161,7 +161,7 @@ export interface SiteContent {
 
   scm: {
     meta: PageMeta
-    photo: ArchiveImage
+    photo: PhotoMeta
     intro: Prose
     /** "Synchronizing Global Operations" — the SCM landing bullets. */
     synchronizing: { heading: string; items: { title: string; body: string }[] }
@@ -173,7 +173,7 @@ export interface SiteContent {
 
   globalTrade: {
     meta: PageMeta
-    photo: ArchiveImage
+    photo: PhotoMeta
     intro: Prose
     philosophy: Prose
     insurance: Prose
@@ -187,7 +187,7 @@ export interface SiteContent {
 
   logistics: {
     meta: PageMeta
-    photo: ArchiveImage
+    photo: PhotoMeta
     intro: Prose
     center: Prose
     services: { heading: string; blurb: string; items: string[] }
@@ -208,7 +208,7 @@ export interface SiteContent {
   nippon: {
     meta: PageMeta
     /** Kept in full colour — the livery is content, not texture. */
-    photo: ArchiveImage
+    photo: PhotoMeta
     body: Prose
     figures: Figure[]
     history: Prose
