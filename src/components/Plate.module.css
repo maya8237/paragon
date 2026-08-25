@@ -95,12 +95,38 @@
   block-size: auto;
   border: var(--border);
   border-radius: var(--radius);
+  /*
+   * A flex row stretches its items to the tallest by default, which on an
+   * <img> squashes the picture rather than the box. `cover` makes that stretch
+   * a crop instead — and since the widths are already dealt out by aspect
+   * ratio, there is at most a pixel of rounding to absorb.
+   */
+  object-fit: cover;
 }
 
+/*
+ * Stacked on a phone, each photograph takes the whole column so every left and
+ * right edge lines up. `!important` is doing real work: the ratio sizing is set
+ * as an inline style, which a plain rule could not override.
+ */
 @media (max-width: 34em) {
-  .rowImg {
-    /* Ratio-based growth needs a row to divide; stacked, it just distorts. */
+  /*
+   * `:not(.compact)` matters. A compact row must keep the per-image flex-grow
+   * set inline, and the `flex` shorthand below would overwrite it with 1 —
+   * giving every photograph the same width regardless of shape.
+   */
+  .row:not(.compact) > .rowImg {
     flex: 1 1 100% !important;
+    max-inline-size: 100% !important;
+  }
+
+  /*
+   * A compact row divides the column instead of wrapping: zeroing the basis
+   * leaves the inline flex-grow — the aspect ratio — as the only thing
+   * apportioning width, so the pair stays on one line and level.
+   */
+  .compact > .rowImg {
+    flex-basis: 0 !important;
   }
 }
 

@@ -111,8 +111,17 @@ export function Plate({
  * shape the original designer cropped them to, and no two match.
  */
 export function PlateRow({ photos }: { photos: { name: PhotoName; alt: string }[] }) {
+  /*
+   * On a phone a row normally stacks, each photograph filling the column. That
+   * only works when the photograph has the pixels to fill it: below roughly
+   * 290px it would be enlarged past what it can carry, and — because the larger
+   * photographs on the same page do fill the column — the result is a stack of
+   * mismatched widths. Such a row stays a row instead, shrunk but level.
+   */
+  const compact = photos.some(({ name }) => PHOTOS[name].width < 290)
+
   return (
-    <div className={s.row}>
+    <div className={[s.row, compact ? s.compact : ''].filter(Boolean).join(' ')}>
       {photos.map(({ name, alt }) => {
         const asset = PHOTOS[name]
         const ratio = asset.width / asset.height
