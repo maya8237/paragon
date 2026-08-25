@@ -9,13 +9,29 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  # The github-pages environment only allows deployments from `main`, so a
+  # push to any other branch can't deploy directly — it asks a fresh run on
+  # `main` to do it instead, which rebuilds every branch anyway.
+  trigger-main-deploy:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a deploy run on main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api "repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" \
+            -f ref=main
+
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -64,6 +80,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
