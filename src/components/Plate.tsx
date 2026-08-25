@@ -122,30 +122,51 @@ export function PlateRow({ photos }: { photos: { name: PhotoName; alt: string }[
 
   return (
     <div className={[s.row, compact ? s.compact : ''].filter(Boolean).join(' ')}>
-      {photos.map(({ name, alt }) => {
-        const asset = PHOTOS[name]
-        const ratio = asset.width / asset.height
-        return (
-          <img
-            key={name}
-            className={s.rowImg}
-            style={{
-              flexGrow: ratio,
-              flexBasis: `${ratio * 120}px`,
-              // Never enlarge past the pixels the photograph actually has. The
-              // centre frames are only ~240px wide, and stretched to the full
-              // measure they turn to mush; capped, the row simply ends early.
-              maxInlineSize: `${asset.width}px`,
-            }}
-            src={assetPath(asset.file)}
-            alt={alt}
-            width={asset.width}
-            height={asset.height}
-            loading="lazy"
-            decoding="async"
-          />
-        )
-      })}
+      {photos.map((photo) => (
+        <RowPhoto key={photo.name} {...photo} />
+      ))}
+    </div>
+  )
+}
+
+/**
+ * One photograph in a row, with the plate it arrives on.
+ *
+ * The plate is a real element rather than a background on the image, because
+ * these are lazy-loaded: a photograph far down the page may not be fetched
+ * until the reader is nearly on top of it, and an image with nothing behind it
+ * shows as a hole in the layout with its alt text loose inside. The plate holds
+ * the space — the same sunk paper the mounted plates use — so a photograph that
+ * is slow to arrive reads as an empty frame rather than a broken page.
+ */
+function RowPhoto({ name, alt }: { name: PhotoName; alt: string }) {
+  const asset = PHOTOS[name]
+  const ratio = asset.width / asset.height
+
+  return (
+    <div
+      className={s.rowFrame}
+      style={{
+        flexGrow: ratio,
+        flexBasis: `${ratio * 120}px`,
+        // Never enlarge past the pixels the photograph actually has. The centre
+        // frames are only ~240px wide, and stretched to the full measure they
+        // turn to mush; capped, the row simply ends early.
+        maxInlineSize: `${asset.width}px`,
+        // Holds the exact height before the photograph arrives, so nothing on
+        // the page moves when it does.
+        aspectRatio: `${asset.width} / ${asset.height}`,
+      }}
+    >
+      <img
+        className={s.rowImg}
+        src={assetPath(asset.file)}
+        alt={alt}
+        width={asset.width}
+        height={asset.height}
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   )
 }

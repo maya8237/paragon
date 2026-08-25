@@ -88,13 +88,23 @@
   margin-block-start: var(--space-l);
 }
 
-.rowImg {
-  display: block;
+/*
+ * The plate a photograph arrives on. It carries the edge and the sunk paper so
+ * the space reads as deliberately empty while the picture is still loading,
+ * rather than as a hole with alt text in it.
+ */
+.rowFrame {
   min-inline-size: 0;
-  inline-size: 100%;
-  block-size: auto;
+  background: var(--surface-sunk);
   border: var(--border);
   border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.rowImg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
   /*
    * A flex row stretches its items to the tallest by default, which on an
    * <img> squashes the picture rather than the box. `cover` makes that stretch
@@ -102,7 +112,19 @@
    * ratio, there is at most a pixel of rounding to absorb.
    */
   object-fit: cover;
+
+  /*
+   * No fade on arrival, deliberately. Hiding the photograph until a script
+   * says otherwise means any failure in that chain leaves a permanently blank
+   * plate, which is a worse fault than a picture that simply appears. The
+   * plate behind it is what stops the wait from looking broken.
+   */
+
+  /* Alt text, on the rare occasion it is what gets rendered. */
+  font-size: var(--step--1);
+  color: var(--slate);
 }
+
 
 /*
  * Stacked on a phone, each photograph takes the whole column so every left and
@@ -115,7 +137,7 @@
    * set inline, and the `flex` shorthand below would overwrite it with 1 —
    * giving every photograph the same width regardless of shape.
    */
-  .row:not(.compact) > .rowImg {
+  .row:not(.compact) > .rowFrame {
     flex: 1 1 100% !important;
     max-inline-size: 100% !important;
   }
@@ -125,7 +147,7 @@
    * leaves the inline flex-grow — the aspect ratio — as the only thing
    * apportioning width, so the pair stays on one line and level.
    */
-  .compact > .rowImg {
+  .compact > .rowFrame {
     flex-basis: 0 !important;
   }
 }
