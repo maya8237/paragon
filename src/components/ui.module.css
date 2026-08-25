@@ -155,16 +155,15 @@
   }
 }
 
-.splitAside {
-  position: sticky;
-  top: var(--space-l);
-}
-
-@media (max-width: 47.99em) {
-  .splitAside {
-    position: static;
-  }
-}
+/*
+ * The aside scrolls with its prose rather than sticking.
+ *
+ * It used to be `position: sticky; top: var(--space-l)`, which detached the
+ * photograph and carried it down the page — and since the site header is
+ * sticky, 4.5rem tall and sits above everything on z-index 50, a 2rem offset
+ * parked the picture underneath it. It also meant the photograph drifted on
+ * past the section it belongs to, alongside content it has nothing to do with.
+ */
 
 /*
  * Media slot. The plate is pulled out to the card's edges so the mount reads as

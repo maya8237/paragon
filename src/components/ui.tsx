@@ -101,7 +101,8 @@ export function Split({ children, aside }: { children: ReactNode; aside: ReactNo
   return (
     <div className={s.split}>
       <div>{children}</div>
-      <div className={s.splitAside}>{aside}</div>
+      {/* The grid's own column sizes the aside; it needs no styles of its own. */}
+      <div>{aside}</div>
     </div>
   )
 }
