@@ -213,6 +213,8 @@ export interface SiteContent {
     figures: Figure[]
     history: Prose
     warehousing: Prose
+    /** The service lines NX Group organises its offering into — added when the group rebranded. */
+    services: { heading: string; items: { title: string; body: string }[] }
     links: ExternalLink[]
   }
 

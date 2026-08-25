@@ -1,0 +1,29 @@
+{
+  "source": "https://www.nipponexpress.com/about/",
+  "figures": {
+    "founded": {
+      "value": "1937",
+      "note": ""
+    },
+    "worldRank": {
+      "value": "4",
+      "note": "Source: Armstrong & Associates, Inc. A&A’s Top 25 Global Freight Forwarders List 2026"
+    },
+    "countries": {
+      "value": "56",
+      "note": "As of March 2026"
+    },
+    "locations": {
+      "value": "2,900+",
+      "note": "Total number of locations outside Japan and logistics facilities within Nippon Express (As of December 2025)"
+    },
+    "groupCompanies": {
+      "value": "322",
+      "note": "As of December 2025"
+    },
+    "employees": {
+      "value": "77,925",
+      "note": "Number of employees (As of December 2025)"
+    }
+  }
+}
