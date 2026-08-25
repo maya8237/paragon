@@ -42,35 +42,14 @@
 }
 
 /*
- * Both marks are sized by height with the width left to the aspect ratio, and
- * both opt out of the reset's `max-inline-size: 100%`. Without `flex: none` on
- * the wrapper they are flex items that shrink to fit whatever space the nav
- * leaves — which differs between English and Hebrew, and squashed the Nippon
- * badge on the Hebrew pages.
+ * Sized by height with the width left to the aspect ratio, and opts out of
+ * the reset's `max-inline-size: 100%`. Without `flex: none` on the wrapper
+ * it's a flex item that shrinks to fit whatever space the nav leaves.
  */
 .logo {
   block-size: 2rem;
   inline-size: auto;
   max-inline-size: none;
-}
-
-.badge {
-  display: none;
-  flex: none;
-  padding-inline-start: var(--space-s);
-  border-inline-start: var(--border);
-}
-
-.badgeImg {
-  block-size: 1.75rem;
-  inline-size: auto;
-  max-inline-size: none;
-}
-
-@media (min-width: 60em) {
-  .badge {
-    display: block;
-  }
 }
 
 .nav {

@@ -76,7 +76,6 @@ export interface SiteContent {
   footer: {
     copyright: string
     accessibility: string
-    nipponBadgeAlt: string
     social: { facebook: string; linkedin: string; pinterest: string }
     socialHeading: string
   }

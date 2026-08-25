@@ -53,7 +53,6 @@ const content: SiteContent = {
     // The Hebrew site leaves the copyright line in English; kept as-is.
     copyright: '© כל הזכויות שמורות - פראגון לוגיסטיקה בע"מ',
     accessibility: 'הצהרת נגישות',
-    nipponBadgeAlt: 'פראגון לוגיסטיקה — סוכן של ניפון אקספרס',
     social: {
       facebook: 'פראגון לוגיסטיקה בפייסבוק',
       linkedin: 'פראגון לוגיסטיקה בלינקדאין',

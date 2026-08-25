@@ -9,7 +9,6 @@ const SOCIAL = {
     'https://www.facebook.com/pages/פראגון-לוגיסטיקה-בעמ-Paragon-Logistics-Ltd/386507584847098',
   linkedin: 'https://www.linkedin.com/company/paragon-logistics-ltd.',
   pinterest: 'https://www.pinterest.com/paragonlogistic/',
-  nippon: 'http://www.nipponexpress.com',
 }
 
 const firstPathSegment = window.location.pathname.split('/').filter(Boolean)[0] ?? ''
@@ -67,21 +66,6 @@ export function Header() {
             <Link to={path('/')} className={s.brand} aria-label={t.meta.companyName}>
               <img className={s.logo} src={assetPath('logo.png')} alt={t.meta.companyName} width={435} height={136} />
             </Link>
-
-            <a
-              className={s.badge}
-              href={SOCIAL.nippon}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                className={s.badgeImg}
-                src={assetPath('nippon-badge.jpg')}
-                alt={t.footer.nipponBadgeAlt}
-                width={212}
-                height={32}
-              />
-            </a>
 
             <nav className={s.nav} aria-label={t.nav.menu}>
               <ul className={s.navList}>
@@ -156,15 +140,6 @@ export function Footer() {
               height={136}
             />
             <p className={s.footerTagline}>{t.meta.tagline}</p>
-            <a href={SOCIAL.nippon} target="_blank" rel="noopener noreferrer">
-              <img
-                src={assetPath('nippon-badge.jpg')}
-                alt={t.footer.nipponBadgeAlt}
-                width={212}
-                height={32}
-                style={{ height: '2rem', width: 'auto' }}
-              />
-            </a>
           </div>
 
           <nav aria-labelledby="footer-nav-heading">

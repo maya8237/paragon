@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "paragon-dev",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["--hot", "./dev.ts"],
+      "port": 5174
+    }
+  ]
+}

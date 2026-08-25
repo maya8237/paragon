@@ -45,7 +45,6 @@ const content: SiteContent = {
   footer: {
     copyright: '© All rights reserved - Paragon Logistics Ltd.',
     accessibility: 'Accessibility statement',
-    nipponBadgeAlt: 'Paragon Logistics — agent of Nippon Express',
     social: {
       facebook: 'Paragon Logistics on Facebook',
       linkedin: 'Paragon Logistics on LinkedIn',
