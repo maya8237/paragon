@@ -191,6 +191,7 @@ export interface SiteContent {
     figures: Figure[]
     history: Prose
     warehousing: Prose
+    services: { heading: string; items: { title: string; body: string }[] }
     links: ExternalLink[]
   }
 

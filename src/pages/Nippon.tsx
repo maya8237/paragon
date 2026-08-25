@@ -1,4 +1,4 @@
-import { Divider, FigureRow, PageHeader, Prose, Section, SectionHead, ui } from '../components/ui'
+import { Card, Divider, FigureRow, Grid, PageHeader, Prose, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, FigureStat } from '../components/bits'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
@@ -35,6 +35,18 @@ export default function Nippon() {
             {p}
           </p>
         ))}
+      </Section>
+
+      <Section labelledBy="nippon-services-heading">
+        <SectionHead heading={n.services.heading} id="nippon-services-heading" />
+        <Grid>
+          {n.services.items.map((item) => (
+            <Card key={item.title}>
+              <h3>{item.title}</h3>
+              <p style={{ color: 'var(--slate)', maxInlineSize: 'none' }}>{item.body}</p>
+            </Card>
+          ))}
+        </Grid>
       </Section>
 
       <Section narrow>
