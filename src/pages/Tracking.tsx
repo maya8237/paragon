@@ -1,5 +1,4 @@
-import { PageHeader, Section, SectionHead, TickList, ui } from '../components/ui'
-import { ExternalLink } from '../components/bits'
+import { DisabledButton, PageHeader, Section, SectionHead, TickList, ui } from '../components/ui'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -25,10 +24,12 @@ export default function Tracking() {
         <TickList items={tr.parameters.items} />
 
         <div className={ui.btnRow}>
-          <ExternalLink href={tr.cta.href} className={`${ui.btn} ${ui.btnPrimary}`}>
-            {tr.cta.label}
-          </ExternalLink>
+          <DisabledButton>{tr.cta.label}</DisabledButton>
         </div>
+
+        <p role="status" className={ui.unavailableNote}>
+          {tr.unavailable}
+        </p>
 
         {/*
           The tracking system is a third-party, plain-HTTP host. It is linked,

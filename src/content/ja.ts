@@ -611,6 +611,7 @@ const content: SiteContent = {
     },
     ctaNote:
       '追跡システム(UnifreightWeb)は、本ウェブサイトとは別に運営されている独立したシステムです。通常のHTTP接続で新しいタブに開き、お客様に発行されたユーザー名とパスワードが必要です。',
+    unavailable: '一時的にご利用いただけません。現在、追跡システムが動作していません。',
   },
 
   nippon: {

@@ -255,6 +255,8 @@ export interface SiteContent {
     parameters: { heading: string; items: string[] }
     cta: ExternalLink
     ctaNote: string
+    /** Shown beside the disabled tracking buttons while the system is down. */
+    unavailable: string
   }
 
   nippon: {

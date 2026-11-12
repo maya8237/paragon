@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import s from './Home.module.css'
 import {
   ButtonLink,
+  DisabledButton,
   ButtonRow,
   CardLink,
   Container,
@@ -204,8 +205,11 @@ export default function Home() {
             <h2 id="tracking-heading">{home.trackingTeaser.heading}</h2>
             <p>{home.trackingTeaser.blurb}</p>
             <ButtonRow>
-              <ButtonLink to={home.trackingTeaser.cta.to}>{home.trackingTeaser.cta.label}</ButtonLink>
+              <DisabledButton>{home.trackingTeaser.cta.label}</DisabledButton>
             </ButtonRow>
+            <p role="status" className={ui.unavailableNote}>
+              {t.tracking.unavailable}
+            </p>
           </div>
 
           <div className={s.nipponCard}>

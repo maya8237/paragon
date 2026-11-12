@@ -694,3 +694,25 @@
 .inverted .figures {
   border-block-start-color: var(--ink-hairline);
 }
+
+/* Disabled buttons: flat and grey, in both light and dark bands. */
+.btn.btnDisabled,
+.inverted .btn.btnDisabled {
+  background: var(--mist);
+  border-color: transparent;
+  color: var(--slate);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.inverted .btn.btnDisabled {
+  background: rgb(255 255 255 / 0.12);
+  color: var(--ink-muted);
+}
+
+.unavailableNote {
+  margin-block-start: var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: 600;
+}

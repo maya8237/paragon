@@ -608,6 +608,7 @@ const content: SiteContent = {
     },
     ctaNote:
       'The tracking system (UnifreightWeb) is a separate system operated outside this website. It opens in a new tab over plain HTTP and requires the user name and password issued to you.',
+    unavailable: 'Temporarily unavailable – tracking is currently not working.',
   },
 
   nippon: {

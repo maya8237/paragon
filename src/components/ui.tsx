@@ -209,6 +209,22 @@ export function ButtonLink({
   )
 }
 
+/** A button that cannot be used right now. Stays in the layout, not focusable, announced as disabled. */
+export function DisabledButton({
+  children,
+  variant = 'primary',
+}: {
+  children: ReactNode
+  variant?: 'primary' | 'ghost' | 'accent'
+}) {
+  const tone = { primary: s.btnPrimary, ghost: s.btnGhost, accent: s.btnAccent }[variant]
+  return (
+    <button type="button" disabled className={cx(s.btn, tone, s.btnDisabled)}>
+      {children}
+    </button>
+  )
+}
+
 export function FigureRow({ children }: { children: ReactNode }) {
   return <div className={s.figures}>{children}</div>
 }
