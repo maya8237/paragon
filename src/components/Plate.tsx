@@ -43,6 +43,7 @@ const PHOTOS = {
   'industry-semiconductor': { file: 'photos/industry-semiconductor.webp', width: 1200, height: 800 },
   'industry-technology': { file: 'photos/industry-technology.webp', width: 1200, height: 800 },
   'industry-mobility': { file: 'photos/industry-mobility.webp', width: 1200, height: 800 },
+  'industry-fashion': { file: 'photos/industry-fashion.webp', width: 1200, height: 800 },
 } as const
 
 export type PhotoName = keyof typeof PHOTOS
