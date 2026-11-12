@@ -196,7 +196,7 @@ const content: SiteContent = {
       servicesEyebrow: 'תחומי הפעילות שלנו',
       servicesHeading: 'פתרונות לכל מרכיבי שרשרת האספקה',
       modesEyebrow: 'סחר בינלאומי',
-      modesHeading: 'כל הדרכים להעביר את המטען שלכם',
+      modesHeading: 'כל הדרכים להעברת המטען שלכם',
       networkEyebrow: 'הרשת שלנו',
       networkHeading: 'חמישה אתרים לאורך ציר הסחר של ישראל',
     },
