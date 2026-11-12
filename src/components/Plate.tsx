@@ -29,7 +29,7 @@ const PHOTOS = {
   'drop-beach': { file: 'photos/drop-beach.webp', width: 1200, height: 800 },
   'charter-air': { file: 'photos/charter-air.jpg', width: 986, height: 519 },
   'charter-road': { file: 'photos/charter-road.webp', width: 1200, height: 800 },
-  'charter-ocean': { file: 'photos/charter-ocean.jpg', width: 359, height: 255 },
+  'charter-ocean': { file: 'photos/charter-ocean.webp', width: 1200, height: 800 },
 
   // The logistics centre, photographed on site. These are the smallest
   // photographs on the site, so they are only ever placed in a row where each
