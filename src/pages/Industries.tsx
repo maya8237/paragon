@@ -1,6 +1,15 @@
 import { CardLink, Card, Grid, PageHeader, Section, SectionHead } from '../components/ui'
+import { Banner } from '../components/Banner'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
+
+const SECTOR_PHOTO: Record<string, string> = {
+  semiconductor: 'industry-semiconductor',
+  technology: 'industry-technology',
+  mobility: 'industry-mobility',
+  'fashion-lifestyle': 'industry-fashion',
+  healthcare: 'industry-healthcare',
+}
 
 export default function Industries() {
   const { t } = useT()
@@ -10,6 +19,10 @@ export default function Industries() {
   return (
     <>
       <PageHeader title={ind.intro.heading} lede={ind.intro.paragraphs[0]} />
+
+      <Section tight>
+        <Banner name="industries-hero" alt={ind.heroAlt} />
+      </Section>
 
       <Section narrow tight>
         {ind.intro.paragraphs.slice(1).map((p) => (
@@ -43,6 +56,11 @@ export default function Industries() {
             lede={item.lead}
             id={`${item.id}-heading`}
           />
+          {SECTOR_PHOTO[item.id] && (
+            <div style={{ marginBlockEnd: 'var(--space-l)' }}>
+              <Banner name={SECTOR_PHOTO[item.id]} alt={item.photoAlt} />
+            </div>
+          )}
           <Grid>
             {item.points.map((point) => (
               <Card key={point.title}>

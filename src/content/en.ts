@@ -690,6 +690,7 @@ const content: SiteContent = {
       description:
         'Logistics shaped around your sector – semiconductor, technology, mobility, fashion & lifestyle and healthcare – from time-critical airfreight to a 3,000 m² logistics centre in central Israel.',
     },
+    heroAlt: 'A container port at dusk with an airliner on the apron, a warehouse and trucks on the access road',
     intro: {
       heading: 'Industries',
       paragraphs: [
@@ -704,6 +705,7 @@ const content: SiteContent = {
         blurb:
           'High-value, time-critical shipments for fabs, equipment makers and their suppliers – moved securely and traced end to end.',
         lead: 'Semiconductor operations have no room for delay or damage. Tooling, equipment and spare parts are costly and urgent, and a day lost can stop a line.',
+        photoAlt: 'Two cleanroom technicians in white suits guiding a sealed aluminium crate suspended on lifting straps',
         points: [
           {
             title: 'Time-critical delivery',
@@ -725,6 +727,7 @@ const content: SiteContent = {
         blurb:
           'IT, electronics and industrial equipment – from import to installation-ready delivery.',
         lead: 'Technology products change fast and demand swings with them. The supply chain has to keep up without losing control of cost, security or timing.',
+        photoAlt: 'Rack-mount servers stacked on pallets in a warehouse',
         points: [
           {
             title: 'Flexible to changing demand',
@@ -746,6 +749,7 @@ const content: SiteContent = {
         blurb:
           'Automotive manufacturers, parts suppliers and the aftermarket – parts that arrive when the line, or the workshop, needs them.',
         lead: 'Vehicle and component supply chains run on tight schedules and many suppliers. A missing part can idle a production line or a repair bay.',
+        photoAlt: 'An electric-vehicle chassis on a warehouse floor beside shelves of tyres, brakes and drivetrain parts',
         points: [
           {
             title: 'Parts to the line, on schedule',
@@ -767,6 +771,7 @@ const content: SiteContent = {
         blurb:
           'Seasonal, fast-turning goods – from import and distribution processing to the final pick.',
         lead: 'Fashion and lifestyle products live on seasons and launch dates. Stock has to arrive, be prepared and move on quickly.',
+        photoAlt: 'Coats and shirts on a rail in a distribution centre, with folded knitwear and cartons beside it',
         points: [
           {
             title: 'Order fulfilment',
@@ -788,6 +793,7 @@ const content: SiteContent = {
         blurb:
           'Sensitive, regulated goods that have to arrive intact, on time and fully documented.',
         lead: 'Healthcare cargo carries more than value: it carries responsibility. It calls for care in handling, accuracy in paperwork and speed when it matters.',
+        photoAlt: 'White medical cartons on shelving beside a refrigerated cabinet and an insulated transport box',
         points: [
           {
             title: 'Personal, time-critical care',

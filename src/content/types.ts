@@ -275,6 +275,8 @@ export interface SiteContent {
 
   industries: {
     meta: PageMeta
+    /** Alt text for the page's hero photograph. */
+    heroAlt: string
     intro: Prose
     /** One per sector; `id` is the in-page anchor (/industries#semiconductor). */
     items: {
@@ -283,6 +285,8 @@ export interface SiteContent {
       /** One line, for the cards and the home page. */
       blurb: string
       lead: string
+      /** Alt text for the sector's photograph. */
+      photoAlt: string
       points: { title: string; body: string }[]
     }[]
     /** Why NX Group's own industry teams sit behind these. */
