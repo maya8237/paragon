@@ -21,8 +21,7 @@ const content: SiteContent = {
   meta: {
     companyName: 'פראגון לוגיסטיקה בע"מ',
     tagline: 'לוגיסטיקה, שרשרת אספקה ושילוח בינלאומי',
-    otherLangLabel: 'EN',
-    switchToOtherLang: 'מעבר לאנגלית',
+    switchTo: { en: 'מעבר לאנגלית', he: 'עברית', ja: 'מעבר ליפנית' },
   },
 
   nav: {

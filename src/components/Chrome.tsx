@@ -3,6 +3,8 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import s from './Chrome.module.css'
 import { Container } from './ui'
 import { useT, useLangPath } from '../i18n/useT'
+import { LANG_LABEL } from '../i18n/LangContext'
+import type { Lang } from '../content/types'
 import { assetPath } from '../lib/assetPath'
 import { ExternalLink } from './bits'
 import { ui } from './ui'
@@ -121,7 +123,7 @@ function Preferences() {
 }
 
 export function Header() {
-  const { t, other } = useT()
+  const { t, others } = useT()
   const path = useLangPath()
   const location = useLocation()
   const [open, setOpen] = useState(false)
@@ -133,10 +135,10 @@ export function Header() {
    * The language switch preserves the current route:
    * `/en/global-trade/air` ↔ `/he/global-trade/air`.
    */
-  const otherLangHref = (() => {
-    const rest = location.pathname.replace(/^\/(en|he)(?=\/|$)/, '')
-    return `/${other}${rest}${location.hash}`
-  })()
+  const langHref = (to: Lang) => {
+    const rest = location.pathname.replace(/^\/(en|he|ja)(?=\/|$)/, '')
+    return `/${to}${rest}${location.hash}`
+  }
 
   return (
     <>
@@ -164,16 +166,19 @@ export function Header() {
             </nav>
 
             <div className={s.langSwitch}>
-              <Link
-                to={otherLangHref}
-                className={s.langLink}
-                lang={other}
-                hrefLang={other}
-                title={t.meta.switchToOtherLang}
-                aria-label={t.meta.switchToOtherLang}
-              >
-                {t.meta.otherLangLabel}
-              </Link>
+              {others.map((to) => (
+                <Link
+                  key={to}
+                  to={langHref(to)}
+                  className={s.langLink}
+                  lang={to}
+                  hrefLang={to}
+                  title={t.meta.switchTo[to]}
+                  aria-label={t.meta.switchTo[to]}
+                >
+                  {LANG_LABEL[to]}
+                </Link>
+              ))}
             </div>
 
             <ExternalLink

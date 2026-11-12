@@ -21,13 +21,16 @@ import { mkdirSync, rmSync } from 'node:fs'
 import { dirname } from 'node:path'
 import en from '../src/content/en'
 import he from '../src/content/he'
+import ja from '../src/content/ja'
 import type { Lang, SiteContent } from '../src/content/types'
 import { PAGES, pagePath, pageTitle } from '../src/site/routes'
 import { BASE, NOINDEX, url } from './site-config'
 
 const DIST = 'dist'
 const SSR_OUT = '.ssr'
-const content: Record<Lang, SiteContent> = { en, he }
+const content: Record<Lang, SiteContent> = { en, he, ja }
+const langs: Lang[] = ['en', 'he', 'ja']
+const LOCALE: Record<Lang, string> = { en: 'en_US', he: 'he_IL', ja: 'ja_JP' }
 
 /* 1. Bundle the app for Bun. Bun's CSS-module class names depend only on the
       source file, so they match the browser bundle's exactly. */
@@ -57,7 +60,7 @@ const organization = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: en.meta.companyName,
-  alternateName: he.meta.companyName,
+  alternateName: [he.meta.companyName, ja.meta.companyName],
   url: url(),
   logo: url('logo.png'),
   description: en.home.meta.description,
@@ -102,8 +105,7 @@ function page({
     def ? `<link rel="canonical" href="${self}" />` : '',
     ...(def
       ? [
-          `<link rel="alternate" hreflang="en" href="${url(pagePath('en', path))}" />`,
-          `<link rel="alternate" hreflang="he" href="${url(pagePath('he', path))}" />`,
+          ...langs.map((l) => `<link rel="alternate" hreflang="${l}" href="${url(pagePath(l, path))}" />`),
           `<link rel="alternate" hreflang="x-default" href="${url(pagePath('en', path))}" />`,
         ]
       : []),
@@ -116,7 +118,7 @@ function page({
     `<meta property="og:image" content="${url('og.png')}" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
-    `<meta property="og:locale" content="${lang === 'he' ? 'he_IL' : 'en_US'}" />`,
+    `<meta property="og:locale" content="${LOCALE[lang]}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     isHome
       ? `<script type="application/ld+json">${JSON.stringify(organization).replaceAll('<', '\\u003c')}</script>`
@@ -141,7 +143,6 @@ async function write(file: string, html: string) {
 }
 
 /* 3. Every page, both languages. */
-const langs: Lang[] = ['en', 'he']
 for (const lang of langs) {
   for (const { path } of PAGES) {
     const routePath = `/${lang}${path === '/' ? '' : path}`
@@ -160,8 +161,7 @@ if (!NOINDEX) {
       (lang) => `  <url>
     <loc>${url(pagePath(lang, path))}</loc>
     <lastmod>${today}</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="${url(pagePath('en', path))}" />
-    <xhtml:link rel="alternate" hreflang="he" href="${url(pagePath('he', path))}" />
+${langs.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url(pagePath(l, path))}" />`).join('\n')}
     <xhtml:link rel="alternate" hreflang="x-default" href="${url(pagePath('en', path))}" />
   </url>`,
     ),

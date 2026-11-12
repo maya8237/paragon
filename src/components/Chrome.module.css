@@ -321,9 +321,30 @@
   }
 }
 
-/* The Hebrew labels are longer: the full nav needs about 89em there, so
-   between 76em and 89em Hebrew keeps the menu button. */
-@media (min-width: 76em) and (max-width: 88.99em) {
+/* Longer labels, or the extra language links, need more room before the full
+   nav fits: each language keeps the menu button up to the width where its nav
+   (measured) fits. */
+@media (min-width: 76em) and (max-width: 81em) {
+  :global(html[lang='en']) .nav {
+    display: none;
+  }
+
+  :global(html[lang='en']) .menuButton {
+    display: inline-flex;
+  }
+
+  :global(html[lang='en']) .mobileNav {
+    display: block;
+  }
+
+  :global(html[lang='en']) .langSwitch {
+    margin-inline-start: auto;
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+}
+
+@media (min-width: 76em) and (max-width: 93em) {
   :global(html[lang='he']) .nav {
     display: none;
   }
@@ -340,6 +361,38 @@
     margin-inline-start: auto;
     padding-inline-start: 0;
     border-inline-start: 0;
+  }
+}
+
+@media (min-width: 76em) and (max-width: 88.99em) {
+  :global(html[lang='ja']) .nav {
+    display: none;
+  }
+
+  :global(html[lang='ja']) .menuButton {
+    display: inline-flex;
+  }
+
+  :global(html[lang='ja']) .mobileNav {
+    display: block;
+  }
+
+  :global(html[lang='ja']) .langSwitch {
+    margin-inline-start: auto;
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+}
+
+/* Two language links sit in the header: keep them compact on phones. */
+@media (max-width: 30em) {
+  .langLink {
+    padding-inline: 0.3rem;
+    font-size: 0.875rem;
+  }
+
+  .langSwitch {
+    gap: 0;
   }
 }
 
@@ -361,13 +414,23 @@
   border-block-end: 1px solid var(--ink-hairline);
 }
 
+/* On desktop the brand column is the widest, so its credential tags sit on
+   one line each. */
+@media (min-width: 64em) {
+  .footerTop {
+    grid-template-columns: minmax(19rem, 1.5fr) repeat(3, minmax(0, 1fr));
+  }
+}
+
 .footerTrust {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2xs);
 }
 
+/* A tag never breaks inside itself: it wraps to the next row whole. */
 .footerTrust li {
+  white-space: nowrap;
   padding: 0.3rem 0.75rem;
   border: 1px solid var(--ink-hairline);
   border-radius: var(--radius-pill);
@@ -494,7 +557,7 @@
 
 /* On the narrowest phones the menu button is icon-only; its label stays for
    screen readers. */
-@media (max-width: 24em) {
+@media (max-width: 30em) {
   .menuButton {
     padding-inline: var(--space-xs);
   }

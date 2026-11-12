@@ -215,7 +215,7 @@ export function FigureRow({ children }: { children: ReactNode }) {
 
 /** `/he/global-trade/air/` → `/global-trade/air`: the route without language or trailing slash. */
 function routeOf(pathname: string): string {
-  return pathname.replace(/^\/(en|he)(?=\/|$)/, '').replace(/\/$/, '') || '/'
+  return pathname.replace(/^\/(en|he|ja)(?=\/|$)/, '').replace(/\/$/, '') || '/'
 }
 
 /**

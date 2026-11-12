@@ -14,19 +14,21 @@
 
 import en from '../src/content/en'
 import he from '../src/content/he'
+import ja from '../src/content/ja'
 import type { Prose, SiteContent } from '../src/content/types'
 import { pagePath } from '../src/site/routes'
 import { url } from './site-config'
 
 const DIST = 'dist'
 
-const page = (lang: 'en' | 'he', to: string) => url(pagePath(lang, to))
+type L = 'en' | 'he' | 'ja'
+const page = (lang: L, to: string) => url(pagePath(lang, to))
 
 const prose = (p: Prose, level = '##') => `${level} ${p.heading}\n\n${p.paragraphs.join('\n\n')}\n`
 const list = (items: string[]) => items.map((i) => `- ${i}`).join('\n') + '\n'
 const steps = (items: string[]) => items.map((i, n) => `${n + 1}. ${i}`).join('\n') + '\n'
 
-function fullText(t: SiteContent, lang: 'en' | 'he'): string {
+function fullText(t: SiteContent, lang: L): string {
   const gt = t.globalTrade
   const l = t.logistics
   const out: string[] = []
@@ -107,7 +109,7 @@ const llms = `# ${en.meta.companyName}
 Israeli logistics, freight-forwarding and supply-chain company, and the Israeli
 agent of NX – Nippon Express and of cargo-partner. Five sites: headquarters in Or Yehuda, a 3,000 m²
 logistics centre in Ramla, an air branch at Ben Gurion Airport, and ocean
-branches at Ashdod and Haifa ports. The site is bilingual (English and Hebrew).
+branches at Ashdod and Haifa ports. The site is in English, Hebrew and Japanese.
 
 ## Full content
 
@@ -121,17 +123,22 @@ ${en.nav.primary.map((n) => `- [${n.label}](${page('en', n.to)})`).join('\n')}
 
 ${he.nav.primary.map((n) => `- [${n.label}](${page('he', n.to)})`).join('\n')}
 
+## Pages (Japanese)
+
+${ja.nav.primary.map((n) => `- [${n.label}](${page('ja', n.to)})`).join('\n')}
+
 ## Contact
 
 - [${en.home.hero.quoteCta.label}](${en.home.hero.quoteCta.href})
 - [${he.home.hero.quoteCta.label}](${he.home.hero.quoteCta.href})
+- [${ja.home.hero.quoteCta.label}](${ja.home.hero.quoteCta.href})
 `
 
 const full = `# ${en.meta.companyName} – full site text
 
 > ${summary}
 
-This file mirrors the website's content. Section 1 is English, section 2 is Hebrew.
+This file mirrors the website's content. Section 1 is English, section 2 is Hebrew, section 3 is Japanese.
 
 ---
 ${fullText(en, 'en')}
@@ -139,6 +146,12 @@ ${fullText(en, 'en')}
 
 <div dir="rtl" lang="he">
 ${fullText(he, 'he')}
+</div>
+
+---
+
+<div lang="ja">
+${fullText(ja, 'ja')}
 </div>
 `
 

@@ -130,6 +130,14 @@
   --font-body: 'Heebo', 'Segoe UI', system-ui, sans-serif;
 }
 
+/* Japanese: Noto Sans JP (Google Fonts serves it in small unicode-range pieces,
+   so only the glyphs a page uses are downloaded), with the system's Japanese
+   UI faces as the fallback. */
+:root:lang(ja) {
+  --font-display: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', system-ui, sans-serif;
+  --font-body: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic UI', 'Meiryo', system-ui, sans-serif;
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur-fast: 0ms;

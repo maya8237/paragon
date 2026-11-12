@@ -26,6 +26,24 @@ h3 {
   line-height: 1.12;
 }
 
+/* Japanese has no word spaces and no capitals: break lines by its own rules,
+   and do not track or tighten the letters. */
+:lang(ja) {
+  line-break: strict;
+  /* Break between phrases, not mid-word, where the browser can tell the difference. */
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+
+:lang(ja) .display,
+:lang(ja) h1,
+:lang(ja) h2,
+:lang(ja) h3 {
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
 h1 {
   font-size: var(--step-4);
 }

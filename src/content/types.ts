@@ -1,7 +1,7 @@
 /**
  * The shape every language file must satisfy.
  *
- * `en.ts` and `he.ts` are both declared `const content: SiteContent`, so a
+ * `en.ts`, `he.ts` and `ja.ts` are all declared `const content: SiteContent`, so a
  * missing or misspelled key in either language is a compile error. This is the
  * mechanism that guarantees every piece of information carried over from the
  * old site exists in both languages.
@@ -11,7 +11,7 @@
  * the gap is the thing the type system is meant to surface.
  */
 
-export type Lang = 'en' | 'he'
+export type Lang = 'en' | 'he' | 'ja'
 
 /** A link that leaves the site. Rendered with an explicit external affordance. */
 export interface ExternalLink {
@@ -72,9 +72,8 @@ export interface SiteContent {
     /** Company legal name, used in the footer and structured data. */
     companyName: string
     tagline: string
-    /** Short label of the *other* language (EN / עב), shown on the switch. */
-    otherLangLabel: string
-    switchToOtherLang: string
+    /** The tooltip / screen-reader text for switching to each language, in this language. */
+    switchTo: Record<Lang, string>
   }
 
   nav: {

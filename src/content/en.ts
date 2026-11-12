@@ -14,8 +14,7 @@ const content: SiteContent = {
   meta: {
     companyName: 'Paragon Logistics Ltd.',
     tagline: 'Logistics, supply chain management and freight operations',
-    otherLangLabel: 'עב',
-    switchToOtherLang: 'Switch to Hebrew',
+    switchTo: { en: 'English', he: 'Switch to Hebrew', ja: 'Switch to Japanese' },
   },
 
   nav: {
