@@ -80,17 +80,66 @@
   block-size: 1.25rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .themeToggle svg {
-    animation: themeSpin var(--dur-slow) var(--ease);
-  }
+/* The preferences panel drops from the gear, at the header's end edge. */
+.prefs {
+  position: relative;
+  flex: none;
 }
 
-@keyframes themeSpin {
-  from {
-    rotate: -90deg;
-    opacity: 0;
-  }
+.prefsPanel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--space-2xs));
+  inset-inline-end: 0;
+  z-index: 60;
+  min-inline-size: 15rem;
+  padding: var(--space-s);
+  background: var(--surface);
+  color: var(--text);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.prefsTitle {
+  margin-block-end: var(--space-2xs);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: var(--tint-soft);
+  border-radius: var(--radius);
+}
+
+.segmentOption {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-block-size: 2.5rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--slate);
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.segmentOption svg {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+}
+
+.segmentOption[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav {

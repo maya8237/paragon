@@ -72,7 +72,7 @@ export interface SiteContent {
     /** Company legal name, used in the footer and structured data. */
     companyName: string
     tagline: string
-    /** Label of the *other* language, shown on the switch. */
+    /** Short label of the *other* language (EN / עב), shown on the switch. */
     otherLangLabel: string
     switchToOtherLang: string
   }
@@ -83,9 +83,11 @@ export interface SiteContent {
     footer: NavItem[]
     skipToContent: string
     breadcrumb: string
-    /** Labels for the theme switch, naming the theme it switches *to*. */
-    themeDark: string
-    themeLight: string
+    /** The preferences panel behind the gear: title, and the light/dark choice. */
+    preferences: string
+    appearance: string
+    lightMode: string
+    darkMode: string
     /** Short label for the header's quote-request button. */
     quote: string
     menu: string

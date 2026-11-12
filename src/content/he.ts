@@ -21,7 +21,7 @@ const content: SiteContent = {
   meta: {
     companyName: 'פראגון לוגיסטיקה בע"מ',
     tagline: 'לוגיסטיקה, שרשרת אספקה ושילוח בינלאומי',
-    otherLangLabel: 'English',
+    otherLangLabel: 'EN',
     switchToOtherLang: 'מעבר לאנגלית',
   },
 
@@ -46,8 +46,10 @@ const content: SiteContent = {
     ],
     quote: 'הצעת מחיר',
     breadcrumb: 'פירורי לחם',
-    themeDark: 'מעבר למצב כהה',
-    themeLight: 'מעבר למצב בהיר',
+    preferences: 'העדפות',
+    appearance: 'מראה',
+    lightMode: 'בהיר',
+    darkMode: 'כהה',
     skipToContent: 'דילוג לתוכן',
     menu: 'תפריט',
     close: 'סגירה',
