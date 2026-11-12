@@ -634,6 +634,13 @@
     transform var(--dur-fast) var(--ease);
 }
 
+/* Buttons that link out are built on ExternalLink, whose baseline alignment
+   and lighter weight suit inline links. `[class]` outranks them here. */
+.btn[class] {
+  align-items: center;
+  font-weight: 700;
+}
+
 .btn:active {
   transform: translateY(1px);
 }
