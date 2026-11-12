@@ -36,6 +36,7 @@ function fullText(t: SiteContent, lang: 'en' | 'he'): string {
   out.push(`${t.meta.tagline}\n`, ...t.home.hero.lede.map((p) => p + '\n'))
   out.push(list(t.home.figures.map((f) => `${f.value} – ${f.label}`)))
   for (const p of t.home.pillars) out.push(`## ${p.title}\n\n${p.blurb}\n`)
+  out.push(`## ${t.home.cargoPartner.heading}\n\n${t.home.cargoPartner.blurb}\n\n${t.home.cargoPartner.cta.href}\n`)
   out.push(`${t.home.hero.quoteCta.label}: ${t.home.hero.quoteCta.href}\n`)
 
   h1(t.about.meta.title, '/about')
@@ -105,7 +106,7 @@ const llms = `# ${en.meta.companyName}
 > ${summary}
 
 Israeli logistics, freight-forwarding and supply-chain company, and the Israeli
-agent of NX – Nippon Express. Five sites: headquarters in Or Yehuda, a 3,000 m²
+agent of NX – Nippon Express and of cargo-partner. Five sites: headquarters in Or Yehuda, a 3,000 m²
 logistics centre in Ramla, an air branch at Ben Gurion Airport, and ocean
 branches at Ashdod and Haifa ports. The site is bilingual (English and Hebrew).
 

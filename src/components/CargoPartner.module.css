@@ -1,0 +1,44 @@
+/* A slim band beneath the NX card: a smaller partner, a smaller voice. */
+.band {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  align-items: start;
+  margin-block-start: var(--space-m);
+  padding: var(--space-m) var(--space-l);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: var(--radius-lg);
+  background: rgb(255 255 255 / 0.03);
+}
+
+@media (min-width: 40em) {
+  .band {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-l);
+  }
+}
+
+.logo {
+  flex: none;
+  block-size: 4.5rem;
+  inline-size: auto;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  align-items: start;
+}
+
+.copy h3 {
+  font-size: var(--step-1);
+  color: var(--white);
+}
+
+.copy p {
+  max-inline-size: 60ch;
+  font-size: var(--step--1);
+  color: var(--ink-text);
+}

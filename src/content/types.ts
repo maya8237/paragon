@@ -150,6 +150,8 @@ export interface SiteContent {
     certificationsTeaser: { heading: string; blurb: string; cta: NavItem }
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
+    /** The smaller second partner, shown beneath NX: cargo-partner (public/cargo-partner-logo.svg). */
+    cargoPartner: { heading: string; blurb: string; logoAlt: string; cta: ExternalLink }
     /** Short credential chips under the hero calls to action. */
     trust: string[]
     /** Section eyebrows and headings introduced by the redesigned home page. */

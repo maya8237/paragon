@@ -1,5 +1,6 @@
 import { Card, Divider, FigureRow, Grid, PageHeader, Prose, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, FigureStat } from '../components/bits'
+import { CargoPartner } from '../components/CargoPartner'
 import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
@@ -87,6 +88,10 @@ export default function Nippon() {
             </ExternalLink>
           ))}
         </div>
+      </Section>
+
+      <Section inverted>
+        <CargoPartner data={t.home.cargoPartner} />
       </Section>
     </>
   )

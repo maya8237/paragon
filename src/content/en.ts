@@ -146,7 +146,14 @@ const content: SiteContent = {
       blurb: `The world’s ${nx.worldRank}th-largest freight forwarder, with ${nx.locations} locations in ${nx.countries} countries and regions and ${nx.employees} employees.`,
       cta: { label: 'About the partnership', to: '/nippon' },
     },
-    trust: ['AEO certified', 'ISO9001 & IQNET', 'NX – Nippon Express agent'],
+    cargoPartner: {
+      heading: 'Also an agent of cargo-partner in Israel',
+      blurb:
+        'cargo-partner, a member of NX – Nippon Express, has provided logistics services since 1983: air, sea and land transport and warehousing, with special expertise in information technology and supply chain optimization.',
+      logoAlt: 'cargo-partner, member of NX – Nippon Express',
+      cta: { label: 'www.cargo-partner.com', href: 'https://www.cargo-partner.com' },
+    },
+    trust: ['AEO certified', 'ISO9001 & IQNET', 'NX – Nippon Express agent', 'cargo-partner agent'],
     sections: {
       servicesEyebrow: 'What we do',
       servicesHeading: 'One partner for the whole supply chain',

@@ -157,7 +157,14 @@ const content: SiteContent = {
       blurb: `NX מדורגת במקום ה-${nx.worldRank} בין המשלחים הגדולים בעולם, עם ${nx.locations} סניפים ב-${nx.countries} מדינות ואזורים ו-${nx.employees} עובדים.`,
       cta: { label: 'על השותפות', to: '/nippon' },
     },
-    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכנת NX – Nippon Express בישראל'],
+    cargoPartner: {
+      heading: 'וגם סוכנת cargo-partner בישראל',
+      blurb:
+        'cargo-partner, חברה ב-NX – Nippon Express, מספקת שירותי לוגיסטיקה מאז 1983: הובלה אווירית, ימית ויבשתית ואחסנה, עם מומחיות מיוחדת בטכנולוגיית מידע ובייעול שרשרת האספקה.',
+      logoAlt: 'cargo-partner, חברה ב-NX – Nippon Express',
+      cta: { label: 'www.cargo-partner.com', href: 'https://www.cargo-partner.com' },
+    },
+    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכנת NX – Nippon Express בישראל', 'סוכנת cargo-partner'],
     sections: {
       servicesEyebrow: 'מה אנחנו עושים',
       servicesHeading: 'שותף אחד לכל שרשרת האספקה',

@@ -17,6 +17,7 @@ import { HeroGlobe } from '../components/HeroGlobe'
 import { Glyph } from '../components/icons'
 import { Reveal } from '../components/Reveal'
 import { assetPath } from '../lib/assetPath'
+import { CargoPartner } from '../components/CargoPartner'
 import { useLangPath, useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -219,6 +220,7 @@ export default function Home() {
             </ButtonRow>
           </div>
         </div>
+        <CargoPartner data={home.cargoPartner} />
       </Section>
 
     </>
