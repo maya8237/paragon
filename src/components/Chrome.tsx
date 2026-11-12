@@ -6,6 +6,7 @@ import { useT, useLangPath } from '../i18n/useT'
 import { assetPath } from '../lib/assetPath'
 import { ExternalLink } from './bits'
 import { ui } from './ui'
+import { useTheme } from '../lib/theme'
 
 const SOCIAL = {
   facebook:
@@ -31,6 +32,32 @@ const ICONS = {
       <path d="M12 3a9 9 0 0 0-3.3 17.36c-.08-.72-.15-1.83.03-2.62.16-.71 1.06-4.5 1.06-4.5s-.27-.54-.27-1.34c0-1.26.73-2.2 1.63-2.2.77 0 1.14.58 1.14 1.27 0 .78-.49 1.94-.75 3.02-.21.9.46 1.64 1.35 1.64 1.62 0 2.86-1.71 2.86-4.17 0-2.18-1.57-3.7-3.8-3.7-2.6 0-4.12 1.94-4.12 3.94 0 .78.3 1.62.67 2.07a.27.27 0 0 1 .06.26c-.07.28-.22.9-.25 1.02-.04.17-.13.2-.3.12-1.14-.53-1.85-2.19-1.85-3.52 0-2.87 2.08-5.5 6.01-5.5 3.15 0 5.6 2.25 5.6 5.25 0 3.13-1.97 5.65-4.71 5.65-.92 0-1.79-.48-2.08-1.05l-.57 2.16c-.2.79-.76 1.78-1.14 2.38A9 9 0 1 0 12 3" />
     </svg>
   ),
+}
+
+const SUN = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+  </svg>
+)
+
+const MOON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+  </svg>
+)
+
+/** Shows the icon of the theme it switches *to*: a moon in light mode. */
+function ThemeToggle() {
+  const { t } = useT()
+  const [theme, toggle] = useTheme()
+  const label = theme === 'dark' ? t.nav.themeLight : t.nav.themeDark
+  return (
+    <button type="button" className={s.themeToggle} onClick={toggle} aria-label={label} title={label}>
+      {/* Keyed so the icon re-mounts, and replays its turn, on every switch. */}
+      <span key={theme}>{theme === 'dark' ? SUN : MOON}</span>
+    </button>
+  )
 }
 
 export function Header() {
@@ -95,6 +122,8 @@ export function Header() {
               {t.nav.quote}
             </ExternalLink>
 
+            <ThemeToggle />
+
             <button
               type="button"
               className={s.menuButton}
@@ -107,7 +136,7 @@ export function Header() {
                 <span />
                 <span />
               </span>
-              {open ? t.nav.close : t.nav.menu}
+              <span className={s.menuLabel}>{open ? t.nav.close : t.nav.menu}</span>
             </button>
           </div>
         </Container>

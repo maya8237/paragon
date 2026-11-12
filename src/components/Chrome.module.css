@@ -30,7 +30,7 @@
 .headerInner {
   display: flex;
   align-items: center;
-  gap: var(--space-m);
+  gap: var(--space-xs);
   min-block-size: 4.75rem;
 }
 
@@ -48,9 +48,49 @@
  * it's a flex item that shrinks to fit whatever space the nav leaves.
  */
 .logo {
-  block-size: 2.4rem;
+  block-size: 2rem;
   inline-size: auto;
   max-inline-size: none;
+  filter: var(--logo-filter);
+}
+
+/* Theme switch: a round icon button, sun ↔ moon. */
+.themeToggle {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border: var(--border);
+  border-radius: 50%;
+  color: var(--text);
+  background: var(--surface);
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.themeToggle:hover {
+  background: var(--tint-soft);
+  border-color: var(--signal);
+}
+
+.themeToggle svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .themeToggle svg {
+    animation: themeSpin var(--dur-slow) var(--ease);
+  }
+}
+
+@keyframes themeSpin {
+  from {
+    rotate: -90deg;
+    opacity: 0;
+  }
 }
 
 .nav {
@@ -369,4 +409,31 @@
 
 .footerBottomEnd {
   margin-inline-start: auto;
+}
+
+@media (min-width: 40em) {
+  .headerInner {
+    gap: var(--space-m);
+  }
+
+  .logo {
+    block-size: 2.4rem;
+  }
+}
+
+/* On the narrowest phones the menu button is icon-only; its label stays for
+   screen readers. */
+@media (max-width: 24em) {
+  .menuButton {
+    padding-inline: var(--space-xs);
+  }
+
+  .menuLabel {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }

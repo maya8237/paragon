@@ -46,6 +46,8 @@ const content: SiteContent = {
     ],
     quote: 'הצעת מחיר',
     breadcrumb: 'פירורי לחם',
+    themeDark: 'מעבר למצב כהה',
+    themeLight: 'מעבר למצב בהיר',
     skipToContent: 'דילוג לתוכן',
     menu: 'תפריט',
     close: 'סגירה',

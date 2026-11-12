@@ -39,6 +39,8 @@ const content: SiteContent = {
     ],
     quote: 'Get a quote',
     breadcrumb: 'Breadcrumb',
+    themeDark: 'Switch to dark mode',
+    themeLight: 'Switch to light mode',
     skipToContent: 'Skip to content',
     menu: 'Menu',
     close: 'Close',

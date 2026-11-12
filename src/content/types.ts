@@ -83,6 +83,9 @@ export interface SiteContent {
     footer: NavItem[]
     skipToContent: string
     breadcrumb: string
+    /** Labels for the theme switch, naming the theme it switches *to*. */
+    themeDark: string
+    themeLight: string
     /** Short label for the header's quote-request button. */
     quote: string
     menu: string
