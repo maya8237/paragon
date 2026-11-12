@@ -284,6 +284,13 @@
   block-size: 1.6rem;
 }
 
+.nxLogo {
+  block-size: 2.5rem;
+  inline-size: auto;
+  max-inline-size: 100%;
+  margin-block-end: var(--space-2xs);
+}
+
 .nipponCard > div {
   align-self: stretch;
 }

@@ -143,8 +143,7 @@ const content: SiteContent = {
     },
     nipponTeaser: {
       heading: 'Agent of Nippon Express in Israel',
-      blurb:
-        'Founded 1872. 1,400 offices worldwide, 60,000 employees and over 400 million tons of total freight.',
+      blurb: `The world’s ${nx.worldRank}th-largest freight forwarder, with ${nx.locations} locations in ${nx.countries} countries and regions and ${nx.employees} employees.`,
       cta: { label: 'About the partnership', to: '/nippon' },
     },
     trust: ['AEO certified', 'ISO9001 & IQNET', 'Nippon Express agent'],
@@ -580,39 +579,39 @@ const content: SiteContent = {
   nippon: {
     meta: {
       title: 'Nippon Express',
-      description: `Paragon Logistics Ltd. is proud to be an agent of NX Group (formerly Nippon Express Group) in Israel — tracing back to 1872, active in ${nx.countries} countries and regions with ${nx.employees} employees.`,
+      description: `Paragon Logistics Ltd. is proud to be an agent of NX Group (formerly Nippon Express Group) in Israel — the world’s ${nx.worldRank}th-largest freight forwarder, active in ${nx.countries} countries and regions with ${nx.employees} employees.`,
     },
     photo: {
       alt: 'A Nippon Cargo Airlines Boeing 747 freighter on the taxiway.',
       caption: 'Nippon Cargo Airlines freighter',
     },
+    logoAlt: 'Nippon Express',
     body: {
       heading: 'Nippon Express',
       paragraphs: [
         'Paragon Logistics Ltd. is proud to be an agent of Nippon Express in Israel.',
-        `In 2022 Nippon Express Group reorganised under a holding company structure and now trades internationally as NX Group. With a history tracing back to 1872, the group ranks ${nx.worldRank}th among the world’s freight forwarders, spans ${nx.countries} countries and regions through ${nx.locations} locations and ${nx.groupCompanies} group companies, and employs ${nx.employees} professionals — allowing it to offer highly competitive services and rates and to achieve economies of scale. Moreover, constantly looking for innovation, NX Group is ready to design “tailor made” services to fit any request of the customers and to increase the competitiveness of their products.`,
+        `NX Group — the Nippon Express Group, trading internationally under that name since 2022 — is one of the world’s largest logistics companies. It ranks ${nx.worldRank}th among the world’s freight forwarders, spans ${nx.countries} countries and regions through ${nx.locations} locations and ${nx.groupCompanies} group companies, and employs ${nx.employees} professionals — allowing it to offer highly competitive services and rates and to achieve economies of scale. Moreover, constantly looking for innovation, NX Group is ready to design “tailor made” services to fit any request of the customers and to increase the competitiveness of their products.`,
       ],
     },
     // Values come from NX Group's own published figures; the labels are ours.
     figures: [
-      { value: '1872', label: 'Origins in Japan' },
-      { value: nx.founded, label: 'Nippon Express Co., Ltd. founded' },
       { value: `${nx.worldRank}th`, label: 'Largest freight forwarder worldwide (A&A)' },
       { value: nx.countries, label: 'Countries and regions' },
       { value: nx.locations, label: 'Locations worldwide' },
+      { value: nx.groupCompanies, label: 'Group companies' },
       { value: nx.employees, label: 'Employees' },
     ],
     history: {
-      heading: 'History and recognition',
+      heading: 'A global leader',
       paragraphs: [
+        `In January 2022 the group moved to a holding company structure under NIPPON EXPRESS HOLDINGS, INC. and began trading internationally as NX Group. The group is ranked ${nx.worldRank}th on Armstrong & Associates’ Top 25 Global Freight Forwarders List (2026), and continues to pursue sustainability management alongside its global growth.`,
         'Nippon Express traces its roots to Riku-un Moto Kaisha, a national land-transport company established in Japan in 1872. Nippon Express Co., Ltd. itself was established in 1937, and thanks to the professional expertise and excellent service level, from the 1950s the company expanded overseas, opened its first US office in New York in 1958, and became a worldwide leader in the international freight forwarding business.',
-        'In January 2022 the group moved to a holding company structure under NIPPON EXPRESS HOLDINGS, INC. and began trading internationally as NX Group. The group is ranked 4th on Armstrong & Associates’ Top 25 Global Freight Forwarders List (2026), and continues to pursue sustainability management alongside its global growth.',
       ],
     },
     warehousing: {
       heading: 'Warehousing and distribution',
       paragraphs: [
-        'NX Group’s Warehouse & Distribution service uses its network across more than 50 countries to combine inventory-based and cross-dock operations, just-in-time factory warehousing, service parts warehousing, reverse logistics, e-commerce fulfilment and integrated delivery — tailored to each customer’s business model.',
+        `NX Group’s Warehouse & Distribution service uses its network across ${nx.countries} countries and regions to combine inventory-based and cross-dock operations, just-in-time factory warehousing, service parts warehousing, reverse logistics, e-commerce fulfilment and integrated delivery — tailored to each customer’s business model.`,
         'The group also invests in warehouse digital transformation, applying automation and digital tools to reduce manual handling and give customers visibility across the supply chain from procurement to final delivery.',
       ],
     },
@@ -621,7 +620,7 @@ const content: SiteContent = {
       items: [
         {
           title: 'Transportation',
-          body: 'A high-quality transport system spanning more than 50 countries, with tailored services that balance cargo needs, cost, lead times and sustainability.',
+          body: `A high-quality transport system spanning ${nx.countries} countries and regions, with tailored services that balance cargo needs, cost, lead times and sustainability.`,
         },
         {
           title: 'Specialized handling',
@@ -629,7 +628,7 @@ const content: SiteContent = {
         },
         {
           title: 'Logistics solutions',
-          body: 'Warehouse and delivery services covering more than 50 countries — inventory control, distribution processing, transport and delivery across the full supply chain.',
+          body: `Warehouse and delivery services covering ${nx.countries} countries and regions — inventory control, distribution processing, transport and delivery across the full supply chain.`,
         },
         {
           title: 'Industries',

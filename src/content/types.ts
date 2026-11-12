@@ -236,6 +236,8 @@ export interface SiteContent {
     meta: PageMeta
     /** Kept in full colour — the livery is content, not texture. */
     photo: PhotoMeta
+    /** Alt text for NX's own logo (public/nx-logo*.png, from nipponexpress.com). */
+    logoAlt: string
     body: Prose
     figures: Figure[]
     history: Prose

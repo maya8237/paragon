@@ -3,6 +3,7 @@ import { ExternalLink, FigureStat } from '../components/bits'
 import { Plate } from '../components/Plate'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
+import { assetPath } from '../lib/assetPath'
 
 export default function Nippon() {
   const { t } = useT()
@@ -11,7 +12,20 @@ export default function Nippon() {
 
   return (
     <>
-      <PageHeader title={n.body.heading} lede={n.body.paragraphs[0]} />
+      <PageHeader
+        title={n.body.heading}
+        lede={n.body.paragraphs[0]}
+        tag={
+          // NX's own mark, white for the dark header band.
+          <img
+            src={assetPath('nx-logo-white.png')}
+            alt={n.logoAlt}
+            width={1041}
+            height={174}
+            style={{ blockSize: '2.75rem', inlineSize: 'auto', maxInlineSize: '100%' }}
+          />
+        }
+      />
 
       {/*
         The one photograph with the resolution to carry a page — the livery is

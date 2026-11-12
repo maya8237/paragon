@@ -16,6 +16,7 @@ import { CorridorMap } from '../components/CorridorMap'
 import { HeroGlobe } from '../components/HeroGlobe'
 import { Glyph } from '../components/icons'
 import { Reveal } from '../components/Reveal'
+import { assetPath } from '../lib/assetPath'
 import { useLangPath, useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
 
@@ -193,9 +194,16 @@ export default function Home() {
           </div>
 
           <div className={s.nipponCard}>
-            <span className={s.teaserIcon}>
-              <Glyph name="handshake" />
-            </span>
+            {/* NX's own mark, white for the dark band. */}
+            <img
+              className={s.nxLogo}
+              src={assetPath('nx-logo-white.png')}
+              alt={t.nippon.logoAlt}
+              width={1041}
+              height={174}
+              loading="lazy"
+              decoding="async"
+            />
             <h2>{home.nipponTeaser.heading}</h2>
             <p>{home.nipponTeaser.blurb}</p>
             <FigureRow>
