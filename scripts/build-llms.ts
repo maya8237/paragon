@@ -105,7 +105,7 @@ const llms = `# ${en.meta.companyName}
 > ${summary}
 
 Israeli logistics, freight-forwarding and supply-chain company, and the Israeli
-agent of Nippon Express. Five sites: headquarters in Or Yehuda, a 3,000 m²
+agent of NX – Nippon Express. Five sites: headquarters in Or Yehuda, a 3,000 m²
 logistics centre in Ramla, an air branch at Ben Gurion Airport, and ocean
 branches at Ashdod and Haifa ports. The site is bilingual (English and Hebrew).
 

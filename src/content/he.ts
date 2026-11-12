@@ -33,7 +33,7 @@ const content: SiteContent = {
       { label: 'סחר בינלאומי', to: '/global-trade' },
       { label: 'לוגיסטיקה', to: '/logistics' },
       { label: 'מעקב משלוחים', to: '/tracking' },
-      { label: 'Nippon Express', to: '/nippon' },
+      { label: 'NX – Nippon Express', to: '/nippon' },
       { label: 'צרו קשר', to: '/contact' },
     ],
     footer: [
@@ -153,11 +153,11 @@ const content: SiteContent = {
       cta: { label: 'על מעקב המשלוחים', to: '/tracking' },
     },
     nipponTeaser: {
-      heading: 'סוכנת Nippon Express בישראל',
-      blurb: `Nippon Express מדורגת במקום ה-${nx.worldRank} בין המשלחים הגדולים בעולם, עם ${nx.locations} סניפים ב-${nx.countries} מדינות ואזורים ו-${nx.employees} עובדים.`,
+      heading: 'סוכנת NX – Nippon Express בישראל',
+      blurb: `NX מדורגת במקום ה-${nx.worldRank} בין המשלחים הגדולים בעולם, עם ${nx.locations} סניפים ב-${nx.countries} מדינות ואזורים ו-${nx.employees} עובדים.`,
       cta: { label: 'על השותפות', to: '/nippon' },
     },
-    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכנת Nippon Express בישראל'],
+    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכנת NX – Nippon Express בישראל'],
     sections: {
       servicesEyebrow: 'מה אנחנו עושים',
       servicesHeading: 'שותף אחד לכל שרשרת האספקה',
@@ -592,18 +592,18 @@ const content: SiteContent = {
 
   nippon: {
     meta: {
-      title: 'Nippon Express',
+      title: 'NX – Nippon Express',
       description: `פראגון לוגיסטיקה גאה להיות סוכנת של קבוצת NX (לשעבר קבוצת Nippon Express) בישראל – מדורגת במקום ה-${nx.worldRank} בין המשלחים הגדולים בעולם, פועלת ב-${nx.countries} מדינות ואזורים ומעסיקה ${nx.employees} עובדים.`,
     },
     photo: {
       alt: 'מטוס מטען בואינג 747 של Nippon Cargo Airlines על מסלול ההסעה.',
       caption: 'מטוס מטען של Nippon Cargo Airlines',
     },
-    logoAlt: 'Nippon Express',
+    logoAlt: 'NX – Nippon Express',
     body: {
-      heading: 'Nippon Express',
+      heading: 'NX – Nippon Express',
       paragraphs: [
-        'פראגון לוגיסטיקה גאה להיות סוכנת של חברת Nippon Express בישראל.',
+        'פראגון לוגיסטיקה גאה להיות סוכנת של NX – Nippon Express בישראל.',
         `קבוצת NX – קבוצת Nippon Express, הפועלת בעולם תחת שם זה מאז 2022 – היא מחברות הלוגיסטיקה הגדולות בעולם. הקבוצה מדורגת במקום ה-${nx.worldRank} בין המשלחים הגדולים בעולם, פועלת ב-${nx.countries} מדינות ואזורים באמצעות ${nx.locations} סניפים ו-${nx.groupCompanies} חברות בת, ומעסיקה ${nx.employees} עובדים – נתונים המאפשרים לה להציע שירותים ותעריפים תחרותיים, ותועלת כלכלית.`,
         'מעבר לכך, עם דגש מתמשך על חדשנות, קבוצת NX מציעה גם פתרונות "תפורים" על פי הצורך, בכדי לענות לכל צורכי לקוחותיה ולהגדיל את היתרונות התחרותיים של מוצריה.',
       ],
@@ -620,7 +620,7 @@ const content: SiteContent = {
       heading: 'מובילה עולמית',
       paragraphs: [
         `בינואר 2022 עברה הקבוצה למבנה חברת אחזקות תחת NIPPON EXPRESS HOLDINGS, INC. והחלה לפעול בעולם תחת השם "קבוצת NX". הקבוצה מדורגת במקום ה-${nx.worldRank} ברשימת Top 25 Global Freight Forwarders של חברת Armstrong & Associates (2026), וממשיכה לקדם ניהול בר-קיימא לצד הצמיחה הגלובלית שלה.`,
-        'שורשיה של Nippon Express נטועים בחברת "Riku-un Moto Kaisha", חברת הובלות יבשתית שהוקמה ביפן בשנת 1872. Nippon Express בע״מ עצמה הוקמה בשנת 1937, והודות למומחיות המקצועית ולרמת השירות הגבוהה, החל משנות ה-50 החלה החברה להתרחב מחוץ ליפן, פתחה ב-1958 את משרדה הראשון בארה״ב בניו יורק, והפכה למובילה עולמית בתחום השילוח הבינלאומי.',
+        'שורשיה של NX נטועים בחברת "Riku-un Moto Kaisha", חברת הובלות יבשתית שהוקמה ביפן בשנת 1872. Nippon Express בע״מ עצמה הוקמה בשנת 1937, והודות למומחיות המקצועית ולרמת השירות הגבוהה, החל משנות ה-50 החלה החברה להתרחב מחוץ ליפן, פתחה ב-1958 את משרדה הראשון בארה״ב בניו יורק, והפכה למובילה עולמית בתחום השילוח הבינלאומי.',
       ],
     },
     warehousing: {

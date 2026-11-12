@@ -106,7 +106,7 @@
 
 .navLink {
   display: block;
-  padding: var(--space-2xs) 0.6rem;
+  padding: var(--space-2xs) 0.5rem;
   border-radius: var(--radius-pill);
   font-size: 0.9375rem;
   font-weight: 600;
@@ -272,9 +272,9 @@
   }
 }
 
-/* The Hebrew labels are longer: the full nav needs about 88em there, so
-   between 76em and 88em Hebrew keeps the menu button. */
-@media (min-width: 76em) and (max-width: 87.99em) {
+/* The Hebrew labels are longer: the full nav needs about 89em there, so
+   between 76em and 89em Hebrew keeps the menu button. */
+@media (min-width: 76em) and (max-width: 88.99em) {
   :global(html[lang='he']) .nav {
     display: none;
   }

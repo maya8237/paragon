@@ -26,7 +26,7 @@ const content: SiteContent = {
       { label: 'Global Trade', to: '/global-trade' },
       { label: 'Logistics Services', to: '/logistics' },
       { label: 'Tracking', to: '/tracking' },
-      { label: 'Nippon Express', to: '/nippon' },
+      { label: 'NX – Nippon Express', to: '/nippon' },
       { label: 'Contact', to: '/contact' },
     ],
     footer: [
@@ -142,11 +142,11 @@ const content: SiteContent = {
       cta: { label: 'About tracking', to: '/tracking' },
     },
     nipponTeaser: {
-      heading: 'Agent of Nippon Express in Israel',
+      heading: 'Agent of NX – Nippon Express in Israel',
       blurb: `The world’s ${nx.worldRank}th-largest freight forwarder, with ${nx.locations} locations in ${nx.countries} countries and regions and ${nx.employees} employees.`,
       cta: { label: 'About the partnership', to: '/nippon' },
     },
-    trust: ['AEO certified', 'ISO9001 & IQNET', 'Nippon Express agent'],
+    trust: ['AEO certified', 'ISO9001 & IQNET', 'NX – Nippon Express agent'],
     sections: {
       servicesEyebrow: 'What we do',
       servicesHeading: 'One partner for the whole supply chain',
@@ -578,18 +578,18 @@ const content: SiteContent = {
 
   nippon: {
     meta: {
-      title: 'Nippon Express',
+      title: 'NX – Nippon Express',
       description: `Paragon Logistics Ltd. is proud to be an agent of NX Group (formerly Nippon Express Group) in Israel – the world’s ${nx.worldRank}th-largest freight forwarder, active in ${nx.countries} countries and regions with ${nx.employees} employees.`,
     },
     photo: {
       alt: 'A Nippon Cargo Airlines Boeing 747 freighter on the taxiway.',
       caption: 'Nippon Cargo Airlines freighter',
     },
-    logoAlt: 'Nippon Express',
+    logoAlt: 'NX – Nippon Express',
     body: {
-      heading: 'Nippon Express',
+      heading: 'NX – Nippon Express',
       paragraphs: [
-        'Paragon Logistics Ltd. is proud to be an agent of Nippon Express in Israel.',
+        'Paragon Logistics Ltd. is proud to be an agent of NX – Nippon Express in Israel.',
         `NX Group – the Nippon Express Group, trading internationally under that name since 2022 – is one of the world’s largest logistics companies. It ranks ${nx.worldRank}th among the world’s freight forwarders, spans ${nx.countries} countries and regions through ${nx.locations} locations and ${nx.groupCompanies} group companies, and employs ${nx.employees} professionals – allowing it to offer highly competitive services and rates and to achieve economies of scale. Moreover, constantly looking for innovation, NX Group is ready to design “tailor made” services to fit any request of the customers and to increase the competitiveness of their products.`,
       ],
     },
@@ -605,7 +605,7 @@ const content: SiteContent = {
       heading: 'A global leader',
       paragraphs: [
         `In January 2022 the group moved to a holding company structure under NIPPON EXPRESS HOLDINGS, INC. and began trading internationally as NX Group. The group is ranked ${nx.worldRank}th on Armstrong & Associates’ Top 25 Global Freight Forwarders List (2026), and continues to pursue sustainability management alongside its global growth.`,
-        'Nippon Express traces its roots to Riku-un Moto Kaisha, a national land-transport company established in Japan in 1872. Nippon Express Co., Ltd. itself was established in 1937, and thanks to the professional expertise and excellent service level, from the 1950s the company expanded overseas, opened its first US office in New York in 1958, and became a worldwide leader in the international freight forwarding business.',
+        'NX traces its roots to Riku-un Moto Kaisha, a national land-transport company established in Japan in 1872. Nippon Express Co., Ltd. itself was established in 1937, and thanks to the professional expertise and excellent service level, from the 1950s the company expanded overseas, opened its first US office in New York in 1958, and became a worldwide leader in the international freight forwarding business.',
       ],
     },
     warehousing: {
