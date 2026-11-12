@@ -15,14 +15,15 @@
 import en from '../src/content/en'
 import he from '../src/content/he'
 import ja from '../src/content/ja'
-import type { Prose, SiteContent } from '../src/content/types'
-import { pagePath } from '../src/site/routes'
+import type { Lang, Prose, SiteContent } from '../src/content/types'
+import { PAGES, pagePath } from '../src/site/routes'
 import { TRACKING_ENABLED } from '../src/site/features'
 import { url } from './site-config'
 
 const DIST = 'dist'
 
-type L = 'en' | 'he' | 'ja'
+type L = Lang
+const content: Record<L, SiteContent> = { en, he, ja }
 const page = (lang: L, to: string) => url(pagePath(lang, to))
 
 const prose = (p: Prose, level = '##') => `${level} ${p.heading}\n\n${p.paragraphs.join('\n\n')}\n`
@@ -112,6 +113,15 @@ function fullText(t: SiteContent, lang: L): string {
 
 const summary = en.home.meta.description
 
+/** Every published page (the same list as the sitemap), with its description. */
+const pageList = (lang: L, name: string) =>
+  `## Pages (${name})\n\n` +
+  PAGES.map(({ path, meta }) => {
+    const m = meta(content[lang])
+    return `- [${m.title}](${page(lang, path)}): ${m.description}`
+  }).join('\n') +
+  '\n'
+
 const llms = `# ${en.meta.companyName}
 
 > ${summary}
@@ -123,20 +133,11 @@ branches at Ashdod and Haifa ports. The site is in English, Hebrew and Japanese.
 
 ## Full content
 
-- [Full site text, English and Hebrew](${url('llms-full.txt')}): every page as Markdown
+- [Full site text, English, Hebrew and Japanese](${url('llms-full.txt')}): every page as Markdown
 
-## Pages (English)
-
-${en.nav.primary.map((n) => `- [${n.label}](${page('en', n.to)})`).join('\n')}
-
-## Pages (Hebrew)
-
-${he.nav.primary.map((n) => `- [${n.label}](${page('he', n.to)})`).join('\n')}
-
-## Pages (Japanese)
-
-${ja.nav.primary.map((n) => `- [${n.label}](${page('ja', n.to)})`).join('\n')}
-
+${pageList('en', 'English')}
+${pageList('he', 'Hebrew')}
+${pageList('ja', 'Japanese')}
 ## Contact
 
 - [${en.home.hero.quoteCta.label}](${en.home.hero.quoteCta.href})
