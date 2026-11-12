@@ -11,34 +11,42 @@ import { assetPath } from '../lib/assetPath'
  */
 const PHOTOS = {
   'nippon-cargo': { file: 'photos/nippon-cargo.jpg', width: 500, height: 333 },
-  scm: { file: 'photos/scm.jpg', width: 184, height: 115 },
-  'global-trade': { file: 'photos/global-trade.jpg', width: 184, height: 115 },
-  logistics: { file: 'photos/logistics.jpg', width: 184, height: 115 },
+  scm: { file: 'photos/scm.webp', width: 1200, height: 800 },
+  'global-trade': { file: 'photos/global-trade.webp', width: 1200, height: 800 },
+  logistics: { file: 'photos/logistics.webp', width: 1200, height: 800 },
 
   // The freight-mode photographs, cut out of the strips the old site served
   // them in. Each was one frame of a two- or three-up collage with the gaps and
   // rounded corners baked into the image; separating them is what lets a page
   // size a photograph to its own needs.
-  'ocean-berth': { file: 'photos/ocean-berth.jpg', width: 425, height: 316 },
-  'ocean-terminal': { file: 'photos/ocean-terminal.jpg', width: 481, height: 316 },
-  'ocean-craning': { file: 'photos/ocean-craning.jpg', width: 431, height: 319 },
-  'air-freighter': { file: 'photos/air-freighter.jpg', width: 319, height: 342 },
-  'air-loading': { file: 'photos/air-loading.jpg', width: 638, height: 347 },
-  'air-departure': { file: 'photos/air-departure.jpg', width: 564, height: 351 },
-  'drop-landing-craft': { file: 'photos/drop-landing-craft.jpg', width: 306, height: 224 },
-  'drop-beach': { file: 'photos/drop-beach.jpg', width: 346, height: 223 },
+  'ocean-berth': { file: 'photos/ocean-berth.webp', width: 1200, height: 800 },
+  'ocean-terminal': { file: 'photos/ocean-terminal.webp', width: 1200, height: 800 },
+  'ocean-craning': { file: 'photos/ocean-craning.webp', width: 1200, height: 800 },
+  'air-freighter': { file: 'photos/air-freighter.webp', width: 1200, height: 800 },
+  'air-loading': { file: 'photos/air-loading.webp', width: 1200, height: 800 },
+  'air-departure': { file: 'photos/air-departure.webp', width: 1200, height: 800 },
+  'drop-landing-craft': { file: 'photos/drop-landing-craft.webp', width: 1200, height: 800 },
+  'drop-beach': { file: 'photos/drop-beach.webp', width: 1200, height: 800 },
   'charter-air': { file: 'photos/charter-air.jpg', width: 986, height: 519 },
-  'charter-road': { file: 'photos/charter-road.jpg', width: 349, height: 268 },
-  'charter-ocean': { file: 'photos/charter-ocean.jpg', width: 359, height: 255 },
+  'charter-road': { file: 'photos/charter-road.webp', width: 1200, height: 800 },
+  'charter-ocean': { file: 'photos/charter-ocean.webp', width: 1200, height: 800 },
 
   // The logistics centre, photographed on site. These are the smallest
   // photographs on the site, so they are only ever placed in a row where each
   // one renders a few hundred pixels wide at most.
-  'centre-forklift': { file: 'photos/centre-forklift.jpg', width: 246, height: 156 },
-  'centre-racking': { file: 'photos/centre-racking.jpg', width: 207, height: 156 },
+  'centre-forklift': { file: 'photos/centre-forklift.webp', width: 1200, height: 800 },
+  'centre-racking': { file: 'photos/centre-racking.webp', width: 1200, height: 800 },
 
-  'projects-barge': { file: 'photos/projects-barge.jpg', width: 584, height: 405 },
-  'projects-quay': { file: 'photos/projects-quay.jpg', width: 596, height: 443 },
+  'projects-barge': { file: 'photos/projects-barge.webp', width: 1200, height: 800 },
+  'projects-quay': { file: 'photos/projects-quay.webp', width: 1200, height: 800 },
+  'industries-hero': { file: 'photos/industries-hero.webp', width: 1200, height: 800 },
+  'industry-semiconductor': { file: 'photos/industry-semiconductor.webp', width: 1200, height: 800 },
+  'industry-technology': { file: 'photos/industry-technology.webp', width: 1200, height: 800 },
+  'industry-mobility': { file: 'photos/industry-mobility.webp', width: 1200, height: 800 },
+  'industry-fashion': { file: 'photos/industry-fashion.webp', width: 1200, height: 800 },
+  'industry-healthcare': { file: 'photos/industry-healthcare.webp', width: 1200, height: 800 },
+  'about-hq': { file: 'photos/about-hq.webp', width: 1200, height: 800 },
+  'contact-desk': { file: 'photos/contact-desk.webp', width: 1200, height: 800 },
 } as const
 
 export type PhotoName = keyof typeof PHOTOS

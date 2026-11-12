@@ -12,8 +12,17 @@ export function useT(): LangValue {
   return value
 }
 
-/** Prefix a route with the active language: `path('/about')` → `/he/about`. */
+/**
+ * Prefix a route with the active language: `path('/about')` → `/he/about/`.
+ *
+ * The trailing slash is the address a static host actually serves (each page
+ * is a folder with an index.html), so links never cost a redirect.
+ */
 export function useLangPath(): (path: string) => string {
   const { lang } = useT()
-  return (path: string) => `/${lang}${path === '/' ? '' : path}`
+  return (path: string) => {
+    const [route = '', hash] = path.split('#')
+    const full = `/${lang}${route === '/' ? '' : route}/`
+    return hash ? `${full}#${hash}` : full
+  }
 }

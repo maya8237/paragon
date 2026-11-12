@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import s from './Chrome.module.css'
 import { Container } from './ui'
 import { useT, useLangPath } from '../i18n/useT'
+import { LANGS, LANG_LABEL, LANG_NAME, LANG_HINT, browserLang, rememberLang, storedLang } from '../i18n/LangContext'
+import type { Lang } from '../content/types'
 import { assetPath } from '../lib/assetPath'
+import { ExternalLink } from './bits'
+import { ui } from './ui'
+import { useTheme } from '../lib/theme'
+import { MegaNav, MegaAccordion, buildMenu } from './Mega'
 
 const SOCIAL = {
   facebook:
@@ -31,11 +37,220 @@ const ICONS = {
   ),
 }
 
+const SUN = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+  </svg>
+)
+
+const MOON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+  </svg>
+)
+
+const GLOBE = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3" />
+  </svg>
+)
+
+const CHECK = (
+  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="m3.5 8.5 3 3 6-7" />
+  </svg>
+)
+
+const GEAR = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+  </svg>
+)
+
+/**
+ * A gear that opens a small preferences panel. For now it holds the light/dark
+ * choice, so the header stays uncluttered and more settings have room to land.
+ */
+function Preferences() {
+  const { t } = useT()
+  const [theme, toggle] = useTheme()
+  const [open, setOpen] = useState(false)
+  const root = useRef<HTMLDivElement>(null)
+  const location = useLocation()
+
+  useEffect(() => setOpen(false), [location.pathname])
+  useEffect(() => {
+    if (!open) return
+    const away = (e: PointerEvent) => {
+      if (!root.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('pointerdown', away)
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('pointerdown', away)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [open])
+
+  const choose = (next: 'light' | 'dark') => {
+    if (next !== theme) toggle()
+  }
+
+  return (
+    <div className={s.prefs} ref={root}>
+      <button
+        type="button"
+        className={s.themeToggle}
+        aria-expanded={open}
+        aria-controls="preferences-panel"
+        aria-label={t.nav.preferences}
+        title={t.nav.preferences}
+        onClick={() => setOpen((v) => !v)}
+      >
+        {GEAR}
+      </button>
+      {open ? (
+        <div className={s.prefsPanel} id="preferences-panel" role="group" aria-label={t.nav.preferences}>
+          <p className={s.prefsTitle}>{t.nav.appearance}</p>
+          <div className={s.segment}>
+            {(['light', 'dark'] as const).map((mode) => (
+              <button
+                key={mode}
+                type="button"
+                className={s.segmentOption}
+                aria-pressed={theme === mode}
+                onClick={() => choose(mode)}
+              >
+                {mode === 'light' ? SUN : MOON}
+                {mode === 'light' ? t.nav.lightMode : t.nav.darkMode}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+/** A globe button that opens the three languages, each in its own script. */
+function LanguageMenu({ hrefFor }: { hrefFor: (to: Lang) => string }) {
+  const { t, lang } = useT()
+  const [open, setOpen] = useState(false)
+  const root = useRef<HTMLDivElement>(null)
+  const location = useLocation()
+
+  useEffect(() => setOpen(false), [location.pathname])
+  useEffect(() => {
+    if (!open) return
+    const away = (e: PointerEvent) => {
+      if (!root.current?.contains(e.target as Node)) setOpen(false)
+    }
+    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    document.addEventListener('pointerdown', away)
+    document.addEventListener('keydown', esc)
+    return () => {
+      document.removeEventListener('pointerdown', away)
+      document.removeEventListener('keydown', esc)
+    }
+  }, [open])
+
+  return (
+    <div className={s.langMenu} ref={root}>
+      <button
+        type="button"
+        className={s.langButton}
+        aria-expanded={open}
+        aria-controls="language-menu"
+        aria-label={`${t.nav.language}: ${LANG_NAME[lang]}`}
+        onClick={() => setOpen((v) => !v)}
+      >
+        {GLOBE}
+        <span className={s.langCode}>{LANG_LABEL[lang]}</span>
+      </button>
+      {open ? (
+        <ul className={s.langPanel} id="language-menu">
+          {LANGS.map((to) => (
+            <li key={to}>
+              {to === lang ? (
+                <span className={s.langOption} aria-current="true" lang={to}>
+                  {LANG_NAME[to]}
+                  {CHECK}
+                </span>
+              ) : (
+                <Link
+                  to={hrefFor(to)}
+                  className={s.langOption}
+                  lang={to}
+                  hrefLang={to}
+                  onClick={() => rememberLang(to)}
+                >
+                  {LANG_NAME[to]}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  )
+}
+
+/**
+ * If the browser prefers another language the site has, and the visitor has
+ * not chosen one or dismissed this, offer it — never switch on their behalf.
+ */
+function LanguageHint({ hrefFor }: { hrefFor: (to: Lang) => string }) {
+  const { t, lang } = useT()
+  const [offer, setOffer] = useState<Lang | null>(null)
+
+  useEffect(() => {
+    let dismissed = false
+    try {
+      dismissed = sessionStorage.getItem('paragon.langHint') === '1'
+    } catch {
+      // Treat as not dismissed.
+    }
+    const want = browserLang()
+    setOffer(!dismissed && !storedLang() && want !== lang ? want : null)
+  }, [lang])
+
+  if (!offer) return null
+  const dismiss = () => {
+    try {
+      sessionStorage.setItem('paragon.langHint', '1')
+    } catch {
+      // Fine: it simply returns on the next page.
+    }
+    setOffer(null)
+  }
+  const copy = LANG_HINT[offer]
+  return (
+    <div className={s.hint} lang={offer} dir={offer === 'he' ? 'rtl' : 'ltr'} role="region" aria-label={t.nav.language}>
+      <Container>
+        <div className={s.hintInner}>
+          <span>{copy.text}</span>
+          <Link to={hrefFor(offer)} className={s.hintCta} onClick={() => rememberLang(offer)}>
+            {copy.cta}
+          </Link>
+          <button type="button" className={s.hintClose} aria-label={t.nav.close} onClick={dismiss}>
+            ×
+          </button>
+        </div>
+      </Container>
+    </div>
+  )
+}
+
 export function Header() {
-  const { t, other } = useT()
+  const { t } = useT()
   const path = useLangPath()
   const location = useLocation()
   const [open, setOpen] = useState(false)
+  const menu = buildMenu(t)
 
   // Any navigation closes the mobile menu, including back/forward.
   useEffect(() => setOpen(false), [location.pathname])
@@ -44,16 +259,18 @@ export function Header() {
    * The language switch preserves the current route:
    * `/en/global-trade/air` ↔ `/he/global-trade/air`.
    */
-  const otherLangHref = (() => {
-    const rest = location.pathname.replace(/^\/(en|he)(?=\/|$)/, '')
-    return `/${other}${rest}${location.hash}`
-  })()
+  const langHref = (to: Lang) => {
+    const rest = location.pathname.replace(/^\/(en|he|ja)(?=\/|$)/, '')
+    return `/${to}${rest}${location.hash}`
+  }
 
   return (
     <>
       <a className={s.skip} href="#main">
         {t.nav.skipToContent}
       </a>
+
+      <LanguageHint hrefFor={langHref} />
 
       <header className={s.header}>
         <Container>
@@ -63,28 +280,19 @@ export function Header() {
             </Link>
 
             <nav className={s.nav} aria-label={t.nav.menu}>
-              <ul className={s.navList}>
-                {t.nav.primary.map((item) => (
-                  <li key={item.to}>
-                    <NavLink to={path(item.to)} end={item.to === '/'} className={s.navLink}>
-                      {item.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+              <MegaNav groups={menu} />
             </nav>
 
-            <div className={s.langSwitch}>
-              <Link
-                to={otherLangHref}
-                className={s.langLink}
-                lang={other}
-                hrefLang={other}
-                title={t.meta.switchToOtherLang}
-              >
-                {t.meta.otherLangLabel}
-              </Link>
-            </div>
+            <LanguageMenu hrefFor={langHref} />
+
+            <ExternalLink
+              href={t.home.hero.quoteCta.href}
+              className={`${ui.btn} ${ui.btnAccent} ${s.quote}`}
+            >
+              {t.nav.quote}
+            </ExternalLink>
+
+            <Preferences />
 
             <button
               type="button"
@@ -93,7 +301,12 @@ export function Header() {
               aria-controls="mobile-nav"
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? t.nav.close : t.nav.menu}
+              <span className={s.burger} data-open={open} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+              <span className={s.menuLabel}>{open ? t.nav.close : t.nav.menu}</span>
             </button>
           </div>
         </Container>
@@ -101,15 +314,13 @@ export function Header() {
         {open ? (
           <div className={s.mobileNav} id="mobile-nav">
             <Container>
-              <ul className={s.mobileList}>
-                {t.nav.primary.map((item) => (
-                  <li key={item.to}>
-                    <NavLink to={path(item.to)} end={item.to === '/'} className={s.mobileLink}>
-                      {item.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+              <MegaAccordion groups={menu} onGo={() => setOpen(false)} />
+              <ExternalLink
+                href={t.home.hero.quoteCta.href}
+                className={`${ui.btn} ${ui.btnAccent} ${s.mobileQuote}`}
+              >
+                {t.home.hero.quoteCta.label}
+              </ExternalLink>
             </Container>
           </div>
         ) : null}
@@ -135,6 +346,11 @@ export function Footer() {
               height={136}
             />
             <p className={s.footerTagline}>{t.meta.tagline}</p>
+            <ul className={s.footerTrust}>
+              {t.home.trust.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
 
           <nav aria-labelledby="footer-nav-heading">
@@ -151,6 +367,38 @@ export function Footer() {
               ))}
             </ul>
           </nav>
+
+          <div>
+            <h2 className={s.footerHeading}>{t.footer.partnersHeading}</h2>
+            {/* NX leads and is larger; cargo-partner follows. White marks for the navy. */}
+            <div className={s.partners}>
+              <Link to={path('/nippon')} className={s.partnerLink}>
+                <img
+                  className={s.partnerNx}
+                  src={assetPath('nx-logo-white.png')}
+                  alt={t.nippon.logoAlt}
+                  width={1041}
+                  height={174}
+                  loading="lazy"
+                />
+              </Link>
+              <a
+                href={t.home.cargoPartner.cta.href}
+                className={s.partnerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className={s.partnerCp}
+                  src={assetPath('cargo-partner-logo.svg')}
+                  alt={t.home.cargoPartner.logoAlt}
+                  width={120}
+                  height={92}
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
 
           <div>
             <h2 className={s.footerHeading}>{t.footer.socialHeading}</h2>

@@ -85,12 +85,9 @@ function line(from: Location['id'], to: Location['id']): string {
  * the *current* route — a router `To` with only `hash` set, so it resolves
  * against whatever pathname is already active — while the home page supplies
  * a full `{ pathname, hash }` pointing at the localized contact page instead.
- * These must go through router `Link`s rather than a hand-built `#id` string:
- * this app runs a `HashRouter`, where the entire URL fragment *is* the route,
- * so a bare `<a href="#hq">` doesn't add an anchor to the current route, it
- * replaces the whole route with `/hq` and 404s. Real anchor elements (which
- * `Link` renders under the hood) keep the nodes keyboard-operable, while the
- * optional callback supports contact-card highlighting after navigation.
+ * These go through router `Link`s rather than hand-built `<a href>`s so the
+ * deployment's base path and the language prefix are always applied, while
+ * real anchor elements (which `Link` renders) keep the nodes keyboard-operable.
  */
 export function CorridorMap({
   linked = false,
@@ -179,7 +176,7 @@ export function CorridorMap({
                       to={hrefForNode(node.id)}
                       className={s.nodeLink}
                       onClick={() => onNodeClick?.(node.id)}
-                      aria-label={`${node.name} — ${node.role}. ${t.common.jumpToLocation}`}
+                      aria-label={`${node.name} – ${node.role}. ${t.common.jumpToLocation}`}
                     >
                       {marks}
                     </Link>

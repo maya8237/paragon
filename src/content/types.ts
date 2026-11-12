@@ -1,7 +1,7 @@
 /**
  * The shape every language file must satisfy.
  *
- * `en.ts` and `he.ts` are both declared `const content: SiteContent`, so a
+ * `en.ts`, `he.ts` and `ja.ts` are all declared `const content: SiteContent`, so a
  * missing or misspelled key in either language is a compile error. This is the
  * mechanism that guarantees every piece of information carried over from the
  * old site exists in both languages.
@@ -11,7 +11,7 @@
  * the gap is the thing the type system is meant to surface.
  */
 
-export type Lang = 'en' | 'he'
+export type Lang = 'en' | 'he' | 'ja'
 
 /** A link that leaves the site. Rendered with an explicit external affordance. */
 export interface ExternalLink {
@@ -72,18 +72,43 @@ export interface SiteContent {
     /** Company legal name, used in the footer and structured data. */
     companyName: string
     tagline: string
-    /** Label of the *other* language, shown on the switch. */
-    otherLangLabel: string
-    switchToOtherLang: string
+    /** The tooltip / screen-reader text for switching to each language, in this language. */
+    switchTo: Record<Lang, string>
   }
 
   nav: {
     primary: NavItem[]
+    /** Labels for the mega menu's groups and sections; links reuse `primary` and page content. */
+    mega: {
+      services: string
+      partners: string
+      company: string
+      freight: string
+      warehousing: string
+      sectors: string
+      network: string
+      viewAll: string
+      overview: string
+      servicesBlurb: string
+      sectorsBlurb: string
+      partnersBlurb: string
+      companyBlurb: string
+    }
     /** Footer's secondary text nav — mirrors the old site's footer link row. */
     footer: NavItem[]
     skipToContent: string
+    breadcrumb: string
+    /** The preferences panel behind the gear: title, and the light/dark choice. */
+    preferences: string
+    appearance: string
+    lightMode: string
+    darkMode: string
+    /** Short label for the header's quote-request button. */
+    quote: string
     menu: string
     close: string
+    /** Accessible name for the language menu. */
+    language: string
   }
 
   footer: {
@@ -91,6 +116,7 @@ export interface SiteContent {
     accessibility: string
     social: { facebook: string; linkedin: string; pinterest: string }
     socialHeading: string
+    partnersHeading: string
   }
 
   common: {
@@ -117,8 +143,9 @@ export interface SiteContent {
   home: {
     meta: PageMeta
     hero: {
-      /** Small mode tag above the display heading. */
-      eyebrow: string
+      /** The logo's slogan, in small capitals above the company name. */
+      slogan: string
+      /** The company name, the largest line of the hero heading. */
       heading: string
       /** The two intro paragraphs from the old home page, verbatim in substance. */
       lede: string[]
@@ -143,10 +170,29 @@ export interface SiteContent {
     certificationsTeaser: { heading: string; blurb: string; cta: NavItem }
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
+    /** The smaller second partner, shown beneath NX: cargo-partner (public/cargo-partner-logo.svg). */
+    /** A band on the home page pointing at the industries page. */
+    industriesTeaser: { eyebrow: string; heading: string; blurb: string; cta: NavItem }
+    cargoPartner: { heading: string; blurb: string; logoAlt: string; cta: ExternalLink }
+    /** Short credential chips under the hero calls to action. */
+    trust: string[]
+    /** Section eyebrows and headings introduced by the redesigned home page. */
+    sections: {
+      servicesEyebrow: string
+      servicesHeading: string
+      modesEyebrow: string
+      modesHeading: string
+      networkEyebrow: string
+      networkHeading: string
+    }
+    /** Closing call-to-action band. */
+    cta: { heading: string; blurb: string }
   }
 
   about: {
     meta: PageMeta
+    /** Alt text for the page's hero photograph. */
+    heroAlt: string
     profile: Prose
     /** The four sub-headed sections of the company profile. */
     sections: Prose[]
@@ -211,12 +257,16 @@ export interface SiteContent {
     parameters: { heading: string; items: string[] }
     cta: ExternalLink
     ctaNote: string
+    /** Shown beside the disabled tracking buttons while the system is down. */
+    unavailable: string
   }
 
   nippon: {
     meta: PageMeta
     /** Kept in full colour — the livery is content, not texture. */
     photo: PhotoMeta
+    /** Alt text for NX's own logo (public/nx-logo*.png, from nipponexpress.com). */
+    logoAlt: string
     body: Prose
     figures: Figure[]
     history: Prose
@@ -225,8 +275,30 @@ export interface SiteContent {
     links: ExternalLink[]
   }
 
+  industries: {
+    meta: PageMeta
+    /** Alt text for the page's hero photograph. */
+    heroAlt: string
+    intro: Prose
+    /** One per sector; `id` is the in-page anchor (/industries#semiconductor). */
+    items: {
+      id: string
+      title: string
+      /** One line, for the cards and the home page. */
+      blurb: string
+      lead: string
+      /** Alt text for the sector's photograph. */
+      photoAlt: string
+      points: { title: string; body: string }[]
+    }[]
+    /** Why NX Group's own industry teams sit behind these. */
+    nx: Prose
+  }
+
   contact: {
     meta: PageMeta
+    /** Alt text for the page's hero photograph. */
+    heroAlt: string
     intro: string
     locations: Location[]
     form: { heading: string; blurb: string; cta: ExternalLink }

@@ -7,9 +7,12 @@ export function FigureStat({ figure }: { figure: Figure }) {
   return (
     <div className={s.figure}>
       <span className={s.figureValue}>
-        {/* Isolated, not forced LTR — a value may carry a Hebrew unit, and the
-            bidi algorithm places it correctly for the page's direction. */}
-        <span className="bidi-isolate">{figure.value}</span>
+        {/* Direction comes from the value itself: "3,000 מ״ר" starts with a
+            Hebrew letter and reads RTL, while "2,900+" has none and stays LTR —
+            so its plus sign never jumps to the front in Hebrew. */}
+        <span className="bidi-isolate" dir="auto">
+          {figure.value}
+        </span>
       </span>
       <span className={s.figureLabel}>{figure.label}</span>
     </div>

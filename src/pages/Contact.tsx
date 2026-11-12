@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Grid, PageHeader, Section, SectionHead, ui } from '../components/ui'
 import { ExternalLink, LocationCard } from '../components/bits'
+import { Banner } from '../components/Banner'
 import { CorridorMap } from '../components/CorridorMap'
 import { useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
@@ -34,6 +35,10 @@ export default function Contact() {
   return (
     <>
       <PageHeader title={c.meta.title} lede={c.intro} />
+
+      <Section tight>
+        <Banner name="contact-desk" alt={c.heroAlt} />
+      </Section>
 
       {/* The same five nodes the hero draws — this page is where their data lives. */}
       <Section tight>

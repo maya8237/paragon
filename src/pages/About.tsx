@@ -1,3 +1,4 @@
+import { Banner } from '../components/Banner'
 import { Divider, Grid, PageHeader, Prose, Section, SectionHead } from '../components/ui'
 import { CertList } from '../components/bits'
 import { useT } from '../i18n/useT'
@@ -11,6 +12,10 @@ export default function About() {
   return (
     <>
       <PageHeader title={about.profile.heading} lede={about.profile.paragraphs[0]} />
+
+      <Section tight>
+        <Banner name="about-hq" alt={about.heroAlt} />
+      </Section>
 
       <Section narrow>
         {about.profile.paragraphs.slice(1).map((p) => (

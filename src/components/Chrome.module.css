@@ -21,16 +21,17 @@
   position: sticky;
   inset-block-start: 0;
   z-index: 50;
-  background: rgb(255 255 255 / 0.92);
-  backdrop-filter: blur(8px);
+  background: var(--header-bg);
+  backdrop-filter: saturate(1.4) blur(12px);
   border-block-end: var(--border);
+  box-shadow: 0 1px 0 rgb(6 36 63 / 0.02), 0 8px 24px rgb(6 36 63 / 0.04);
 }
 
 .headerInner {
   display: flex;
   align-items: center;
-  gap: var(--space-m);
-  min-block-size: 4.5rem;
+  gap: var(--space-xs);
+  min-block-size: 4.75rem;
 }
 
 .brand {
@@ -50,6 +51,95 @@
   block-size: 2rem;
   inline-size: auto;
   max-inline-size: none;
+  filter: var(--logo-filter);
+}
+
+/* Theme switch: a round icon button, sun ↔ moon. */
+.themeToggle {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  border: var(--border);
+  border-radius: 50%;
+  color: var(--text);
+  background: var(--surface);
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.themeToggle:hover {
+  background: var(--tint-soft);
+  border-color: var(--signal);
+}
+
+.themeToggle svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+/* The preferences panel drops from the gear, at the header's end edge. */
+.prefs {
+  position: relative;
+  flex: none;
+}
+
+.prefsPanel {
+  position: absolute;
+  inset-block-start: calc(100% + var(--space-2xs));
+  inset-inline-end: 0;
+  z-index: 60;
+  min-inline-size: 15rem;
+  padding: var(--space-s);
+  background: var(--surface);
+  color: var(--text);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.prefsTitle {
+  margin-block-end: var(--space-2xs);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--slate);
+}
+
+.segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: var(--tint-soft);
+  border-radius: var(--radius);
+}
+
+.segmentOption {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-block-size: 2.5rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--slate);
+  transition:
+    background var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease);
+}
+
+.segmentOption svg {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+}
+
+.segmentOption[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
 }
 
 .nav {
@@ -65,10 +155,10 @@
 
 .navLink {
   display: block;
-  padding: var(--space-2xs) var(--space-xs);
-  border-radius: var(--radius);
-  font-size: var(--step--1);
-  font-weight: 500;
+  padding: var(--space-2xs) 0.5rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--slate);
   text-decoration: none;
   white-space: nowrap;
@@ -79,23 +169,13 @@
 
 .navLink:hover {
   color: var(--paragon);
-  background: var(--paper);
+  background: var(--tint-soft);
 }
 
 /* --transit marks the currently selected item, and nothing else. */
 .navLink[aria-current='page'] {
-  color: var(--ink);
-  position: relative;
-}
-
-.navLink[aria-current='page']::after {
-  content: '';
-  position: absolute;
-  inset-inline: var(--space-xs);
-  inset-block-end: -1px;
-  block-size: 2px;
-  background: var(--transit);
-  border-radius: 1px;
+  color: var(--paragon);
+  background: var(--tint);
 }
 
 @media (min-width: 64em) {
@@ -104,47 +184,150 @@
   }
 }
 
-/* Language switch */
-.langSwitch {
+/* Language menu: globe + current code, opening a short list. */
+.langMenu {
+  position: relative;
   flex: none;
   margin-inline-start: auto;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
 }
 
 @media (min-width: 64em) {
-  .langSwitch {
+  .langMenu {
     margin-inline-start: 0;
     padding-inline-start: var(--space-s);
     border-inline-start: var(--border);
   }
 }
 
-.langLink {
-  font-size: var(--step--1);
-  font-weight: 500;
+.langButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-block-size: 2.75rem;
+  padding: var(--space-3xs) var(--space-xs);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--paragon);
-  text-decoration: none;
-  padding: var(--space-3xs) var(--space-2xs);
-  border-radius: var(--radius);
+  cursor: pointer;
 }
 
-.langLink:hover {
-  background: var(--paper);
+.langButton:hover,
+.langButton[aria-expanded='true'] {
+  background: var(--tint-soft);
+}
+
+.langButton svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+.langPanel {
+  position: absolute;
+  inset-block-start: calc(100% + 0.25rem);
+  inset-inline-end: 0;
+  z-index: 60;
+  min-inline-size: 11rem;
+  padding: var(--space-3xs);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  min-block-size: 2.75rem;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.langOption:hover {
+  background: var(--tint-soft);
+  color: var(--paragon);
+}
+
+.langOption[aria-current='true'] {
+  color: var(--paragon);
+  background: var(--tint);
+}
+
+/* Suggestion line above the header. */
+.hint {
+  background: var(--tint);
+  color: var(--text);
+  font-size: var(--step--1);
+  border-block-end: var(--border);
+}
+
+.hintInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-s);
+  min-block-size: 2.75rem;
+  padding-block: var(--space-3xs);
+}
+
+.hintCta {
+  font-weight: 700;
+  color: var(--paragon);
+}
+
+.hintClose {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border: 0;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* Quote button — hidden on the narrowest phones, where it lives in the menu. */
+/* `[class]` outranks the shared .btn rule, whose display would otherwise win. */
+.quote[class] {
+  display: none;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9375rem;
+  flex: none;
+}
+
+@media (min-width: 40em) {
+  .quote[class] {
+    display: inline-flex;
+  }
+}
+
+.mobileQuote {
+  inline-size: 100%;
+  margin-block-start: var(--space-m);
 }
 
 /* Mobile menu */
 .menuButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
-  padding: var(--space-2xs) var(--space-xs);
+  gap: 0.6em;
+  min-block-size: 2.75rem;
+  padding: var(--space-2xs) var(--space-s);
   border: var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   font-size: var(--step--1);
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 700;
+  color: var(--text);
   background: var(--surface);
 }
 
@@ -152,6 +335,34 @@
   .menuButton {
     display: none;
   }
+}
+
+.burger {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  inline-size: 16px;
+}
+
+.burger span {
+  block-size: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    transform var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.burger[data-open='true'] span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.burger[data-open='true'] span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger[data-open='true'] span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
 }
 
 .mobileNav {
@@ -167,18 +378,19 @@
 
 .mobileLink {
   display: block;
-  padding: var(--space-s) 0;
+  padding: var(--space-s) var(--space-xs);
   border-block-end: var(--border);
   font-size: var(--step-1);
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 600;
+  color: var(--text);
   text-decoration: none;
 }
 
 .mobileLink[aria-current='page'] {
   color: var(--paragon);
-  border-inline-start: 3px solid var(--transit);
-  padding-inline-start: var(--space-s);
+  background: var(--tint);
+  border-radius: var(--radius);
+  border-block-end-color: transparent;
 }
 
 @media (min-width: 64em) {
@@ -189,7 +401,9 @@
 
 /* Footer */
 .footer {
+  position: relative;
   background: var(--ink);
+  border-block-start: 4px solid var(--transit);
   color: var(--ink-text);
   padding-block: var(--space-2xl) var(--space-l);
   margin-block-start: auto;
@@ -201,6 +415,30 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   padding-block-end: var(--space-l);
   border-block-end: 1px solid var(--ink-hairline);
+}
+
+/* On desktop the brand column is the widest, so its credential tags sit on
+   one line each. */
+@media (min-width: 64em) {
+  .footerTop {
+    grid-template-columns: minmax(19rem, 1.5fr) repeat(3, minmax(0, 1fr));
+  }
+}
+
+.footerTrust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+/* A tag never breaks inside itself: it wraps to the next row whole. */
+.footerTrust li {
+  white-space: nowrap;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--ink-hairline);
+  border-radius: var(--radius-pill);
+  font-size: var(--step--1);
+  color: var(--ink-text);
 }
 
 .footerBrand {
@@ -266,10 +504,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 2.5rem;
-  block-size: 2.5rem;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
   border: 1px solid var(--ink-hairline);
-  border-radius: var(--radius);
+  border-radius: 50%;
   color: var(--ink-text);
   transition:
     border-color var(--dur) var(--ease),
@@ -308,4 +546,73 @@
 
 .footerBottomEnd {
   margin-inline-start: auto;
+}
+
+@media (min-width: 40em) {
+  .headerInner {
+    gap: var(--space-m);
+  }
+
+  .logo {
+    block-size: 2.4rem;
+  }
+}
+
+/* On the narrowest phones the menu button is icon-only; its label stays for
+   screen readers. */
+@media (max-width: 30em) {
+  .menuButton {
+    padding-inline: var(--space-xs);
+  }
+
+  .menuLabel {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Footer partners: NX first and larger, cargo-partner beneath. */
+.partners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: start;
+}
+
+.partnerLink {
+  display: inline-block;
+  opacity: 0.9;
+  transition: opacity var(--dur-fast, 150ms) var(--ease, ease);
+}
+
+.partnerLink:hover {
+  opacity: 1;
+}
+
+.partnerNx {
+  block-size: 2rem;
+  inline-size: auto;
+}
+
+.partnerCp {
+  block-size: 3.25rem;
+  inline-size: auto;
+}
+
+/* At 320px the Japanese language name ("日本語") would push the menu button
+   off-screen, so below 24em the language button shows only the globe; its
+   aria-label still names the language. */
+@media (max-width: 24em) {
+  .langCode {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }

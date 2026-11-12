@@ -22,6 +22,7 @@ import { nx } from '../src/content/nx'
 const LANGUAGES = [
   { name: 'English', path: 'src/content/en.ts' },
   { name: 'Hebrew', path: 'src/content/he.ts' },
+  { name: 'Japanese', path: 'src/content/ja.ts' },
 ] as const
 
 const sources = await Promise.all(
@@ -44,7 +45,7 @@ for (const key of Object.keys(nx)) {
 }
 
 if (asymmetric.length === 0) {
-  console.log('Translations verified — every NX Group figure is carried in both languages.')
+  console.log('Translations verified — every NX Group figure is carried in every language.')
   process.exit(0)
 }
 

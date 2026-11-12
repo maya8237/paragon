@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useT } from './useT'
 import type { PageMeta } from '../content/types'
+import { pageTitle } from '../site/routes'
 
 /**
  * Sets the document title and meta description for a route.
@@ -13,7 +14,7 @@ export function usePageMeta(meta: PageMeta, { isHome = false }: { isHome?: boole
   const company = t.meta.companyName
 
   useEffect(() => {
-    document.title = isHome ? `${meta.title} · ${t.meta.tagline}` : `${meta.title} · ${company}`
+    document.title = pageTitle(t, meta, isHome)
 
     let tag = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     if (!tag) {

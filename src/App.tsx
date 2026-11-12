@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { LangProvider, isLang, preferredLang } from './i18n/LangContext'
 import { Header, Footer } from './components/Chrome'
+import { QuoteBand } from './components/QuoteBand'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -12,6 +13,7 @@ import Air from './pages/Air'
 import DropShipments from './pages/DropShipments'
 import Charter from './pages/Charter'
 import Logistics from './pages/Logistics'
+import Industries from './pages/Industries'
 import Tracking from './pages/Tracking'
 import Nippon from './pages/Nippon'
 import Contact from './pages/Contact'
@@ -67,12 +69,14 @@ function Shell() {
             <Route path="charter" element={<Charter />} />
           </Route>
           <Route path="logistics" element={<Logistics />} />
+          <Route path="industries" element={<Industries />} />
           <Route path="tracking" element={<Tracking />} />
           <Route path="nippon" element={<Nippon />} />
           <Route path="contact" element={<Contact />} />
           <Route path="accessibility" element={<Accessibility />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <QuoteBand />
       </main>
       <Footer />
     </>
@@ -105,7 +109,7 @@ export default function App() {
     <>
       <ScrollManager />
       <Routes>
-        <Route path="/" element={<Navigate to={`/${preferredLang()}`} replace />} />
+        <Route path="/" element={<Navigate to={`/${preferredLang()}/`} replace />} />
         <Route path="/:lang/*" element={<LangRoute />} />
       </Routes>
     </>
