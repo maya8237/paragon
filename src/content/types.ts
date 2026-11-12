@@ -191,6 +191,8 @@ export interface SiteContent {
 
   about: {
     meta: PageMeta
+    /** Alt text for the page's hero photograph. */
+    heroAlt: string
     profile: Prose
     /** The four sub-headed sections of the company profile. */
     sections: Prose[]
@@ -295,6 +297,8 @@ export interface SiteContent {
 
   contact: {
     meta: PageMeta
+    /** Alt text for the page's hero photograph. */
+    heroAlt: string
     intro: string
     locations: Location[]
     form: { heading: string; blurb: string; cta: ExternalLink }

@@ -201,6 +201,7 @@ const content: SiteContent = {
       description:
         'Paragon Logistics Ltd. – industry veterans offering a profound and personal approach to the complete supply chain cycle, from a 3,000 m² logistics centre in central Israel.',
     },
+    heroAlt: 'Paragon’s headquarters at sunset, a glass office building beside a loading yard with trucks',
     profile: {
       heading: 'Company Profile',
       paragraphs: [
@@ -705,7 +706,7 @@ const content: SiteContent = {
         blurb:
           'High-value, time-critical shipments for fabs, equipment makers and their suppliers – moved securely and traced end to end.',
         lead: 'Semiconductor operations have no room for delay or damage. Tooling, equipment and spare parts are costly and urgent, and a day lost can stop a line.',
-        photoAlt: 'Two cleanroom technicians in white suits guiding a sealed aluminium crate suspended on lifting straps',
+        photoAlt: 'Two airfreight handlers in hi-vis vests moving a shrink-wrapped equipment crate on a pallet jack, with a cargo aircraft behind them',
         points: [
           {
             title: 'Time-critical delivery',
@@ -824,6 +825,7 @@ const content: SiteContent = {
       description:
         'Paragon Logistics – headquarters in Or Yehuda, logistics centre in Ramla, air branch at Ben Gurion Airport, ocean branch at Ashdod Port and ocean representative at Haifa Port.',
     },
+    heroAlt: 'A reception desk with a headset, laptop and notebook, ready for your call',
     intro:
       'Five sites across Israel – headquarters, the logistics centre, the air branch and two ports.',
     locations: [
