@@ -194,7 +194,7 @@ const content: SiteContent = {
     trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכנת NX – Nippon Express בישראל', 'סוכנת cargo-partner'],
     sections: {
       servicesEyebrow: 'תחומי הפעילות שלנו',
-      servicesHeading: 'שלושה תחומים, שותף אחד',
+      servicesHeading: 'פתרונות לכל מרכיבי שרשרת האספקה',
       modesEyebrow: 'סחר בינלאומי',
       modesHeading: 'כל הדרכים להעביר את המטען שלכם',
       networkEyebrow: 'הרשת שלנו',
