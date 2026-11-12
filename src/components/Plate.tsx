@@ -22,7 +22,7 @@ const PHOTOS = {
   'ocean-berth': { file: 'photos/ocean-berth.webp', width: 1200, height: 800 },
   'ocean-terminal': { file: 'photos/ocean-terminal.webp', width: 1200, height: 800 },
   'ocean-craning': { file: 'photos/ocean-craning.webp', width: 1200, height: 800 },
-  'air-freighter': { file: 'photos/air-freighter.jpg', width: 319, height: 342 },
+  'air-freighter': { file: 'photos/air-freighter.webp', width: 1200, height: 800 },
   'air-loading': { file: 'photos/air-loading.jpg', width: 638, height: 347 },
   'air-departure': { file: 'photos/air-departure.jpg', width: 564, height: 351 },
   'drop-landing-craft': { file: 'photos/drop-landing-craft.jpg', width: 306, height: 224 },
