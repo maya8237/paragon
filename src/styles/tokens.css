@@ -121,13 +121,13 @@
 
 /*
  * Font stack is driven off the [lang] attribute so no component needs to know
- * which language it is rendering. Rubik sets both display and body on the
- * Hebrew side — it is the closest free Hebrew face to Degular's feel, and it
- * is matched to Figtree on x-height so EN and HE read as one system.
+ * which language it is rendering. Heebo sets both display and body on the
+ * Hebrew side: clean and neutral, bold enough for the hero, and its Latin
+ * letters suit the English names inside Hebrew text.
  */
 :root:lang(he) {
-  --font-display: 'Rubik', 'Segoe UI', system-ui, sans-serif;
-  --font-body: 'Rubik', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Heebo', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Heebo', 'Segoe UI', system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {

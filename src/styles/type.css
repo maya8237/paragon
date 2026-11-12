@@ -16,8 +16,8 @@ h3 {
   text-wrap: balance;
 }
 
-/* Hebrew does not take Latin-style negative tracking, and Rubik needs a touch
-   more leading than Figtree at the same optical size. */
+/* Hebrew does not take Latin-style negative tracking, and Heebo needs a touch
+   more leading than the Latin face at the same optical size. */
 :lang(he) .display,
 :lang(he) h1,
 :lang(he) h2,
