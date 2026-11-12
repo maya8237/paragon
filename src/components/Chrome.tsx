@@ -211,7 +211,7 @@ function LanguageHint({ hrefFor }: { hrefFor: (to: Lang) => string }) {
   useEffect(() => {
     let dismissed = false
     try {
-      dismissed = sessionStorage.getItem('paragon.langHint') === '1'
+      dismissed = localStorage.getItem('paragon.langHint') === '1'
     } catch {
       // Treat as not dismissed.
     }
@@ -222,9 +222,9 @@ function LanguageHint({ hrefFor }: { hrefFor: (to: Lang) => string }) {
   if (!offer) return null
   const dismiss = () => {
     try {
-      sessionStorage.setItem('paragon.langHint', '1')
+      localStorage.setItem('paragon.langHint', '1')
     } catch {
-      // Fine: it simply returns on the next page.
+      // Fine: it simply returns on the next visit.
     }
     setOffer(null)
   }
@@ -233,12 +233,15 @@ function LanguageHint({ hrefFor }: { hrefFor: (to: Lang) => string }) {
     <div className={s.hint} lang={offer} dir={offer === 'he' ? 'rtl' : 'ltr'} role="region" aria-label={t.nav.language}>
       <Container>
         <div className={s.hintInner}>
-          <span>{copy.text}</span>
+          <span className={s.hintIcon}>{GLOBE}</span>
+          <span className={s.hintText}>{copy.text}</span>
           <Link to={hrefFor(offer)} className={s.hintCta} onClick={() => rememberLang(offer)}>
             {copy.cta}
           </Link>
           <button type="button" className={s.hintClose} aria-label={t.nav.close} onClick={dismiss}>
-            ×
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
           </button>
         </div>
       </Container>

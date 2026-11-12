@@ -267,32 +267,94 @@
   color: var(--text);
   font-size: var(--step--1);
   border-block-end: var(--border);
+  animation: hintIn var(--dur-slow) var(--ease) both;
+}
+
+@keyframes hintIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
 }
 
 .hintInner {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--space-2xs) var(--space-s);
-  min-block-size: 2.75rem;
+  gap: var(--space-xs);
+  min-block-size: 3rem;
   padding-block: var(--space-3xs);
 }
 
-.hintCta {
-  font-weight: 700;
+.hintIcon {
+  display: inline-flex;
+  flex: none;
   color: var(--paragon);
 }
 
+.hintIcon svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+.hintText {
+  font-weight: 600;
+}
+
+/* The offer is a real button-shaped link: one clear thing to press. */
+.hintCta {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.25rem;
+  padding: 0 var(--space-s);
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.hintCta:hover {
+  background: var(--harbor);
+  color: var(--white);
+}
+
 .hintClose {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
   min-inline-size: 2.75rem;
   min-block-size: 2.75rem;
+  margin-inline-start: auto;
   border: 0;
+  border-radius: 50%;
   background: none;
-  font-size: 1.5rem;
-  line-height: 1;
   color: var(--text-muted);
   cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.hintClose:hover {
+  background: rgb(6 36 63 / 0.08);
+}
+
+.hintClose svg {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+/* The close button sits at the far edge while text and offer stay centred. */
+@media (min-width: 40em) {
+  .hintInner {
+    position: relative;
+  }
+
+  .hintClose {
+    position: absolute;
+    inset-inline-end: 0;
+  }
 }
 
 /* Quote button — hidden on the narrowest phones, where it lives in the menu. */
