@@ -12,7 +12,7 @@ import { assetPath } from '../lib/assetPath'
 const PHOTOS = {
   'nippon-cargo': { file: 'photos/nippon-cargo.jpg', width: 500, height: 333 },
   scm: { file: 'photos/scm.webp', width: 1200, height: 800 },
-  'global-trade': { file: 'photos/global-trade.jpg', width: 184, height: 115 },
+  'global-trade': { file: 'photos/global-trade.webp', width: 1200, height: 800 },
   logistics: { file: 'photos/logistics.webp', width: 1200, height: 800 },
 
   // The freight-mode photographs, cut out of the strips the old site served
