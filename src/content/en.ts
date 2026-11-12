@@ -805,7 +805,7 @@ const content: SiteContent = {
             body: 'For cargo that needs controlled temperature or protection from vibration, we draw on the specialist handling expertise of NX Group.',
           },
           {
-            title: 'Traceable and insured',
+            title: 'Full control and insurance',
             body: 'Control by serial number, inventory control and professional cargo insurance, with customs clearance included at both ends.',
           },
         ],
