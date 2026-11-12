@@ -147,7 +147,7 @@ const content: SiteContent = {
       cta: { label: 'About the partnership', to: '/nippon' },
     },
     cargoPartner: {
-      heading: 'Also an agent of cargo-partner in Israel',
+      heading: 'Agent of cargo-partner in Israel',
       blurb:
         'cargo-partner, a member of NX – Nippon Express, has provided logistics services since 1983: air, sea and land transport and warehousing, with special expertise in information technology and supply chain optimization.',
       logoAlt: 'cargo-partner, member of NX – Nippon Express',

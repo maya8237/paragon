@@ -158,7 +158,7 @@ const content: SiteContent = {
       cta: { label: 'על השותפות', to: '/nippon' },
     },
     cargoPartner: {
-      heading: 'וגם סוכנת cargo-partner בישראל',
+      heading: 'סוכנת cargo-partner בישראל',
       blurb:
         'cargo-partner, חברה ב-NX – Nippon Express, מספקת שירותי לוגיסטיקה מאז 1983: הובלה אווירית, ימית ויבשתית ואחסנה, עם מומחיות מיוחדת בטכנולוגיית מידע ובייעול שרשרת האספקה.',
       logoAlt: 'cargo-partner, חברה ב-NX – Nippon Express',
