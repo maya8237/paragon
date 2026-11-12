@@ -54,94 +54,6 @@
   filter: var(--logo-filter);
 }
 
-/* Theme switch: a round icon button, sun ↔ moon. */
-.themeToggle {
-  flex: none;
-  display: inline-grid;
-  place-items: center;
-  inline-size: 2.75rem;
-  block-size: 2.75rem;
-  border: var(--border);
-  border-radius: 50%;
-  color: var(--text);
-  background: var(--surface);
-  transition:
-    background var(--dur-fast) var(--ease),
-    border-color var(--dur-fast) var(--ease);
-}
-
-.themeToggle:hover {
-  background: var(--tint-soft);
-  border-color: var(--signal);
-}
-
-.themeToggle svg {
-  inline-size: 1.25rem;
-  block-size: 1.25rem;
-}
-
-/* The preferences panel drops from the gear, at the header's end edge. */
-.prefs {
-  position: relative;
-  flex: none;
-}
-
-.prefsPanel {
-  position: absolute;
-  inset-block-start: calc(100% + var(--space-2xs));
-  inset-inline-end: 0;
-  z-index: 60;
-  min-inline-size: 15rem;
-  padding: var(--space-s);
-  background: var(--surface);
-  color: var(--text);
-  border: var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-}
-
-.prefsTitle {
-  margin-block-end: var(--space-2xs);
-  font-size: var(--step--1);
-  font-weight: 600;
-  color: var(--slate);
-}
-
-.segment {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  background: var(--tint-soft);
-  border-radius: var(--radius);
-}
-
-.segmentOption {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  min-block-size: 2.5rem;
-  border-radius: calc(var(--radius) - 2px);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--slate);
-  transition:
-    background var(--dur-fast) var(--ease),
-    color var(--dur-fast) var(--ease);
-}
-
-.segmentOption svg {
-  inline-size: 1.1rem;
-  block-size: 1.1rem;
-}
-
-.segmentOption[aria-pressed='true'] {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: var(--shadow-sm);
-}
-
 .nav {
   display: none;
   margin-inline-start: auto;
@@ -677,4 +589,32 @@
     clip-path: inset(50%);
     white-space: nowrap;
   }
+}
+
+/* Footer light/dark switch: a quiet text button, in the footer's own colours. */
+.themeSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-block-size: 2.75rem;
+  padding: 0 var(--space-xs);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  font: inherit;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
+}
+
+.themeSwitch:hover {
+  color: var(--white);
+  background: rgb(255 255 255 / 0.08);
+}
+
+.themeSwitch svg {
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
 }

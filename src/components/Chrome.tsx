@@ -64,76 +64,25 @@ const CHECK = (
   </svg>
 )
 
-const GEAR = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="3" />
-    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-  </svg>
-)
-
 /**
- * A gear that opens a small preferences panel. For now it holds the light/dark
- * choice, so the header stays uncluttered and more settings have room to land.
+ * Light/dark switch, in the footer. The site follows the visitor's device
+ * setting by default (see index.html); this is for anyone who wants to choose.
  */
-function Preferences() {
+function ThemeSwitch() {
   const { t } = useT()
   const [theme, toggle] = useTheme()
-  const [open, setOpen] = useState(false)
-  const root = useRef<HTMLDivElement>(null)
-  const location = useLocation()
-
-  useEffect(() => setOpen(false), [location.pathname])
-  useEffect(() => {
-    if (!open) return
-    const away = (e: PointerEvent) => {
-      if (!root.current?.contains(e.target as Node)) setOpen(false)
-    }
-    const esc = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
-    document.addEventListener('pointerdown', away)
-    document.addEventListener('keydown', esc)
-    return () => {
-      document.removeEventListener('pointerdown', away)
-      document.removeEventListener('keydown', esc)
-    }
-  }, [open])
-
-  const choose = (next: 'light' | 'dark') => {
-    if (next !== theme) toggle()
-  }
-
+  const target = theme === 'dark' ? 'light' : 'dark'
+  const label = target === 'dark' ? t.nav.darkMode : t.nav.lightMode
   return (
-    <div className={s.prefs} ref={root}>
-      <button
-        type="button"
-        className={s.themeToggle}
-        aria-expanded={open}
-        aria-controls="preferences-panel"
-        aria-label={t.nav.preferences}
-        title={t.nav.preferences}
-        onClick={() => setOpen((v) => !v)}
-      >
-        {GEAR}
-      </button>
-      {open ? (
-        <div className={s.prefsPanel} id="preferences-panel" role="group" aria-label={t.nav.preferences}>
-          <p className={s.prefsTitle}>{t.nav.appearance}</p>
-          <div className={s.segment}>
-            {(['light', 'dark'] as const).map((mode) => (
-              <button
-                key={mode}
-                type="button"
-                className={s.segmentOption}
-                aria-pressed={theme === mode}
-                onClick={() => choose(mode)}
-              >
-                {mode === 'light' ? SUN : MOON}
-                {mode === 'light' ? t.nav.lightMode : t.nav.darkMode}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
-    </div>
+    <button
+      type="button"
+      className={s.themeSwitch}
+      aria-label={`${t.nav.appearance}: ${label}`}
+      onClick={toggle}
+    >
+      {target === 'dark' ? MOON : SUN}
+      <span>{label}</span>
+    </button>
   )
 }
 
@@ -296,7 +245,6 @@ export function Header() {
               {t.nav.quote}
             </ExternalLink>
 
-            <Preferences />
 
             <button
               type="button"
@@ -441,6 +389,9 @@ export function Footer() {
         <div className={s.footerBottom}>
           <span>{t.footer.copyright}</span>
           <Link to={path('/accessibility')}>{t.footer.accessibility}</Link>
+          <span className={s.footerBottomEnd}>
+            <ThemeSwitch />
+          </span>
         </div>
       </Container>
     </footer>
