@@ -8,20 +8,19 @@
  *
  *   dist/llms.txt       — short index in the llmstxt.org format
  *   dist/llms-full.txt  — every page, both languages, as Markdown
- *   dist/index.html     — gains schema.org JSON-LD for the company and its
- *                         five sites, and a <noscript> pointer to the above
  *
- *   bun run build:llms   (runs after `bun build` as part of `bun run build`)
+ * The pages themselves are pre-rendered by scripts/prerender.ts.
  */
 
 import en from '../src/content/en'
 import he from '../src/content/he'
 import type { Prose, SiteContent } from '../src/content/types'
+import { pagePath } from '../src/site/routes'
+import { url } from './site-config'
 
 const DIST = 'dist'
 
-/** Links are relative so the files work on every branch preview and on main. */
-const page = (lang: string, to: string) => `./#/${lang}${to === '/' ? '' : to}`
+const page = (lang: 'en' | 'he', to: string) => url(pagePath(lang, to))
 
 const prose = (p: Prose, level = '##') => `${level} ${p.heading}\n\n${p.paragraphs.join('\n\n')}\n`
 const list = (items: string[]) => items.map((i) => `- ${i}`).join('\n') + '\n'
@@ -112,7 +111,7 @@ branches at Ashdod and Haifa ports. The site is bilingual (English and Hebrew).
 
 ## Full content
 
-- [Full site text, English and Hebrew](./llms-full.txt): every page as Markdown
+- [Full site text, English and Hebrew](${url('llms-full.txt')}): every page as Markdown
 
 ## Pages (English)
 
@@ -146,44 +145,4 @@ ${fullText(he, 'he')}
 await Bun.write(`${DIST}/llms.txt`, llms)
 await Bun.write(`${DIST}/llms-full.txt`, full)
 
-/* Structured data and a no-JavaScript fallback in the HTML shell itself. */
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: en.meta.companyName,
-  alternateName: he.meta.companyName,
-  description: summary,
-  logo: 'logo.png',
-  sameAs: [
-    'https://www.facebook.com/pages/פראגון-לוגיסטיקה-בעמ-Paragon-Logistics-Ltd/386507584847098',
-    'https://www.linkedin.com/company/paragon-logistics-ltd.',
-    'https://www.pinterest.com/paragonlogistic/',
-  ],
-  location: en.contact.locations.map((loc) => ({
-    '@type': 'Place',
-    name: loc.name,
-    address: { '@type': 'PostalAddress', streetAddress: loc.address.join(', '), addressCountry: 'IL' },
-    ...(loc.email ? { email: loc.email } : {}),
-    ...(loc.phones[0] ? { telephone: loc.phones[0].value } : {}),
-  })),
-  hasCredential: en.about.certifications.items.map((c) => c.label),
-}
-
-const noscript = `<noscript>
-      <h1>${en.meta.companyName}</h1>
-      <p>${summary}</p>
-      <p>The full text of this site, in English and Hebrew, is at <a href="./llms-full.txt">llms-full.txt</a>.</p>
-    </noscript>`
-
-const indexPath = `${DIST}/index.html`
-let html = await Bun.file(indexPath).text()
-html = html
-  .replace(
-    '</head>',
-    `  <link rel="alternate" type="text/markdown" href="./llms-full.txt" title="Full site text" />\n` +
-      `    <script type="application/ld+json">${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}</script>\n  </head>`,
-  )
-  .replace('<div id="root"></div>', `<div id="root"></div>\n    ${noscript}`)
-await Bun.write(indexPath, html)
-
-console.log('Wrote llms.txt, llms-full.txt and JSON-LD into dist/')
+console.log('Wrote llms.txt and llms-full.txt')

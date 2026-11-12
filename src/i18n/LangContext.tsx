@@ -21,10 +21,14 @@ export function preferredLang(): Lang {
   } catch {
     // Private windows and blocked site data both throw here; fall through.
   }
+  // Also called while pages are rendered at build time, where there is no
+  // browser language to read.
+  if (typeof navigator === 'undefined') return DEFAULT_LANG
   const candidates = navigator.languages?.length
     ? navigator.languages
     : [navigator.language]
   for (const tag of candidates) {
+    if (!tag) continue
     const primary = tag.toLowerCase().split('-')[0]
     if (primary === 'he' || primary === 'iw') return 'he'
     if (primary === 'en') return 'en'

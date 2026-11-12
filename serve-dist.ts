@@ -1,11 +1,11 @@
 /**
- * Serves the production build for verification.
+ * Serves the production build for verification, the way GitHub Pages does:
+ * a file is served as-is, a folder redirects to its trailing-slash address
+ * and serves its index.html, and anything else gets 404.html with a 404.
  *
- * Mirrors what a static host needs to do for a client-routed SPA: serve the
- * built file when one exists at that path, and fall back to `index.html` for
- * every deep route so `/en/global-trade/air` does not 404 on a hard reload.
+ * Build with plain `bun run build` (base `/`) before previewing.
  */
-import { existsSync } from 'node:fs'
+import { existsSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 
 const DIST = 'dist'
@@ -13,14 +13,20 @@ const port = Number(Bun.env.PORT ?? 4321)
 
 const server = Bun.serve({
   port,
-  async fetch(request) {
+  fetch(request) {
     const { pathname } = new URL(request.url)
-    const file = join(DIST, decodeURIComponent(pathname))
+    const path = join(DIST, decodeURIComponent(pathname))
 
-    if (pathname !== '/' && existsSync(file) && (await Bun.file(file).exists())) {
-      return new Response(Bun.file(file))
+    if (existsSync(path) && statSync(path).isDirectory()) {
+      if (!pathname.endsWith('/')) return Response.redirect(`${pathname}/`, 301)
+      const index = join(path, 'index.html')
+      if (existsSync(index)) return new Response(Bun.file(index))
+    } else if (existsSync(path)) {
+      return new Response(Bun.file(path))
     }
-    return new Response(Bun.file(join(DIST, 'index.html')), {
+
+    return new Response(Bun.file(join(DIST, '404.html')), {
+      status: 404,
       headers: { 'content-type': 'text/html; charset=utf-8' },
     })
   },

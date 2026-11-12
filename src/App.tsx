@@ -107,7 +107,7 @@ export default function App() {
     <>
       <ScrollManager />
       <Routes>
-        <Route path="/" element={<Navigate to={`/${preferredLang()}`} replace />} />
+        <Route path="/" element={<Navigate to={`/${preferredLang()}/`} replace />} />
         <Route path="/:lang/*" element={<LangRoute />} />
       </Routes>
     </>

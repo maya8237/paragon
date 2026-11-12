@@ -10,6 +10,8 @@ const KEY = 'paragon-theme'
  * the wrong theme; this hook reads it back and flips it.
  */
 export function currentTheme(): Theme {
+  // Pages are also rendered at build time, where there is no document.
+  if (typeof document === 'undefined') return 'light'
   return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
 }
 

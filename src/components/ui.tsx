@@ -213,6 +213,11 @@ export function FigureRow({ children }: { children: ReactNode }) {
   return <div className={s.figures}>{children}</div>
 }
 
+/** `/he/global-trade/air/` → `/global-trade/air`: the route without language or trailing slash. */
+function routeOf(pathname: string): string {
+  return pathname.replace(/^\/(en|he)(?=\/|$)/, '').replace(/\/$/, '') || '/'
+}
+
 /**
  * Decorative art for the page header: the page's own icon in a hub, with a
  * shipment dot circling it on a dashed orbit. Hidden below 60em.
@@ -241,7 +246,7 @@ function Breadcrumb({ title }: { title: string }) {
   const { t } = useT()
   const path = useLangPath()
   const { pathname } = useLocation()
-  const rest = pathname.replace(/^\/(en|he)/, '')
+  const rest = routeOf(pathname)
   const parent = rest.startsWith('/global-trade/')
     ? t.nav.primary.find((item) => item.to === '/global-trade')
     : undefined
@@ -285,7 +290,7 @@ export function PageHeader({
   children?: ReactNode
 }) {
   const { pathname } = useLocation()
-  const icon = ROUTE_ICON[pathname.replace(/^\/(en|he)/, '')] ?? 'globe'
+  const icon = ROUTE_ICON[routeOf(pathname)] ?? 'globe'
 
   return (
     <header className={s.pageHeader}>
