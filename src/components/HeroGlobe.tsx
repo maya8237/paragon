@@ -61,18 +61,37 @@ const slerp = (a: Vec, b: Vec, t: number): Vec => {
 
 const ORIGIN = toVec(TEL_AVIV)
 const STEPS = 72
-/** Each lane as points on a great circle, lifted off the surface in the middle. */
-const LANES: Vec[][] = HUBS.map((hub) => {
-  const to = toVec(hub)
-  const reach = Math.acos(ORIGIN[0] * to[0] + ORIGIN[1] * to[1] + ORIGIN[2] * to[2])
+
+/** A lane between two places: points on a great circle, lifted in the middle. */
+function lane(from: Vec, to: Vec): Vec[] {
+  const reach = Math.acos(Math.min(1, from[0] * to[0] + from[1] * to[1] + from[2] * to[2]))
   const lift = 0.025 + 0.045 * (reach / Math.PI)
   return Array.from({ length: STEPS + 1 }, (_, i) => {
     const t = i / STEPS
-    const p = slerp(ORIGIN, to, t)
+    const p = slerp(from, to, t)
     const r = 0.8 * (1.004 + lift * Math.sin(Math.PI * t))
     return [p[0] * r, p[1] * r, p[2] * r] as Vec
   })
-})
+}
+
+/** Index pairs into HUBS: the hubs trade with one another too, not only with Tel Aviv. */
+const LINKS: [number, number][] = [
+  [0, 1], // New York – Los Angeles
+  [0, 2], // New York – London
+  [1, 10], // Los Angeles – Tokyo
+  [2, 4], // London – Lagos
+  [3, 7], // Rotterdam – Mumbai
+  [4, 6], // Lagos – Johannesburg
+  [5, 7], // Nairobi – Mumbai
+  [6, 5], // Johannesburg – Nairobi
+  [7, 8], // Mumbai – Singapore
+  [8, 9], // Singapore – Shanghai
+  [9, 10], // Shanghai – Tokyo
+  [3, 9], // Rotterdam – Shanghai
+]
+const HUB_VECS = HUBS.map(toVec)
+const SPOKES: Vec[][] = HUB_VECS.map((to) => lane(ORIGIN, to))
+const MESH: Vec[][] = LINKS.map(([a, b]) => lane(HUB_VECS[a]!, HUB_VECS[b]!))
 const CITIES: Vec[] = HUBS.map((h) => {
   const v = toVec(h)
   return [v[0] * 0.8 * 1.004, v[1] * 0.8 * 1.004, v[2] * 0.8 * 1.004] as Vec
@@ -95,25 +114,29 @@ function drawOverlay(ctx: CanvasRenderingContext2D, size: number, phi: number) {
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
 
-  for (const lane of LANES) {
-    const pts = lane.map((p) => rotate(p, phi))
-    ctx.lineWidth = 1.4 * unit
-    let open = false
-    ctx.beginPath()
-    for (let i = 0; i < pts.length; i++) {
-      const p = pts[i]!
-      if (hidden(p)) {
-        open = false
-        continue
+  const stroke = (lanes: Vec[][], width: number, alpha: number) => {
+    ctx.lineWidth = width * unit
+    ctx.strokeStyle = `rgb(${SAGE} / ${alpha})`
+    for (const path of lanes) {
+      let open = false
+      ctx.beginPath()
+      for (const point of path) {
+        const p = rotate(point, phi)
+        if (hidden(p)) {
+          open = false
+          continue
+        }
+        const [x, y] = px(p)
+        if (open) ctx.lineTo(x, y)
+        else ctx.moveTo(x, y)
+        open = true
       }
-      const [x, y] = px(p)
-      if (open) ctx.lineTo(x, y)
-      else ctx.moveTo(x, y)
-      open = true
+      ctx.stroke()
     }
-    ctx.strokeStyle = `rgb(${SAGE} / 0.8)`
-    ctx.stroke()
   }
+  // The network between the hubs sits behind, fainter; Tel Aviv's lanes lead.
+  stroke(MESH, 1, 0.42)
+  stroke(SPOKES, 1.5, 0.85)
 
   const dot = (p: Vec, r: number, halo: number) => {
     const q = rotate(p, phi)

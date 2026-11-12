@@ -34,7 +34,6 @@ function fullText(t: SiteContent, lang: 'en' | 'he'): string {
 
   h1(t.home.meta.title, '/')
   out.push(`${t.meta.tagline}\n`, ...t.home.hero.lede.map((p) => p + '\n'))
-  out.push(list(t.home.figures.map((f) => `${f.value} – ${f.label}`)))
   for (const p of t.home.pillars) out.push(`## ${p.title}\n\n${p.blurb}\n`)
   out.push(`## ${t.home.cargoPartner.heading}\n\n${t.home.cargoPartner.blurb}\n\n${t.home.cargoPartner.cta.href}\n`)
   out.push(`${t.home.hero.quoteCta.label}: ${t.home.hero.quoteCta.href}\n`)

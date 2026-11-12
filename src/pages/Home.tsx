@@ -83,16 +83,6 @@ export default function Home() {
         </Container>
       </section>
 
-      <Container>
-        <div className={s.figureCard}>
-          <FigureRow>
-            {home.figures.map((figure) => (
-              <FigureStat key={figure.label} figure={figure} />
-            ))}
-          </FigureRow>
-        </div>
-      </Container>
-
       <Section labelledBy="pillars-heading">
         <Reveal className={s.reveal} revealedClassName={s.revealed}>
           <SectionHead
