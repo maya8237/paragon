@@ -78,6 +78,22 @@ export interface SiteContent {
 
   nav: {
     primary: NavItem[]
+    /** Labels for the mega menu's groups and sections; links reuse `primary` and page content. */
+    mega: {
+      services: string
+      partners: string
+      company: string
+      freight: string
+      warehousing: string
+      sectors: string
+      network: string
+      viewAll: string
+      overview: string
+      servicesBlurb: string
+      sectorsBlurb: string
+      partnersBlurb: string
+      companyBlurb: string
+    }
     /** Footer's secondary text nav — mirrors the old site's footer link row. */
     footer: NavItem[]
     skipToContent: string

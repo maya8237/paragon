@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import s from './Chrome.module.css'
 import { Container } from './ui'
 import { useT, useLangPath } from '../i18n/useT'
@@ -9,6 +9,7 @@ import { assetPath } from '../lib/assetPath'
 import { ExternalLink } from './bits'
 import { ui } from './ui'
 import { useTheme } from '../lib/theme'
+import { MegaNav, MegaAccordion, buildMenu } from './Mega'
 
 const SOCIAL = {
   facebook:
@@ -127,6 +128,7 @@ export function Header() {
   const path = useLangPath()
   const location = useLocation()
   const [open, setOpen] = useState(false)
+  const menu = buildMenu(t)
 
   // Any navigation closes the mobile menu, including back/forward.
   useEffect(() => setOpen(false), [location.pathname])
@@ -154,15 +156,7 @@ export function Header() {
             </Link>
 
             <nav className={s.nav} aria-label={t.nav.menu}>
-              <ul className={s.navList}>
-                {t.nav.primary.map((item) => (
-                  <li key={item.to}>
-                    <NavLink to={path(item.to)} end={item.to === '/'} className={s.navLink}>
-                      {item.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+              <MegaNav groups={menu} />
             </nav>
 
             <div className={s.langSwitch}>
@@ -210,15 +204,7 @@ export function Header() {
         {open ? (
           <div className={s.mobileNav} id="mobile-nav">
             <Container>
-              <ul className={s.mobileList}>
-                {t.nav.primary.map((item) => (
-                  <li key={item.to}>
-                    <NavLink to={path(item.to)} end={item.to === '/'} className={s.mobileLink}>
-                      {item.label}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
+              <MegaAccordion groups={menu} onGo={() => setOpen(false)} />
               <ExternalLink
                 href={t.home.hero.quoteCta.href}
                 className={`${ui.btn} ${ui.btnAccent} ${s.mobileQuote}`}

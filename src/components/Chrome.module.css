@@ -178,7 +178,7 @@
   background: var(--tint);
 }
 
-@media (min-width: 76em) {
+@media (min-width: 64em) {
   .nav {
     display: block;
   }
@@ -193,7 +193,7 @@
   gap: var(--space-2xs);
 }
 
-@media (min-width: 76em) {
+@media (min-width: 64em) {
   .langSwitch {
     margin-inline-start: 0;
     padding-inline-start: var(--space-s);
@@ -253,7 +253,7 @@
   background: var(--surface);
 }
 
-@media (min-width: 76em) {
+@media (min-width: 64em) {
   .menuButton {
     display: none;
   }
@@ -315,72 +315,9 @@
   border-block-end-color: transparent;
 }
 
-@media (min-width: 76em) {
+@media (min-width: 64em) {
   .mobileNav {
     display: none;
-  }
-}
-
-/* Longer labels, or the extra language links, need more room before the full
-   nav fits: each language keeps the menu button up to the width where its nav
-   (measured) fits. */
-@media (min-width: 76em) and (max-width: 91em) {
-  :global(html[lang='en']) .nav {
-    display: none;
-  }
-
-  :global(html[lang='en']) .menuButton {
-    display: inline-flex;
-  }
-
-  :global(html[lang='en']) .mobileNav {
-    display: block;
-  }
-
-  :global(html[lang='en']) .langSwitch {
-    margin-inline-start: auto;
-    padding-inline-start: 0;
-    border-inline-start: 0;
-  }
-}
-
-@media (min-width: 76em) and (max-width: 102em) {
-  :global(html[lang='he']) .nav {
-    display: none;
-  }
-
-  :global(html[lang='he']) .menuButton {
-    display: inline-flex;
-  }
-
-  :global(html[lang='he']) .mobileNav {
-    display: block;
-  }
-
-  :global(html[lang='he']) .langSwitch {
-    margin-inline-start: auto;
-    padding-inline-start: 0;
-    border-inline-start: 0;
-  }
-}
-
-@media (min-width: 76em) and (max-width: 93em) {
-  :global(html[lang='ja']) .nav {
-    display: none;
-  }
-
-  :global(html[lang='ja']) .menuButton {
-    display: inline-flex;
-  }
-
-  :global(html[lang='ja']) .mobileNav {
-    display: block;
-  }
-
-  :global(html[lang='ja']) .langSwitch {
-    margin-inline-start: auto;
-    padding-inline-start: 0;
-    border-inline-start: 0;
   }
 }
 
