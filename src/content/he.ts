@@ -100,7 +100,7 @@ const content: SiteContent = {
       // The Google Form the Hebrew home page linked as
       // "קישור לטופס בקשה להצעת מחיר לשירותי שילוח בנ״ל".
       quoteCta: {
-        label: 'טופס בקשה להצעת מחיר לשירותי שילוח בינלאומי',
+        label: 'טופס בקשה להצעת מחיר',
         href: 'https://forms.gle/1UJGFS68wG541c8y9',
       },
     },
