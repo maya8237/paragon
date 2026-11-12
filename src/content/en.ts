@@ -740,7 +740,7 @@ const content: SiteContent = {
           },
           {
             title: 'Visibility at every step',
-            body: 'Shipment status updates automatically in our secured tracking system – by transport mode, carrier, destination and location.',
+            body: 'Shipment status is available at every stage – by transport mode, carrier, destination and location.',
           },
         ],
       },
