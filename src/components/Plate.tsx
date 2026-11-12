@@ -25,7 +25,7 @@ const PHOTOS = {
   'air-freighter': { file: 'photos/air-freighter.webp', width: 1200, height: 800 },
   'air-loading': { file: 'photos/air-loading.webp', width: 1200, height: 800 },
   'air-departure': { file: 'photos/air-departure.webp', width: 1200, height: 800 },
-  'drop-landing-craft': { file: 'photos/drop-landing-craft.jpg', width: 306, height: 224 },
+  'drop-landing-craft': { file: 'photos/drop-landing-craft.webp', width: 1200, height: 800 },
   'drop-beach': { file: 'photos/drop-beach.jpg', width: 346, height: 223 },
   'charter-air': { file: 'photos/charter-air.jpg', width: 986, height: 519 },
   'charter-road': { file: 'photos/charter-road.jpg', width: 349, height: 268 },
