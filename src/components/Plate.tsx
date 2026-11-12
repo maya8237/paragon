@@ -24,7 +24,7 @@ const PHOTOS = {
   'ocean-craning': { file: 'photos/ocean-craning.webp', width: 1200, height: 800 },
   'air-freighter': { file: 'photos/air-freighter.webp', width: 1200, height: 800 },
   'air-loading': { file: 'photos/air-loading.webp', width: 1200, height: 800 },
-  'air-departure': { file: 'photos/air-departure.jpg', width: 564, height: 351 },
+  'air-departure': { file: 'photos/air-departure.webp', width: 1200, height: 800 },
   'drop-landing-craft': { file: 'photos/drop-landing-craft.jpg', width: 306, height: 224 },
   'drop-beach': { file: 'photos/drop-beach.jpg', width: 346, height: 223 },
   'charter-air': { file: 'photos/charter-air.jpg', width: 986, height: 519 },
