@@ -6,12 +6,15 @@
     <!-- Bun resolves this from disk and emits a hashed copy, so it must be a
          real relative path rather than a bare "/favicon.ico". -->
     <link rel="icon" href="./public/favicon.ico" sizes="any" />
-    <!-- Theme before first paint: light, unless the visitor chose dark themselves.
-         The system's colour scheme is deliberately not consulted. -->
+    <!-- Theme before first paint. The site is light only for now: DARK_MODE must
+         match DARK_MODE_ENABLED in src/site/features.ts. When it is true, the
+         theme is light unless the visitor chose dark themselves (the system's
+         colour scheme is deliberately not consulted). -->
     <script>
+      var DARK_MODE = false
       try {
         document.documentElement.dataset.theme =
-          localStorage.getItem('paragon-theme') === 'dark' ? 'dark' : 'light'
+          DARK_MODE && localStorage.getItem('paragon-theme') === 'dark' ? 'dark' : 'light'
       } catch (e) {
         document.documentElement.dataset.theme = 'light'
       }

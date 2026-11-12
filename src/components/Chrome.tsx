@@ -8,7 +8,7 @@ import type { Lang } from '../content/types'
 import { assetPath } from '../lib/assetPath'
 import { ExternalLink } from './bits'
 import { ui } from './ui'
-import { visibleNav } from '../site/features'
+import { DARK_MODE_ENABLED, visibleNav } from '../site/features'
 import { useTheme } from '../lib/theme'
 import { MegaNav, MegaAccordion, buildMenu } from './Mega'
 
@@ -389,9 +389,11 @@ export function Footer() {
         <div className={s.footerBottom}>
           <span>{t.footer.copyright}</span>
           <Link to={path('/accessibility')}>{t.footer.accessibility}</Link>
-          <span className={s.footerBottomEnd}>
-            <ThemeSwitch />
-          </span>
+          {DARK_MODE_ENABLED && (
+            <span className={s.footerBottomEnd}>
+              <ThemeSwitch />
+            </span>
+          )}
         </div>
       </Container>
     </footer>
