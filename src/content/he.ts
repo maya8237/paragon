@@ -31,6 +31,7 @@ const content: SiteContent = {
       { label: 'שרשרת אספקה', to: '/scm' },
       { label: 'סחר בינלאומי', to: '/global-trade' },
       { label: 'לוגיסטיקה', to: '/logistics' },
+      { label: 'תעשיות', to: '/industries' },
       { label: 'מעקב משלוחים', to: '/tracking' },
       { label: 'NX – Nippon Express', to: '/nippon' },
       { label: 'צרו קשר', to: '/contact' },

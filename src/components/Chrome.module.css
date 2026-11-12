@@ -324,7 +324,7 @@
 /* Longer labels, or the extra language links, need more room before the full
    nav fits: each language keeps the menu button up to the width where its nav
    (measured) fits. */
-@media (min-width: 76em) and (max-width: 81em) {
+@media (min-width: 76em) and (max-width: 91em) {
   :global(html[lang='en']) .nav {
     display: none;
   }
@@ -344,7 +344,7 @@
   }
 }
 
-@media (min-width: 76em) and (max-width: 93em) {
+@media (min-width: 76em) and (max-width: 102em) {
   :global(html[lang='he']) .nav {
     display: none;
   }
@@ -364,7 +364,7 @@
   }
 }
 
-@media (min-width: 76em) and (max-width: 88.99em) {
+@media (min-width: 76em) and (max-width: 93em) {
   :global(html[lang='ja']) .nav {
     display: none;
   }

@@ -24,6 +24,7 @@ const content: SiteContent = {
       { label: 'SCM', to: '/scm' },
       { label: 'Global Trade', to: '/global-trade' },
       { label: 'Logistics Services', to: '/logistics' },
+      { label: 'Industries', to: '/industries' },
       { label: 'Tracking', to: '/tracking' },
       { label: 'NX – Nippon Express', to: '/nippon' },
       { label: 'Contact', to: '/contact' },

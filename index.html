@@ -6,13 +6,15 @@
     <!-- Bun resolves this from disk and emits a hashed copy, so it must be a
          real relative path rather than a bare "/favicon.ico". -->
     <link rel="icon" href="./public/favicon.ico" sizes="any" />
-    <!-- Theme before first paint: saved choice, else the system setting. -->
+    <!-- Theme before first paint: light, unless the visitor chose dark themselves.
+         The system's colour scheme is deliberately not consulted. -->
     <script>
       try {
-        var saved = localStorage.getItem('paragon-theme')
         document.documentElement.dataset.theme =
-          saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-      } catch (e) {}
+          localStorage.getItem('paragon-theme') === 'dark' ? 'dark' : 'light'
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light'
+      }
     </script>
     <title>Paragon Logistics</title>
     <meta

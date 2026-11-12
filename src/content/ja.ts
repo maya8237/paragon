@@ -27,6 +27,7 @@ const content: SiteContent = {
       { label: 'SCM', to: '/scm' },
       { label: 'グローバル貿易', to: '/global-trade' },
       { label: 'ロジスティクス', to: '/logistics' },
+      { label: '対応業界', to: '/industries' },
       { label: '貨物追跡', to: '/tracking' },
       { label: 'NX – 日本通運', to: '/nippon' },
       { label: 'お問い合わせ', to: '/contact' },
