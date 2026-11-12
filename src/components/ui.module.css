@@ -91,14 +91,16 @@
   color: var(--ink);
 }
 
+/* A dark translucent fill, not a pale one: on the lighter end of the band
+   gradient, white text on a pale fill falls to ~3.3:1 (needs 4.5:1). */
 .inverted .btnGhost {
-  background: rgb(255 255 255 / 0.06);
-  border-color: rgb(255 255 255 / 0.28);
+  background: rgb(6 36 63 / 0.4);
+  border-color: rgb(255 255 255 / 0.4);
   color: var(--white);
 }
 
 .inverted .btnGhost:hover {
-  background: rgb(255 255 255 / 0.14);
+  background: rgb(6 36 63 / 0.6);
   border-color: var(--white);
   color: var(--white);
 }

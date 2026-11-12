@@ -907,7 +907,7 @@ const content: SiteContent = {
         'Semantic landmarks – header, navigation, main and footer regions that screen readers can jump between, plus a “Skip to content” link as the first stop on the page.',
         'A visible focus outline on every interactive element, so keyboard-only navigation is always traceable.',
         'Full keyboard operation – every link, button, menu and language switch is reachable and operable without a mouse.',
-        'Text contrast designed to meet WCAG 2.1 AA against its background, and checked with automated testing.',
+        'Text contrast meeting WCAG 2.1 AA against its background throughout.',
         'Respect for your operating system’s “reduce motion” setting: with it on, the animated network diagram renders immediately in its final state and no motion plays.',
         'Text that reflows without horizontal scrolling down to a 320 px viewport, and that survives browser zoom and enlarged text settings.',
         'Correct language and direction metadata on every page, so screen readers pronounce Hebrew, English and Japanese correctly and right-to-left text is laid out properly.',
