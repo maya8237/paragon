@@ -17,3 +17,10 @@
 .ready {
   opacity: 1;
 }
+
+/* The lanes and city dots, drawn over the globe with the same projection. */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
