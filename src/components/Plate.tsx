@@ -11,7 +11,7 @@ import { assetPath } from '../lib/assetPath'
  */
 const PHOTOS = {
   'nippon-cargo': { file: 'photos/nippon-cargo.jpg', width: 500, height: 333 },
-  scm: { file: 'photos/scm.jpg', width: 184, height: 115 },
+  scm: { file: 'photos/scm.webp', width: 1200, height: 800 },
   'global-trade': { file: 'photos/global-trade.jpg', width: 184, height: 115 },
   logistics: { file: 'photos/logistics.jpg', width: 184, height: 115 },
 
