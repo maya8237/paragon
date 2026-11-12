@@ -97,6 +97,7 @@ export interface SiteContent {
     accessibility: string
     social: { facebook: string; linkedin: string; pinterest: string }
     socialHeading: string
+    partnersHeading: string
   }
 
   common: {

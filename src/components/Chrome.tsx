@@ -207,6 +207,38 @@ export function Footer() {
           </nav>
 
           <div>
+            <h2 className={s.footerHeading}>{t.footer.partnersHeading}</h2>
+            {/* NX leads and is larger; cargo-partner follows. White marks for the navy. */}
+            <div className={s.partners}>
+              <Link to={path('/nippon')} className={s.partnerLink}>
+                <img
+                  className={s.partnerNx}
+                  src={assetPath('nx-logo-white.png')}
+                  alt={t.nippon.logoAlt}
+                  width={1041}
+                  height={174}
+                  loading="lazy"
+                />
+              </Link>
+              <a
+                href={t.home.cargoPartner.cta.href}
+                className={s.partnerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  className={s.partnerCp}
+                  src={assetPath('cargo-partner-logo.svg')}
+                  alt={t.home.cargoPartner.logoAlt}
+                  width={120}
+                  height={92}
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div>
             <h2 className={s.footerHeading}>{t.footer.socialHeading}</h2>
             <div className={s.social}>
               <a

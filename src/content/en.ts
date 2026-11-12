@@ -55,6 +55,7 @@ const content: SiteContent = {
       pinterest: 'Paragon Logistics on Pinterest',
     },
     socialHeading: 'Follow Paragon',
+    partnersHeading: 'Our partners',
   },
 
   common: {

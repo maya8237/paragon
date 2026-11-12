@@ -63,6 +63,7 @@ const content: SiteContent = {
       pinterest: 'פראגון לוגיסטיקה בפינטרסט',
     },
     socialHeading: 'עקבו אחרינו',
+    partnersHeading: 'השותפים שלנו',
   },
 
   common: {
