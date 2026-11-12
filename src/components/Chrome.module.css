@@ -21,16 +21,17 @@
   position: sticky;
   inset-block-start: 0;
   z-index: 50;
-  background: rgb(255 255 255 / 0.92);
-  backdrop-filter: blur(8px);
+  background: var(--header-bg);
+  backdrop-filter: saturate(1.4) blur(12px);
   border-block-end: var(--border);
+  box-shadow: 0 1px 0 rgb(6 36 63 / 0.02), 0 8px 24px rgb(6 36 63 / 0.04);
 }
 
 .headerInner {
   display: flex;
   align-items: center;
   gap: var(--space-m);
-  min-block-size: 4.5rem;
+  min-block-size: 4.75rem;
 }
 
 .brand {
@@ -47,7 +48,7 @@
  * it's a flex item that shrinks to fit whatever space the nav leaves.
  */
 .logo {
-  block-size: 2rem;
+  block-size: 2.4rem;
   inline-size: auto;
   max-inline-size: none;
 }
@@ -65,10 +66,10 @@
 
 .navLink {
   display: block;
-  padding: var(--space-2xs) var(--space-xs);
-  border-radius: var(--radius);
-  font-size: var(--step--1);
-  font-weight: 500;
+  padding: var(--space-2xs) 0.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--slate);
   text-decoration: none;
   white-space: nowrap;
@@ -79,26 +80,16 @@
 
 .navLink:hover {
   color: var(--paragon);
-  background: var(--paper);
+  background: var(--tint-soft);
 }
 
 /* --transit marks the currently selected item, and nothing else. */
 .navLink[aria-current='page'] {
-  color: var(--ink);
-  position: relative;
+  color: var(--paragon);
+  background: var(--tint);
 }
 
-.navLink[aria-current='page']::after {
-  content: '';
-  position: absolute;
-  inset-inline: var(--space-xs);
-  inset-block-end: -1px;
-  block-size: 2px;
-  background: var(--transit);
-  border-radius: 1px;
-}
-
-@media (min-width: 64em) {
+@media (min-width: 76em) {
   .nav {
     display: block;
   }
@@ -113,7 +104,7 @@
   gap: var(--space-2xs);
 }
 
-@media (min-width: 64em) {
+@media (min-width: 76em) {
   .langSwitch {
     margin-inline-start: 0;
     padding-inline-start: var(--space-s);
@@ -122,8 +113,11 @@
 }
 
 .langLink {
-  font-size: var(--step--1);
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--paragon);
   text-decoration: none;
   padding: var(--space-3xs) var(--space-2xs);
@@ -131,27 +125,77 @@
 }
 
 .langLink:hover {
-  background: var(--paper);
+  background: var(--tint-soft);
+}
+
+/* Quote button — hidden on the narrowest phones, where it lives in the menu. */
+/* `[class]` outranks the shared .btn rule, whose display would otherwise win. */
+.quote[class] {
+  display: none;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9375rem;
+  flex: none;
+}
+
+@media (min-width: 40em) {
+  .quote[class] {
+    display: inline-flex;
+  }
+}
+
+.mobileQuote {
+  inline-size: 100%;
+  margin-block-start: var(--space-m);
 }
 
 /* Mobile menu */
 .menuButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
-  padding: var(--space-2xs) var(--space-xs);
+  gap: 0.6em;
+  min-block-size: 2.75rem;
+  padding: var(--space-2xs) var(--space-s);
   border: var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   font-size: var(--step--1);
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 700;
+  color: var(--text);
   background: var(--surface);
 }
 
-@media (min-width: 64em) {
+@media (min-width: 76em) {
   .menuButton {
     display: none;
   }
+}
+
+.burger {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 3px;
+  inline-size: 16px;
+}
+
+.burger span {
+  block-size: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition:
+    transform var(--dur) var(--ease),
+    opacity var(--dur) var(--ease);
+}
+
+.burger[data-open='true'] span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.burger[data-open='true'] span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger[data-open='true'] span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
 }
 
 .mobileNav {
@@ -167,21 +211,22 @@
 
 .mobileLink {
   display: block;
-  padding: var(--space-s) 0;
+  padding: var(--space-s) var(--space-xs);
   border-block-end: var(--border);
   font-size: var(--step-1);
-  font-weight: 500;
-  color: var(--ink);
+  font-weight: 600;
+  color: var(--text);
   text-decoration: none;
 }
 
 .mobileLink[aria-current='page'] {
   color: var(--paragon);
-  border-inline-start: 3px solid var(--transit);
-  padding-inline-start: var(--space-s);
+  background: var(--tint);
+  border-radius: var(--radius);
+  border-block-end-color: transparent;
 }
 
-@media (min-width: 64em) {
+@media (min-width: 76em) {
   .mobileNav {
     display: none;
   }
@@ -189,7 +234,9 @@
 
 /* Footer */
 .footer {
+  position: relative;
   background: var(--ink);
+  border-block-start: 4px solid var(--transit);
   color: var(--ink-text);
   padding-block: var(--space-2xl) var(--space-l);
   margin-block-start: auto;
@@ -201,6 +248,20 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   padding-block-end: var(--space-l);
   border-block-end: 1px solid var(--ink-hairline);
+}
+
+.footerTrust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+}
+
+.footerTrust li {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--ink-hairline);
+  border-radius: var(--radius-pill);
+  font-size: var(--step--1);
+  color: var(--ink-text);
 }
 
 .footerBrand {
@@ -266,10 +327,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  inline-size: 2.5rem;
-  block-size: 2.5rem;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
   border: 1px solid var(--ink-hairline);
-  border-radius: var(--radius);
+  border-radius: 50%;
   color: var(--ink-text);
   transition:
     border-color var(--dur) var(--ease),

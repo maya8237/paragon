@@ -4,6 +4,8 @@ import s from './Chrome.module.css'
 import { Container } from './ui'
 import { useT, useLangPath } from '../i18n/useT'
 import { assetPath } from '../lib/assetPath'
+import { ExternalLink } from './bits'
+import { ui } from './ui'
 
 const SOCIAL = {
   facebook:
@@ -86,6 +88,13 @@ export function Header() {
               </Link>
             </div>
 
+            <ExternalLink
+              href={t.home.hero.quoteCta.href}
+              className={`${ui.btn} ${ui.btnAccent} ${s.quote}`}
+            >
+              {t.nav.quote}
+            </ExternalLink>
+
             <button
               type="button"
               className={s.menuButton}
@@ -93,6 +102,11 @@ export function Header() {
               aria-controls="mobile-nav"
               onClick={() => setOpen((v) => !v)}
             >
+              <span className={s.burger} data-open={open} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
               {open ? t.nav.close : t.nav.menu}
             </button>
           </div>
@@ -110,6 +124,12 @@ export function Header() {
                   </li>
                 ))}
               </ul>
+              <ExternalLink
+                href={t.home.hero.quoteCta.href}
+                className={`${ui.btn} ${ui.btnAccent} ${s.mobileQuote}`}
+              >
+                {t.home.hero.quoteCta.label}
+              </ExternalLink>
             </Container>
           </div>
         ) : null}
@@ -135,6 +155,11 @@ export function Footer() {
               height={136}
             />
             <p className={s.footerTagline}>{t.meta.tagline}</p>
+            <ul className={s.footerTrust}>
+              {t.home.trust.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
 
           <nav aria-labelledby="footer-nav-heading">

@@ -37,6 +37,8 @@ const content: SiteContent = {
       { label: 'Shipments Tracking', to: '/tracking' },
       { label: 'Contact us', to: '/contact' },
     ],
+    quote: 'Get a quote',
+    breadcrumb: 'Breadcrumb',
     skipToContent: 'Skip to content',
     menu: 'Menu',
     close: 'Close',
@@ -142,6 +144,19 @@ const content: SiteContent = {
       blurb:
         'Founded 1872. 1,400 offices worldwide, 60,000 employees and over 400 million tons of total freight.',
       cta: { label: 'About the partnership', to: '/nippon' },
+    },
+    trust: ['AEO certified', 'ISO9001 & IQNET', 'Nippon Express agent'],
+    sections: {
+      servicesEyebrow: 'What we do',
+      servicesHeading: 'One partner for the whole supply chain',
+      modesEyebrow: 'Global trade',
+      modesHeading: 'Every way your cargo moves',
+      networkEyebrow: 'Our network',
+      networkHeading: 'Five sites across Israel’s trade corridor',
+    },
+    cta: {
+      heading: 'Ready to move your next shipment?',
+      blurb: 'Tell us what you are shipping and where — our team will come back with a tailored quote.',
     },
   },
 

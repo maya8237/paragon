@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { LangProvider, isLang, preferredLang } from './i18n/LangContext'
 import { Header, Footer } from './components/Chrome'
+import { QuoteBand } from './components/QuoteBand'
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -73,6 +74,7 @@ function Shell() {
           <Route path="accessibility" element={<Accessibility />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <QuoteBand />
       </main>
       <Footer />
     </>

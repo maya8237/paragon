@@ -82,6 +82,9 @@ export interface SiteContent {
     /** Footer's secondary text nav — mirrors the old site's footer link row. */
     footer: NavItem[]
     skipToContent: string
+    breadcrumb: string
+    /** Short label for the header's quote-request button. */
+    quote: string
     menu: string
     close: string
   }
@@ -143,6 +146,19 @@ export interface SiteContent {
     certificationsTeaser: { heading: string; blurb: string; cta: NavItem }
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
+    /** Short credential chips under the hero calls to action. */
+    trust: string[]
+    /** Section eyebrows and headings introduced by the redesigned home page. */
+    sections: {
+      servicesEyebrow: string
+      servicesHeading: string
+      modesEyebrow: string
+      modesHeading: string
+      networkEyebrow: string
+      networkHeading: string
+    }
+    /** Closing call-to-action band. */
+    cta: { heading: string; blurb: string }
   }
 
   about: {

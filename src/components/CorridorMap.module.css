@@ -133,7 +133,7 @@
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 15px;
-  fill: var(--ink);
+  fill: var(--text);
   transition: fill var(--dur-fast) cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 
@@ -287,7 +287,7 @@ a.nodeListRow:hover .nodeListName {
   font-family: var(--font-display);
   font-weight: 500;
   font-size: var(--step-1);
-  color: var(--ink);
+  color: var(--text);
 }
 
 .nodeListRole {

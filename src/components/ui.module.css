@@ -20,10 +20,26 @@
   padding-block: var(--space-xl);
 }
 
-/* The page's single value inversion — Tracking and Nippon ride in this band. */
+/*
+ * Dark band. A navy radial gradient with a faint dot grid on top — the grid
+ * reads as a chart or a port plan, and is the only texture on the site.
+ */
 .inverted {
-  background: var(--ink);
+  position: relative;
+  background: var(--band);
   color: var(--ink-text);
+  isolation: isolate;
+}
+
+.inverted::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  pointer-events: none;
 }
 
 .inverted h1,
@@ -39,7 +55,7 @@
 }
 
 .inverted a {
-  color: #8ec7f5;
+  color: #9fd3ff;
 }
 
 .inverted a:hover {
@@ -50,12 +66,6 @@
   background: var(--ink-hairline);
 }
 
-/*
- * Everything below re-colours a component for the dark band. Each selector is
- * deliberately at least as specific as the light-mode rule it overrides —
- * `.prose p:first-of-type` and `.inverted a` both used to win here and left
- * text at 1.0:1 and 3.5:1 respectively.
- */
 .inverted .prose p,
 .inverted .prose p:first-of-type {
   color: var(--ink-text);
@@ -67,22 +77,70 @@
 }
 
 .inverted .steps li::before {
-  color: #8ec7f5;
-}
-
-.inverted .btnPrimary {
-  background: var(--paragon);
+  background: rgb(255 255 255 / 0.1);
   color: var(--white);
 }
 
-/* Full inversion on hover — a darker blue would disappear into the band. */
+.inverted .btnPrimary {
+  background: var(--transit);
+  color: var(--ink);
+}
+
 .inverted .btnPrimary:hover {
   background: var(--white);
   color: var(--ink);
 }
 
 .inverted .btnGhost {
+  background: rgb(255 255 255 / 0.06);
+  border-color: rgb(255 255 255 / 0.28);
+  color: var(--white);
+}
+
+.inverted .btnGhost:hover {
+  background: rgb(255 255 255 / 0.14);
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.inverted .card {
+  background: rgb(255 255 255 / 0.05);
+  border-color: rgb(255 255 255 / 0.12);
+  box-shadow: none;
+}
+
+.inverted .chips li {
+  color: var(--ink-text);
+}
+
+/* Eyebrow: a small green-dotted label above a section heading. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--paragon);
+}
+
+.eyebrow::before {
+  content: '';
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: var(--transit);
+  box-shadow: 0 0 0 4px rgb(108 192 74 / 0.2);
+}
+
+:global(:lang(he)) .eyebrow {
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.inverted .eyebrow {
+  color: #9fd3ff;
 }
 
 .sectionHead {
@@ -90,11 +148,22 @@
   flex-direction: column;
   gap: var(--space-xs);
   margin-block-end: var(--space-l);
+  align-items: start;
+}
+
+.sectionHeadCenter {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.sectionHeadCenter .sectionLede {
+  margin-inline: auto;
 }
 
 .sectionLede {
   font-size: var(--step-1);
-  line-height: 1.45;
+  line-height: 1.5;
   color: var(--slate);
   max-inline-size: var(--measure);
 }
@@ -106,7 +175,7 @@
   margin-block: var(--space-xl);
 }
 
-/* Flat card: white on --paper, hairline border, no shadow ever. */
+/* Card: white, soft cool shadow, generous corner. */
 .card {
   background: var(--surface);
   border: var(--border);
@@ -115,9 +184,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2xs);
-  /* Clips edge-to-edge media to the card's corners. The card is itself the
-     link, so its own focus outline is drawn outside this box and survives. */
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .cardLink {
@@ -125,12 +193,14 @@
   color: inherit;
   transition:
     border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
     transform var(--dur) var(--ease);
 }
 
 .cardLink:hover {
-  border-color: var(--signal);
-  transform: translateY(-2px);
+  border-color: rgb(47 131 198 / 0.45);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
   color: inherit;
 }
 
@@ -138,10 +208,39 @@
   color: var(--paragon);
 }
 
-/*
- * Prose + aside. The aside is capped near the plates' native width so
- * the photographs are never asked to stretch to fill a column.
- */
+.cardLink:hover .cardIcon {
+  background: var(--action);
+  color: var(--white);
+}
+
+.cardIcon {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 3rem;
+  block-size: 3rem;
+  border-radius: 12px;
+  background: var(--tint);
+  color: var(--paragon);
+  margin-block-end: var(--space-2xs);
+  transition:
+    background var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.cardIcon svg {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+
+/* An icon laid over the photograph's bottom edge. */
+.cardMedia + .cardIcon {
+  margin-block-start: calc(-1 * var(--space-l) - var(--space-2xs));
+  position: relative;
+  border: 3px solid var(--surface);
+  box-sizing: content-box;
+  box-shadow: var(--shadow-sm);
+}
+
 .split {
   display: grid;
   gap: var(--space-l);
@@ -155,53 +254,48 @@
   }
 }
 
-/*
- * The aside scrolls with its prose rather than sticking.
- *
- * It used to be `position: sticky; top: var(--space-l)`, which detached the
- * photograph and carried it down the page — and since the site header is
- * sticky, 4.5rem tall and sits above everything on z-index 50, a 2rem offset
- * parked the picture underneath it. It also meant the photograph drifted on
- * past the section it belongs to, alongside content it has nothing to do with.
- */
-
-/*
- * Media slot. The plate is pulled out to the card's edges so the mount reads as
- * part of the card rather than as a picture sitting inside it, and given a
- * little breathing room before the title.
- */
 .cardMedia {
   margin: calc(var(--space-m) * -1) calc(var(--space-m) * -1) var(--space-2xs);
 }
 
 .cardTitle {
+  font-size: var(--step-2);
   transition: color var(--dur) var(--ease);
 }
 
 .cardBody {
   color: var(--slate);
   font-size: var(--step-0);
+  line-height: 1.55;
   max-inline-size: none;
 }
 
-/* Arrow that points along the reading direction in both scripts. */
 .cardArrow {
   margin-block-start: auto;
   padding-block-start: var(--space-s);
   color: var(--paragon);
   font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .cardArrow::after {
   content: '→';
   margin-inline-start: 0.4em;
   display: inline-block;
+  transition: transform var(--dur) var(--ease);
+}
+
+.cardLink:hover .cardArrow::after {
+  transform: translateX(4px);
 }
 
 :global(:dir(rtl)) .cardArrow::after {
   content: '←';
+}
+
+:global(:dir(rtl)) .cardLink:hover .cardArrow::after {
+  transform: translateX(-4px);
 }
 
 .grid {
@@ -212,11 +306,10 @@
 
 .grid2 {
   display: grid;
-  gap: var(--space-l);
+  gap: var(--space-m);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
 }
 
-/* Prose block: heading plus paragraphs. */
 .prose {
   display: flex;
   flex-direction: column;
@@ -236,16 +329,16 @@
   color: var(--text);
 }
 
-/* Ticked list used for every bullet set on the site. */
+/* Ticked list: a green check in a soft disc. */
 .ticks {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-s);
 }
 
 .ticks li {
   position: relative;
-  padding-inline-start: 1.75rem;
+  padding-inline-start: 2.25rem;
   color: var(--slate);
 }
 
@@ -253,66 +346,191 @@
   content: '';
   position: absolute;
   inset-inline-start: 0;
-  inset-block-start: 0.5em;
+  inset-block-start: 0.1em;
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+  border-radius: 50%;
+  background: var(--transit)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2306243f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E")
+    center / 0.8rem no-repeat;
+}
+
+/* Dense list for the 13 logistics services, as soft tiles. */
+.chips {
+  display: grid;
+  gap: var(--space-xs);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+.chips li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-s);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: var(--step-0);
+  font-weight: 600;
+}
+
+.chips li::before {
+  content: '';
+  flex: none;
   inline-size: 0.5rem;
   block-size: 0.5rem;
   border-radius: 50%;
   background: var(--transit);
 }
 
-/* Two-column dense list for the 13 logistics services. */
-.chips {
-  display: grid;
-  gap: var(--space-2xs) var(--space-m);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-}
-
-.chips li {
-  padding-block: var(--space-2xs);
-  border-block-end: var(--border);
-  color: var(--text);
-  font-size: var(--step-0);
-}
-
-/* Ordered framework list — numbers here are real sequence, unlike section tags. */
+/* Ordered steps: numbered discs joined by a thin rail. */
 .steps {
   counter-reset: step;
   display: flex;
   flex-direction: column;
-  gap: var(--space-s);
+  gap: var(--space-m);
 }
 
 .steps li {
   counter-increment: step;
   position: relative;
-  padding-inline-start: 2.75rem;
+  padding-inline-start: 3.25rem;
   color: var(--slate);
-  min-block-size: 1.75rem;
+  min-block-size: 2.25rem;
+  padding-block-start: 0.3rem;
 }
 
 .steps li::before {
-  content: counter(step, decimal-leading-zero);
+  content: counter(step);
   position: absolute;
   inset-inline-start: 0;
   inset-block-start: 0;
-  font-variant-numeric: tabular-nums;
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  display: grid;
+  place-items: center;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  border-radius: 50%;
+  background: var(--tint);
   color: var(--paragon);
-  padding-block-start: 0.15em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
+.steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  inset-inline-start: calc(1.125rem - 1px);
+  inset-block-start: 2.5rem;
+  inset-block-end: calc(-1 * var(--space-m) + 0.25rem);
+  inline-size: 2px;
+  background: linear-gradient(var(--mist), transparent);
+}
+
+.inverted .steps li:not(:last-child)::after {
+  background: linear-gradient(rgb(255 255 255 / 0.2), transparent);
+}
+
+/*
+ * Page header: the dark band every inner page opens on, with the page's
+ * icon drawn large on a dotted orbit at the far edge.
+ */
 .pageHeader {
-  padding-block: var(--space-2xl) var(--space-l);
-  border-block-end: var(--border);
-  background: var(--surface);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: var(--space-2xl) var(--space-xl);
+  background: var(--band);
+  color: var(--ink-text);
+}
+
+.pageHeader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.pageHeader h1 {
+  color: var(--white);
+  max-inline-size: 22ch;
+}
+
+.pageHeader .sectionLede {
+  color: var(--ink-text);
 }
 
 .pageHeaderInner {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
+  align-items: start;
+}
+
+.pageHeaderArt {
+  position: absolute;
+  inset-inline-end: calc(var(--gutter) * -0.5);
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  inline-size: 17rem;
+  block-size: 17rem;
+  color: rgb(255 255 255 / 0.9);
+  pointer-events: none;
+  display: none;
+}
+
+@media (min-width: 60em) {
+  .pageHeaderArt {
+    display: block;
+  }
+
+  .pageHeaderInner {
+    padding-inline-end: 18rem;
+  }
+}
+
+.pageHeaderArt svg {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.orbit {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+}
+
+.orbitSpin {
+  transform-origin: 140px 140px;
+}
+
+.orbitDot {
+  fill: var(--transit);
+}
+
+.orbitHub {
+  fill: rgb(255 255 255 / 0.06);
+  stroke: rgb(255 255 255 / 0.18);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .orbitSpin {
+    animation: orbit 28s linear infinite;
+  }
+}
+
+@keyframes orbit {
+  to {
+    rotate: 360deg;
+  }
 }
 
 .breadcrumb {
@@ -321,20 +539,29 @@
   gap: var(--space-2xs);
   align-items: center;
   font-size: var(--step--1);
-  color: var(--slate);
+  color: var(--ink-muted);
 }
 
 .breadcrumb a {
-  color: var(--slate);
+  color: var(--ink-muted);
   text-decoration: none;
 }
 
 .breadcrumb a:hover {
-  color: var(--paragon);
+  color: var(--white);
   text-decoration: underline;
 }
 
-/* Sub-navigation for the Global Trade tree. */
+.breadcrumbSep {
+  opacity: 0.6;
+}
+
+:global(:dir(rtl)) .breadcrumbSep {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+/* Sub-navigation for the Global Trade tree — pills on the dark header. */
 .subnav {
   display: flex;
   flex-wrap: wrap;
@@ -343,63 +570,97 @@
 }
 
 .subnavLink {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-block-size: 2.75rem;
   padding: var(--space-2xs) var(--space-s);
-  border: var(--border);
-  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: var(--radius-pill);
   font-size: var(--step--1);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  color: var(--slate);
-  background: var(--surface);
+  color: var(--ink-text);
+  background: rgb(255 255 255 / 0.05);
   transition:
     border-color var(--dur) var(--ease),
+    background var(--dur) var(--ease),
     color var(--dur) var(--ease);
 }
 
+.subnavLink svg {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+}
+
 .subnavLink:hover {
-  border-color: var(--signal);
-  color: var(--paragon);
+  border-color: var(--white);
+  color: var(--white);
+  background: rgb(255 255 255 / 0.12);
 }
 
 .subnavLink[aria-current='page'] {
   border-color: var(--transit);
+  background: var(--transit);
   color: var(--ink);
-  background: var(--paper);
 }
 
 /* Buttons */
 .btnRow {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-s);
+  gap: var(--space-xs);
   margin-block-start: var(--space-m);
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5em;
-  padding: 0.75rem 1.4rem;
+  min-block-size: 3rem;
+  padding: 0.7rem 1.4rem;
   border-radius: var(--radius);
-  font-weight: 500;
+  font-weight: 700;
   font-size: var(--step-0);
   text-decoration: none;
   border: 1px solid transparent;
+  cursor: pointer;
   transition:
-    background var(--dur) var(--ease),
-    border-color var(--dur) var(--ease),
-    color var(--dur) var(--ease);
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 .btnPrimary {
-  background: var(--paragon);
+  background: var(--action);
   color: var(--white);
+  box-shadow: 0 6px 16px rgb(26 104 173 / 0.25);
 }
 
 .btnPrimary:hover {
-  background: var(--ink);
+  background: var(--harbor);
   color: var(--white);
+}
+
+/* The green "act now" button — quotes and tracking. Navy text, always. */
+.btnAccent,
+.inverted .btnAccent {
+  background: var(--transit);
+  color: var(--ink);
+  box-shadow: 0 6px 18px rgb(108 192 74 / 0.3);
+}
+
+.btnAccent:hover,
+.inverted .btnAccent:hover {
+  background: #82cf62;
+  color: var(--ink);
 }
 
 .btnGhost {
@@ -411,6 +672,7 @@
 .btnGhost:hover {
   border-color: var(--signal);
   color: var(--paragon);
+  background: var(--tint-soft);
 }
 
 /* Figure strip */

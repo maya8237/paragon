@@ -1,11 +1,6 @@
-/*
- * The hero is a corridor diagram, not a headline slab. Copy sits on one side,
- * the network on the other; below 60em the diagram drops under the copy.
- */
+/* Hero: navy band, copy on one side, the globe on the other. */
 .hero {
-  background: var(--surface);
-  border-block-end: var(--border);
-  padding-block: var(--space-2xl) var(--space-xl);
+  padding-block: var(--space-2xl) calc(var(--space-2xl) + 3rem);
   overflow: hidden;
 }
 
@@ -16,47 +11,119 @@
   grid-template-columns: 1fr;
 }
 
-/* The map is a portrait panel, so the copy takes the larger share. */
 @media (min-width: 60em) {
   .heroGrid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     gap: var(--space-2xl);
-    align-items: start;
   }
 }
 
 .heroCopy {
   display: flex;
   flex-direction: column;
-  gap: var(--space-s);
+  gap: var(--space-m);
   align-items: start;
 }
 
-.heroTitle {
-  font-size: var(--step-4);
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.06);
+  color: var(--white);
+  font-size: var(--step--1);
+  font-weight: 600;
 }
 
-:global(:root:lang(he)) .heroTitle {
-  max-inline-size: none;
-  white-space: nowrap;
-  font-size: var(--step-4);
-  line-height: 0.95;
+.heroBadgeDot {
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: var(--transit);
+  box-shadow: 0 0 0 4px rgb(108 192 74 / 0.25);
+}
+
+.heroTitle {
+  font-size: var(--step-5);
+  max-inline-size: 16ch;
+}
+
+/* A short green-to-blue rule under the headline. */
+.heroTitle::after {
+  content: '';
+  display: block;
+  inline-size: 4rem;
+  block-size: 4px;
+  margin-block-start: var(--space-m);
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--transit), var(--signal));
+}
+
+:global(:dir(rtl)) .heroTitle::after {
+  background: linear-gradient(-90deg, var(--transit), var(--signal));
 }
 
 .heroLede {
-  color: var(--slate);
   font-size: var(--step-1);
-  line-height: 1.45;
+  line-height: 1.55;
+  max-inline-size: 36rem;
 }
 
-.heroLede + .heroLede {
-  font-size: var(--step-0);
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
 }
 
-/* Scroll-reveal on section headers — the whole motion budget beyond the hero. */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-m);
+  color: var(--ink-text);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.trust svg {
+  inline-size: 1rem;
+  block-size: 1rem;
+  color: var(--transit);
+}
+
+/* The figures ride up over the hero's bottom edge on a white card. */
+.figureCard {
+  position: relative;
+  margin-block-start: -3.5rem;
+  padding: var(--space-l) var(--space-l) var(--space-m);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.figureCard > div {
+  border-block-start: 0;
+  padding-block-start: 0;
+}
+
+@media (max-width: 30em) {
+  .figureCard {
+    padding: var(--space-m);
+  }
+}
+
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(14px);
   transition:
     opacity var(--dur-slow) var(--ease),
     transform var(--dur-slow) var(--ease);
@@ -75,30 +142,67 @@
   }
 }
 
-.teaserGrid {
-  display: grid;
-  gap: var(--space-xl);
-  grid-template-columns: 1fr;
+/* Freight modes on a sunk band. */
+.modes {
+  padding-block: var(--space-2xl);
+  background: linear-gradient(var(--paper), var(--tint-sunk));
+  border-block: var(--border);
 }
 
-@media (min-width: 48em) {
-  .teaserGrid {
-    grid-template-columns: 1fr 1fr;
+.modeGrid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+/* Network: copy beside the corridor map. */
+.network {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+@media (min-width: 56em) {
+  .network {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
     gap: var(--space-2xl);
   }
 }
 
-.teaser {
+.networkCopy {
   display: flex;
   flex-direction: column;
-  gap: var(--space-s);
-  align-items: start;
+}
+
+.networkCopy > div {
+  margin-block-end: var(--space-m);
+}
+
+.networkText {
+  color: var(--slate);
+  line-height: 1.6;
+  margin-block-end: var(--space-s);
+}
+
+.mapPanel {
+  padding: var(--space-l) var(--space-m);
+  background:
+    radial-gradient(var(--dot) 1px, transparent 1.4px) 0 0 / 18px 18px,
+    var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .certBand {
   display: grid;
   gap: var(--space-l);
   grid-template-columns: 1fr;
+  padding: var(--space-l);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 @media (min-width: 56em) {
@@ -106,5 +210,81 @@
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: var(--space-2xl);
     align-items: start;
+    padding: var(--space-xl);
   }
 }
+
+/* Tracking and Nippon */
+.teaserGrid {
+  display: grid;
+  gap: var(--space-m);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48em) {
+  .teaserGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.trackCard,
+.nipponCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: start;
+  padding: var(--space-l);
+  border-radius: var(--radius-lg);
+}
+
+.trackCard {
+  background: linear-gradient(150deg, #8fd66f 0%, var(--transit) 45%, #4aa22e 100%);
+  color: var(--ink);
+  box-shadow: 0 20px 50px rgb(76 160 46 / 0.3);
+}
+
+/* Beats `.inverted h2` / `.inverted p` from the band around it. */
+.trackCard[class] h2,
+.trackCard[class] p {
+  color: var(--ink);
+}
+
+.trackCard[class] a[class] {
+  background: var(--ink);
+  color: var(--white);
+  box-shadow: none;
+}
+
+.trackCard[class] a[class]:hover {
+  background: var(--harbor);
+}
+
+.nipponCard {
+  background: rgb(255 255 255 / 0.05);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
+
+.teaserIcon {
+  display: grid;
+  place-items: center;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.12);
+  color: var(--white);
+}
+
+.trackCard .teaserIcon {
+  background: rgb(6 36 63 / 0.12);
+  color: var(--ink);
+}
+
+.teaserIcon svg {
+  inline-size: 1.6rem;
+  block-size: 1.6rem;
+}
+
+.nipponCard > div {
+  align-self: stretch;
+}
+

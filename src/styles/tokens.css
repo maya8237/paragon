@@ -1,54 +1,64 @@
 /*
  * Design tokens.
  *
- * Colours descend from the old site's live CSS, deepened and desaturated:
- * navies darker, blues lifted for contrast, the logo green pulled off its
- * dated yellow cast. Still unmistakably the same brand.
- *
- * --transit is the one saturated colour on the page and it never decorates:
- * it marks the thing that is currently moving or currently selected.
+ * Colours descend from the old site's live CSS: its navy, its bright blue
+ * and the logo green. Green is the action colour — quote requests, tracking,
+ * and whatever is currently selected — and it always carries navy text.
  */
 
 :root {
-  /* Core */
-  --ink: #0a2137;
-  --harbor: #153050;
-  --paragon: #0b63a8;
-  --signal: #2f8fd4;
-  --transit: #4fc26b;
+  /* Core — the old site's navy (#003a67), blue (#2f83c6) and logo green
+     (#70be45), tuned so every text pairing clears WCAG AA. */
+  --ink: #06243f;
+  --harbor: #0d3a63;
+  --paragon: #1a68ad;
+  --signal: #2f83c6;
+  --transit: #6cc04a;
+  --transit-deep: #3f8f26;
 
   /* Neutrals & accent */
-  --paper: #f6f8fb;
-  --mist: #e4eaf2;
-  --slate: #5a6b80;
+  --paper: #f4f7fb;
+  --mist: #e2e9f2;
+  --slate: #4f6178;
   --brass: #c9a961;
   --white: #ffffff;
 
-  /* Derived surfaces. Depth comes from white on --paper with --mist hairlines,
-     never from drop shadows. */
+  --action: var(--paragon);
+  --tint: #e6f0fa;
+  --tint-soft: #eef5fc;
+  --tint-sunk: #e9f1fa;
+  --dot: rgb(26 104 173 / 0.12);
+  --header-bg: rgb(255 255 255 / 0.9);
+  --logo-filter: none;
+
   --surface: var(--white);
   --surface-sunk: var(--paper);
   --hairline: var(--mist);
   --text: var(--ink);
   --text-muted: var(--slate);
 
-  /* Inverted band (Tracking + Nippon) — the page's single value inversion. */
-  --ink-text: #dce6f2;
-  --ink-muted: #93a8c0;
-  --ink-hairline: #234261;
+  /* Dark bands */
+  --ink-text: #d9e4f1;
+  --ink-muted: #9db1c8;
+  --ink-hairline: #1d4670;
+  --band: radial-gradient(120% 140% at 85% 0%, #0f4a7e 0%, var(--ink) 55%, #041a2f 100%);
+
+  /* Soft, cool-tinted elevation. */
+  --shadow-sm: 0 1px 2px rgb(6 36 63 / 0.06), 0 2px 8px rgb(6 36 63 / 0.05);
+  --shadow-md: 0 4px 10px rgb(6 36 63 / 0.06), 0 16px 36px rgb(6 36 63 / 0.1);
+  --shadow-lg: 0 24px 60px rgb(6 36 63 / 0.18);
 
   /* Type */
-  --font-display: 'Figtree', 'Segoe UI', system-ui, sans-serif;
-  --font-body: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Lexend', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
 
-  /* Scale — display sizes clamp so the hero never overflows 375px. */
-  --step--1: 0.8125rem;
-  --step-0: 1rem;
-  --step-1: 1.125rem;
-  --step-2: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
-  --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.5rem);
-  --step-4: clamp(2.25rem, 1.7rem + 2.6vw, 3.75rem);
-  --step-5: clamp(2.75rem, 1.8rem + 4.4vw, 5.5rem);
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.1875rem;
+  --step-2: clamp(1.3rem, 1.15rem + 0.7vw, 1.6rem);
+  --step-3: clamp(1.7rem, 1.4rem + 1.4vw, 2.4rem);
+  --step-4: clamp(2.1rem, 1.6rem + 2.6vw, 3.6rem);
+  --step-5: clamp(2.5rem, 1.7rem + 4vw, 4.75rem);
 
   /* Space */
   --space-3xs: 0.25rem;
@@ -58,25 +68,55 @@
   --space-m: 1.5rem;
   --space-l: 2rem;
   --space-xl: 3rem;
-  --space-2xl: 4.5rem;
+  --space-2xl: 5rem;
   --space-3xl: 7rem;
 
   /* Layout */
   --measure: 68ch;
   --container: 76rem;
   --container-narrow: 58rem;
-  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --gutter: clamp(1rem, 4vw, 3rem);
 
-  --radius: 4px;
-  --radius-lg: 8px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
 
   --border: 1px solid var(--hairline);
-  --focus-ring: 2px solid var(--signal);
+  --focus-ring: 3px solid var(--signal);
 
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
-  --dur-fast: 140ms;
-  --dur: 260ms;
+  --dur-fast: 150ms;
+  --dur: 250ms;
   --dur-slow: 620ms;
+}
+
+/*
+ * Dark theme. --ink stays navy on purpose: it is the band and footer ground
+ * and the text colour on green, none of which change. Everything a light page
+ * draws on white is redefined here instead.
+ */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #051729;
+  --mist: #1b3a5c;
+  --slate: #a7b8cc;
+  --paragon: #6cb4ef;
+  --action: #1a68ad;
+  --tint: rgb(108 180 239 / 0.14);
+  --tint-soft: rgb(108 180 239 / 0.09);
+  --tint-sunk: #071f37;
+  --dot: rgb(108 180 239 / 0.14);
+  --header-bg: rgb(5 23 41 / 0.88);
+  --logo-filter: brightness(0) invert(1);
+
+  --surface: #0b2742;
+  --surface-sunk: #082035;
+  --text: #eaf1f9;
+  --band: radial-gradient(120% 140% at 85% 0%, #0f4a7e 0%, #031426 60%, #020e1b 100%);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 8px rgb(0 0 0 / 0.2);
+  --shadow-md: 0 4px 10px rgb(0 0 0 / 0.25), 0 16px 36px rgb(0 0 0 / 0.35);
+  --shadow-lg: 0 24px 60px rgb(0 0 0 / 0.5);
 }
 
 /*

@@ -44,6 +44,8 @@ const content: SiteContent = {
       { label: 'מעקב משלוחים', to: '/tracking' },
       { label: 'צרו קשר', to: '/contact' },
     ],
+    quote: 'הצעת מחיר',
+    breadcrumb: 'פירורי לחם',
     skipToContent: 'דילוג לתוכן',
     menu: 'תפריט',
     close: 'סגירה',
@@ -152,6 +154,19 @@ const content: SiteContent = {
       heading: 'סוכן ניפון אקספרס בישראל',
       blurb: 'נוסדה ב- 1872. 1,400 משרדים ברחבי העולם, כ- 60,000 עובדים ומעל 400 מיליון טון שילוח.',
       cta: { label: 'על השותפות', to: '/nippon' },
+    },
+    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכן Nippon Express בישראל'],
+    sections: {
+      servicesEyebrow: 'מה אנחנו עושים',
+      servicesHeading: 'שותף אחד לכל שרשרת האספקה',
+      modesEyebrow: 'סחר בינלאומי',
+      modesHeading: 'כל הדרכים להעביר את המטען שלכם',
+      networkEyebrow: 'הרשת שלנו',
+      networkHeading: 'חמישה אתרים לאורך ציר הסחר של ישראל',
+    },
+    cta: {
+      heading: 'מוכנים למשלוח הבא?',
+      blurb: 'ספרו לנו מה אתם שולחים ולאן — הצוות שלנו יחזור אליכם עם הצעת מחיר מותאמת.',
     },
   },
 

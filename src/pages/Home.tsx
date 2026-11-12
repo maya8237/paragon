@@ -13,6 +13,8 @@ import {
 import { CertList, ExternalLink, FigureStat } from '../components/bits'
 import { Plate, type PhotoName } from '../components/Plate'
 import { CorridorMap } from '../components/CorridorMap'
+import { HeroGlobe } from '../components/HeroGlobe'
+import { Glyph } from '../components/icons'
 import { Reveal } from '../components/Reveal'
 import { useLangPath, useT } from '../i18n/useT'
 import { usePageMeta } from '../i18n/usePageMeta'
@@ -27,6 +29,12 @@ const PILLAR_PHOTO: Record<string, PhotoName> = {
   '/logistics': 'logistics',
 }
 
+/**
+ * Home, in the order a prospective customer asks their questions:
+ * what do you do (hero) → can I trust you (figures, credentials) → which
+ * service fits me (pillars, modes) → where are you (network) → how do I start
+ * (tracking, quote).
+ */
 export default function Home() {
   const { t } = useT()
   const langPath = useLangPath()
@@ -35,49 +43,62 @@ export default function Home() {
 
   return (
     <>
-      <section className={s.hero} aria-labelledby="hero-title">
+      <section className={`${s.hero} ${ui.inverted} inverted`} aria-labelledby="hero-title">
         <Container>
           <div className={s.heroGrid}>
             <div className={s.heroCopy}>
-              <h1 id="hero-title" className={s.heroTitle}>
+              <span className={s.heroBadge}>
+                <span className={s.heroBadgeDot} aria-hidden="true" />
                 {home.hero.heading}
+              </span>
+              <h1 id="hero-title" className={s.heroTitle}>
+                {t.meta.tagline}
               </h1>
-              {home.hero.lede.map((p) => (
-                <p key={p} className={s.heroLede}>
-                  {p}
-                </p>
-              ))}
-              <ButtonRow>
-                <ButtonLink to={home.hero.primaryCta.to}>{home.hero.primaryCta.label}</ButtonLink>
-                <ButtonLink to={home.hero.secondaryCta.to} variant="ghost">
-                  {home.hero.secondaryCta.label}
-                </ButtonLink>
+              <p className={s.heroLede}>{home.hero.lede[0]}</p>
+              <div className={s.heroActions}>
                 <ExternalLink
                   href={home.hero.quoteCta.href}
-                  className={`${ui.btn} ${ui.btnGhost}`}
+                  className={`${ui.btn} ${ui.btnAccent}`}
                 >
                   {home.hero.quoteCta.label}
                 </ExternalLink>
-              </ButtonRow>
+                <ButtonLink to={home.hero.primaryCta.to} variant="ghost">
+                  {home.hero.primaryCta.label}
+                </ButtonLink>
+              </div>
+              <ul className={s.trust}>
+                {home.trust.map((item) => (
+                  <li key={item}>
+                    <Glyph name="check" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <CorridorMap
-              linked
-              hrefForNode={(id) => ({ pathname: langPath('/contact'), hash: `#${id}` })}
-            />
+            <HeroGlobe />
           </div>
+        </Container>
+      </section>
 
+      <Container>
+        <div className={s.figureCard}>
           <FigureRow>
             {home.figures.map((figure) => (
               <FigureStat key={figure.label} figure={figure} />
             ))}
           </FigureRow>
-        </Container>
-      </section>
+        </div>
+      </Container>
 
       <Section labelledBy="pillars-heading">
         <Reveal className={s.reveal} revealedClassName={s.revealed}>
-          <SectionHead heading={t.meta.tagline} id="pillars-heading" />
+          <SectionHead
+            eyebrow={home.sections.servicesEyebrow}
+            heading={home.sections.servicesHeading}
+            lede={t.meta.tagline}
+            id="pillars-heading"
+          />
         </Reveal>
         <Grid>
           {home.pillars.map((pillar) => (
@@ -94,6 +115,49 @@ export default function Home() {
             />
           ))}
         </Grid>
+      </Section>
+
+      <section className={s.modes} aria-labelledby="modes-heading">
+        <Container>
+          <Reveal className={s.reveal} revealedClassName={s.revealed}>
+            <SectionHead
+              eyebrow={home.sections.modesEyebrow}
+              heading={home.sections.modesHeading}
+              id="modes-heading"
+            />
+          </Reveal>
+          <div className={s.modeGrid}>
+            {t.globalTrade.modes.map((mode) => (
+              <CardLink key={mode.to} to={mode.to} title={mode.title} body={mode.blurb} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <Section labelledBy="network-heading">
+        <div className={s.network}>
+          <div className={s.networkCopy}>
+            <SectionHead
+              eyebrow={home.sections.networkEyebrow}
+              heading={home.sections.networkHeading}
+              id="network-heading"
+            />
+            {home.hero.lede.slice(1).map((p) => (
+              <p key={p} className={s.networkText}>
+                {p}
+              </p>
+            ))}
+            <ButtonRow>
+              <ButtonLink to={home.hero.secondaryCta.to}>{home.hero.secondaryCta.label}</ButtonLink>
+            </ButtonRow>
+          </div>
+          <div className={s.mapPanel}>
+            <CorridorMap
+              linked
+              hrefForNode={(id) => ({ pathname: langPath('/contact'), hash: `#${id}` })}
+            />
+          </div>
+        </div>
       </Section>
 
       <Section tight labelledBy="certs-heading">
@@ -114,20 +178,24 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* The page's single value inversion: tracking and the Nippon partnership. */}
       <Section inverted labelledBy="tracking-heading">
         <div className={s.teaserGrid}>
-          <div className={s.teaser}>
+          {/* Green, as the old site's "Shipment's Tracking" banner was. */}
+          <div className={s.trackCard}>
+            <span className={s.teaserIcon}>
+              <Glyph name="radar" />
+            </span>
             <h2 id="tracking-heading">{home.trackingTeaser.heading}</h2>
             <p>{home.trackingTeaser.blurb}</p>
             <ButtonRow>
-              <ButtonLink to={home.trackingTeaser.cta.to}>
-                {home.trackingTeaser.cta.label}
-              </ButtonLink>
+              <ButtonLink to={home.trackingTeaser.cta.to}>{home.trackingTeaser.cta.label}</ButtonLink>
             </ButtonRow>
           </div>
 
-          <div className={s.teaser}>
+          <div className={s.nipponCard}>
+            <span className={s.teaserIcon}>
+              <Glyph name="handshake" />
+            </span>
             <h2>{home.nipponTeaser.heading}</h2>
             <p>{home.nipponTeaser.blurb}</p>
             <FigureRow>
@@ -136,12 +204,15 @@ export default function Home() {
               ))}
             </FigureRow>
             <ButtonRow>
-              <ButtonLink to={home.nipponTeaser.cta.to}>{home.nipponTeaser.cta.label}</ButtonLink>
+              <ButtonLink to={home.nipponTeaser.cta.to} variant="ghost">
+                {home.nipponTeaser.cta.label}
+              </ButtonLink>
               <ExternalLink href="http://www.nipponexpress.com">www.nipponexpress.com</ExternalLink>
             </ButtonRow>
           </div>
         </div>
       </Section>
+
     </>
   )
 }

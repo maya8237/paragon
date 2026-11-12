@@ -1,0 +1,188 @@
+.wrap {
+  position: relative;
+  inline-size: 100%;
+  max-inline-size: 34rem;
+  margin-inline: auto;
+  direction: ltr;
+}
+
+.svg {
+  inline-size: 100%;
+  aspect-ratio: 1;
+  overflow: visible;
+}
+
+.globe {
+  stroke: rgb(255 255 255 / 0.22);
+  stroke-width: 1;
+}
+
+.grid {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.13);
+  stroke-width: 1;
+  stroke-dasharray: 1 5;
+  stroke-linecap: round;
+}
+
+.laneGlow {
+  fill: none;
+  stroke: rgb(108 192 74 / 0.18);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.lane {
+  fill: none;
+  stroke: var(--transit);
+  stroke-width: 2;
+  stroke-dasharray: 6 7;
+  stroke-linecap: round;
+}
+
+.port {
+  fill: var(--ink);
+  stroke: #9fd3ff;
+  stroke-width: 2;
+}
+
+.hub {
+  fill: var(--transit);
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.pulse {
+  fill: none;
+  stroke: var(--transit);
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* At rest each mover sits two-thirds of the way along its lane. */
+.mover {
+  offset-distance: 66%;
+  offset-rotate: 0deg;
+}
+
+.moverDisc {
+  fill: var(--white);
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / 0.35));
+}
+
+.moverIcon {
+  color: var(--ink);
+}
+
+/* Floating mode chips. */
+.chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem 0.45rem 0.45rem;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.1);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  backdrop-filter: blur(10px);
+  color: var(--white);
+  font-size: var(--step--1);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+}
+
+.chipIcon {
+  display: grid;
+  place-items: center;
+  inline-size: 1.9rem;
+  block-size: 1.9rem;
+  border-radius: 50%;
+  background: var(--transit);
+  color: var(--ink);
+}
+
+.chipIcon svg {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.chipA {
+  inset-block-start: 6%;
+  inset-inline-start: -2%;
+}
+
+.chipB {
+  inset-block-end: 10%;
+  inset-inline-end: -2%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lane {
+    animation: flow 1.6s linear infinite;
+  }
+
+  .pulse {
+    animation: pulse 2.4s var(--ease) infinite;
+  }
+
+  .mover {
+    animation: travel 7s ease-in-out infinite;
+  }
+
+  .moverLate {
+    animation-duration: 5.5s;
+    animation-delay: -2s;
+  }
+
+  .chip {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .chipB {
+    animation-delay: -3s;
+  }
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -26;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+@keyframes travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+
+  10%,
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  50% {
+    translate: 0 -8px;
+  }
+}
