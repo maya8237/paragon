@@ -45,7 +45,7 @@ const content: SiteContent = {
       sectors: 'לפי תעשייה',
       network: 'הרשת שלנו',
       viewAll: 'לכל העמודים',
-      overview: 'סקירה',
+      overview: 'כל דרכי ההובלה',
       servicesBlurb: 'שילוח ימי ואווירי ולוגיסטיקה בישראל.',
       sectorsBlurb: 'שרשרת אספקה שמותאמת לתעשייה שלכם.',
       partnersBlurb: 'חלק מרשת NX – Nippon Express.',
