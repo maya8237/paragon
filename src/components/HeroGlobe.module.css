@@ -27,7 +27,7 @@
 
 .laneGlow {
   fill: none;
-  stroke: rgb(111 176 88 / 0.18);
+  stroke: rgb(139 191 115 / 0.18);
   stroke-width: 6;
   stroke-linecap: round;
 }

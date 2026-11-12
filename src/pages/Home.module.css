@@ -25,25 +25,33 @@
   align-items: start;
 }
 
-.heroBadge {
-  display: inline-flex;
+/* The company name as a wordmark-style label: a short green rule, then the
+   name in tracked capitals. */
+.heroBrand {
+  display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid rgb(255 255 255 / 0.2);
-  border-radius: var(--radius-pill);
-  background: rgb(255 255 255 / 0.06);
-  color: var(--white);
-  font-size: var(--step--1);
+  gap: 0.85rem;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--step-0);
   font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
 }
 
-.heroBadgeDot {
-  inline-size: 0.5rem;
-  block-size: 0.5rem;
-  border-radius: 50%;
+.heroBrand::before {
+  content: '';
+  inline-size: 2.25rem;
+  block-size: 3px;
+  border-radius: 2px;
   background: var(--transit);
-  box-shadow: 0 0 0 4px rgb(111 176 88 / 0.25);
+}
+
+/* Hebrew has no capitals, and tracking breaks up its letterforms. */
+:global(:lang(he)) .heroBrand {
+  letter-spacing: 0.02em;
+  font-size: var(--step-1);
 }
 
 .heroTitle {
@@ -238,9 +246,9 @@
 }
 
 .trackCard {
-  background: linear-gradient(150deg, #8cc478 0%, var(--transit) 45%, #5a9a45 100%);
+  background: linear-gradient(150deg, #a6d091 0%, var(--transit) 45%, #74ad5b 100%);
   color: var(--ink);
-  box-shadow: 0 20px 50px rgb(90 154 69 / 0.25);
+  box-shadow: 0 20px 50px rgb(116 173 91 / 0.25);
 }
 
 /* Beats `.inverted h2` / `.inverted p` from the band around it. */

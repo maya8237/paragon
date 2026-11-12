@@ -125,6 +125,7 @@ export interface SiteContent {
     hero: {
       /** Small mode tag above the display heading. */
       eyebrow: string
+      /** The company name, shown as a label above the headline. */
       heading: string
       /** The two intro paragraphs from the old home page, verbatim in substance. */
       lede: string[]

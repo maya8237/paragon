@@ -131,7 +131,7 @@
   block-size: 0.5rem;
   border-radius: 50%;
   background: var(--transit);
-  box-shadow: 0 0 0 4px rgb(111 176 88 / 0.2);
+  box-shadow: 0 0 0 4px rgb(139 191 115 / 0.2);
 }
 
 :global(:lang(he)) .eyebrow {
@@ -661,12 +661,12 @@
 .inverted .btnAccent {
   background: var(--transit);
   color: var(--ink);
-  box-shadow: 0 6px 18px rgb(111 176 88 / 0.3);
+  box-shadow: 0 6px 18px rgb(139 191 115 / 0.3);
 }
 
 .btnAccent:hover,
 .inverted .btnAccent:hover {
-  background: #80bd6a;
+  background: #9dcb88;
   color: var(--ink);
 }
 

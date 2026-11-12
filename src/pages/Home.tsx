@@ -48,10 +48,7 @@ export default function Home() {
         <Container>
           <div className={s.heroGrid}>
             <div className={s.heroCopy}>
-              <span className={s.heroBadge}>
-                <span className={s.heroBadgeDot} aria-hidden="true" />
-                {home.hero.heading}
-              </span>
+              <p className={s.heroBrand}>{home.hero.heading}</p>
               <h1 id="hero-title" className={s.heroTitle}>
                 {t.meta.tagline}
               </h1>
