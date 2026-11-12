@@ -75,8 +75,9 @@ a {
   text-underline-offset: 0.18em;
 }
 
+/* --signal (#2f83c6) is only ~3.7:1 on the light surfaces; --harbor is ~10:1. */
 a:hover {
-  color: var(--signal);
+  color: var(--harbor);
 }
 
 /* One consistent, always-visible focus treatment. */
