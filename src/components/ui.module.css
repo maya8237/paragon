@@ -556,10 +556,7 @@
   opacity: 0.6;
 }
 
-:global(:root[dir='rtl']) .breadcrumbSep {
-  display: inline-block;
-  transform: scaleX(-1);
-}
+/* Same › in every language, Hebrew included — no RTL flip. */
 
 /* Sub-navigation for the Global Trade tree — pills on the dark header. */
 .subnav {
