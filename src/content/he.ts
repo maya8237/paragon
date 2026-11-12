@@ -153,11 +153,11 @@ const content: SiteContent = {
       cta: { label: 'על מעקב המשלוחים', to: '/tracking' },
     },
     nipponTeaser: {
-      heading: 'סוכן ניפון אקספרס בישראל',
-      blurb: 'נוסדה ב- 1872. 1,400 משרדים ברחבי העולם, כ- 60,000 עובדים ומעל 400 מיליון טון שילוח.',
+      heading: 'סוכנת Nippon Express בישראל',
+      blurb: 'Nippon Express נוסדה ב- 1872. 1,400 משרדים ברחבי העולם, כ- 60,000 עובדים ומעל 400 מיליון טון שילוח.',
       cta: { label: 'על השותפות', to: '/nippon' },
     },
-    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכן Nippon Express בישראל'],
+    trust: ['מוסמכים AEO', 'ISO9001 ו-IQNET', 'סוכנת Nippon Express בישראל'],
     sections: {
       servicesEyebrow: 'מה אנחנו עושים',
       servicesHeading: 'שותף אחד לכל שרשרת האספקה',
