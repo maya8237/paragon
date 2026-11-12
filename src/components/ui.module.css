@@ -695,11 +695,12 @@
   border-block-start-color: var(--ink-hairline);
 }
 
-/* Disabled buttons: flat and grey, in both light and dark bands. */
+/* Disabled buttons: an outline with no fill and a dashed edge, so it reads as
+   "not available" rather than as a faded active button. Text stays legible. */
 .btn.btnDisabled,
 .inverted .btn.btnDisabled {
-  background: var(--mist);
-  border-color: transparent;
+  background: transparent;
+  border: 1.5px dashed var(--slate);
   color: var(--slate);
   box-shadow: none;
   cursor: not-allowed;
@@ -707,12 +708,31 @@
 }
 
 .inverted .btn.btnDisabled {
-  background: rgb(255 255 255 / 0.12);
-  color: var(--ink-muted);
+  border-color: rgb(255 255 255 / 0.5);
+  color: #dbe6f2;
 }
 
 .unavailableNote {
-  margin-block-start: var(--space-xs);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  margin-block-start: var(--space-s);
+  padding: var(--space-2xs) var(--space-xs);
+  border: 1px solid var(--brass);
+  border-inline-start-width: 4px;
+  border-radius: var(--radius);
+  background: rgb(201 169 97 / 0.16);
   font-size: var(--step--1);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.unavailableNote svg {
+  flex: none;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  margin-block-start: 0.05rem;
+  color: var(--brass);
 }

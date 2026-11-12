@@ -3,6 +3,7 @@ import s from './Home.module.css'
 import {
   ButtonLink,
   DisabledButton,
+  UnavailableNote,
   ButtonRow,
   CardLink,
   Container,
@@ -207,9 +208,7 @@ export default function Home() {
             <ButtonRow>
               <DisabledButton>{home.trackingTeaser.cta.label}</DisabledButton>
             </ButtonRow>
-            <p role="status" className={ui.unavailableNote}>
-              {t.tracking.unavailable}
-            </p>
+            <UnavailableNote>{t.tracking.unavailable}</UnavailableNote>
           </div>
 
           <div className={s.nipponCard}>

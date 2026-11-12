@@ -324,3 +324,20 @@
   background: var(--tint-soft);
   border-color: var(--signal);
 }
+
+/* The tracking card is green, so its disabled button takes navy, not the
+   pale text a navy band would use. */
+.trackCard button[disabled][class] {
+  background: rgb(6 36 63 / 0.08);
+  border-color: rgb(6 36 63 / 0.55);
+  color: var(--ink);
+}
+
+.trackCard [role='status'] {
+  border-color: var(--ink);
+  background: rgb(6 36 63 / 0.1);
+}
+
+.trackCard [role='status'] svg {
+  color: var(--ink);
+}
