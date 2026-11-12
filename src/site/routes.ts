@@ -15,6 +15,7 @@ export const PAGES: { path: string; meta: (t: SiteContent) => PageMeta }[] = [
   { path: '/global-trade/drop-shipments', meta: (t) => t.globalTrade.dropShipments.meta },
   { path: '/global-trade/charter', meta: (t) => t.globalTrade.charter.meta },
   { path: '/logistics', meta: (t) => t.logistics.meta },
+  { path: '/industries', meta: (t) => t.industries.meta },
   { path: '/tracking', meta: (t) => t.tracking.meta },
   { path: '/nippon', meta: (t) => t.nippon.meta },
   { path: '/contact', meta: (t) => t.contact.meta },

@@ -13,6 +13,7 @@ import Air from './pages/Air'
 import DropShipments from './pages/DropShipments'
 import Charter from './pages/Charter'
 import Logistics from './pages/Logistics'
+import Industries from './pages/Industries'
 import Tracking from './pages/Tracking'
 import Nippon from './pages/Nippon'
 import Contact from './pages/Contact'
@@ -68,6 +69,7 @@ function Shell() {
             <Route path="charter" element={<Charter />} />
           </Route>
           <Route path="logistics" element={<Logistics />} />
+          <Route path="industries" element={<Industries />} />
           <Route path="tracking" element={<Tracking />} />
           <Route path="nippon" element={<Nippon />} />
           <Route path="contact" element={<Contact />} />

@@ -295,3 +295,32 @@
   align-self: stretch;
 }
 
+
+/* The sectors, as links, under the industries teaser. */
+.industryList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-block-end: var(--space-m);
+}
+
+.industryList a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.75rem;
+  padding: 0.4rem 1rem;
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.industryList a:hover {
+  background: var(--tint-soft);
+  border-color: var(--signal);
+}

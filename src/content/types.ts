@@ -153,6 +153,8 @@ export interface SiteContent {
     trackingTeaser: { heading: string; blurb: string; cta: NavItem }
     nipponTeaser: { heading: string; blurb: string; cta: NavItem }
     /** The smaller second partner, shown beneath NX: cargo-partner (public/cargo-partner-logo.svg). */
+    /** A band on the home page pointing at the industries page. */
+    industriesTeaser: { eyebrow: string; heading: string; blurb: string; cta: NavItem }
     cargoPartner: { heading: string; blurb: string; logoAlt: string; cta: ExternalLink }
     /** Short credential chips under the hero calls to action. */
     trust: string[]
@@ -249,6 +251,22 @@ export interface SiteContent {
     warehousing: Prose
     services: { heading: string; items: { title: string; body: string }[] }
     links: ExternalLink[]
+  }
+
+  industries: {
+    meta: PageMeta
+    intro: Prose
+    /** One per sector; `id` is the in-page anchor (/industries#semiconductor). */
+    items: {
+      id: string
+      title: string
+      /** One line, for the cards and the home page. */
+      blurb: string
+      lead: string
+      points: { title: string; body: string }[]
+    }[]
+    /** Why NX Group's own industry teams sit behind these. */
+    nx: Prose
   }
 
   contact: {

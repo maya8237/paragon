@@ -33,6 +33,7 @@ const content: SiteContent = {
       { label: 'Global supply Chain', to: '/scm' },
       { label: 'Global Trade', to: '/global-trade' },
       { label: 'Logistics Services', to: '/logistics' },
+      { label: 'Industries', to: '/industries' },
       { label: 'Shipments Tracking', to: '/tracking' },
       { label: 'Contact us', to: '/contact' },
     ],
@@ -147,6 +148,13 @@ const content: SiteContent = {
       heading: 'Agent of NX – Nippon Express in Israel',
       blurb: `The world’s ${nx.worldRank}th-largest freight forwarder, with ${nx.locations} locations in ${nx.countries} countries and regions and ${nx.employees} employees.`,
       cta: { label: 'About the partnership', to: '/nippon' },
+    },
+    industriesTeaser: {
+      eyebrow: 'Industries',
+      heading: 'Logistics that knows your sector',
+      blurb:
+        'Semiconductor, technology, mobility, fashion & lifestyle and healthcare – each moves differently, so we build the supply chain around how yours does.',
+      cta: { label: 'Explore industries', to: '/industries' },
     },
     cargoPartner: {
       heading: 'Agent of cargo-partner in Israel',
@@ -656,6 +664,134 @@ const content: SiteContent = {
         href: 'https://www.linkedin.com/company/nippon-express-group/',
       },
     ],
+  },
+
+  industries: {
+    meta: {
+      title: 'Industries',
+      description:
+        'Logistics shaped around your sector – semiconductor, technology, mobility, fashion & lifestyle and healthcare – from time-critical airfreight to a 3,000 m² logistics centre in central Israel.',
+    },
+    intro: {
+      heading: 'Industries',
+      paragraphs: [
+        'Every industry moves differently. We build the supply chain around yours.',
+        'Different sectors ask different things of a supply chain: tighter timelines, stricter handling, more demanding paperwork. Paragon combines forwarding, customs clearance and a 3,000 m² logistics centre in central Israel, and shapes them around the way your sector works.',
+      ],
+    },
+    items: [
+      {
+        id: 'semiconductor',
+        title: 'Semiconductor',
+        blurb:
+          'High-value, time-critical shipments for fabs, equipment makers and their suppliers – moved securely and traced end to end.',
+        lead: 'Semiconductor operations have no room for delay or damage. Tooling, equipment and spare parts are costly and urgent, and a day lost can stop a line.',
+        points: [
+          {
+            title: 'Time-critical delivery',
+            body: 'Urgent parts and tooling travel by time-critical airfreight, with an assigned agent following each shipment from pick-up to delivery. Every airfreight operation is traced 24/7.',
+          },
+          {
+            title: 'Secure, documented clearance',
+            body: 'AEO-certified customs brokerage and warehousing mean faster, more predictable clearance for high-value cargo, backed by professional cargo insurance.',
+          },
+          {
+            title: 'Critical spares, always accounted for',
+            body: 'Service parts logistics, inventory control and control by serial number at our logistics centre keep essential spares ready, and every one of them accounted for.',
+          },
+        ],
+      },
+      {
+        id: 'technology',
+        title: 'Technology',
+        blurb:
+          'IT, electronics and industrial equipment – from import to installation-ready delivery.',
+        lead: 'Technology products change fast and demand swings with them. The supply chain has to keep up without losing control of cost, security or timing.',
+        points: [
+          {
+            title: 'Flexible to changing demand',
+            body: 'Air, ocean and charter options are combined to match urgency and budget, including drop shipments that go straight from supplier to site.',
+          },
+          {
+            title: 'Ready to deploy',
+            body: 'Kitting, packing and labelling at our logistics centre, so equipment reaches you prepared for use rather than needing another round of handling.',
+          },
+          {
+            title: 'Visibility at every step',
+            body: 'Shipment status updates automatically in our secured tracking system – by transport mode, carrier, destination and location.',
+          },
+        ],
+      },
+      {
+        id: 'mobility',
+        title: 'Mobility',
+        blurb:
+          'Automotive manufacturers, parts suppliers and the aftermarket – parts that arrive when the line, or the workshop, needs them.',
+        lead: 'Vehicle and component supply chains run on tight schedules and many suppliers. A missing part can idle a production line or a repair bay.',
+        points: [
+          {
+            title: 'Parts to the line, on schedule',
+            body: 'JIT manufacturing support and cross docking at our logistics centre release components to production in step with the plan.',
+          },
+          {
+            title: 'Aftermarket and service parts',
+            body: 'Service parts logistics, order fulfilment and pick & pack keep distributors and workshops stocked with the right parts.',
+          },
+          {
+            title: 'Inbound from every source',
+            body: 'Ocean and air imports of components from suppliers worldwide, with customs clearance at departure and destination handled by one team.',
+          },
+        ],
+      },
+      {
+        id: 'fashion-lifestyle',
+        title: 'Fashion & Lifestyle',
+        blurb:
+          'Seasonal, fast-turning goods – from import and distribution processing to the final pick.',
+        lead: 'Fashion and lifestyle products live on seasons and launch dates. Stock has to arrive, be prepared and move on quickly.',
+        points: [
+          {
+            title: 'Order fulfilment',
+            body: 'Pick & pack, order fulfilment and cross docking from our logistics centre, tailored to how your orders actually flow.',
+          },
+          {
+            title: 'Retail-ready preparation',
+            body: 'Value-added activities such as packing, labelling and kitting, so goods leave the warehouse ready for shelf or customer.',
+          },
+          {
+            title: 'Launches and exhibitions',
+            body: 'Turnkey logistics for trade shows, showrooms and launches: planned schedules, documentation and a dedicated contact through opening day.',
+          },
+        ],
+      },
+      {
+        id: 'healthcare',
+        title: 'Healthcare',
+        blurb:
+          'Sensitive, regulated goods that have to arrive intact, on time and fully documented.',
+        lead: 'Healthcare cargo carries more than value: it carries responsibility. It calls for care in handling, accuracy in paperwork and speed when it matters.',
+        points: [
+          {
+            title: 'Personal, time-critical care',
+            body: 'Sensitive and urgent shipments get an assigned agent who follows the operation through to delivery, with airfreight traced 24/7.',
+          },
+          {
+            title: 'Specialist handling through NX',
+            body: 'For cargo that needs controlled temperature or protection from vibration, we draw on the specialist handling expertise of NX Group.',
+          },
+          {
+            title: 'Traceable and insured',
+            body: 'Control by serial number, inventory control and professional cargo insurance, with customs clearance included at both ends.',
+          },
+        ],
+      },
+    ],
+    nx: {
+      heading: 'Backed by NX Group’s industry teams',
+      paragraphs: [
+        `NX – Nippon Express runs specialist teams for the technology, mobility, fashion & lifestyle, healthcare and semiconductor industries, drawing on a network across ${nx.countries} countries and regions. As its agent in Israel, we bring that depth to Israeli businesses whenever a project calls for it.`,
+      ],
+    },
   },
 
   contact: {

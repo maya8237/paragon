@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import s from './Home.module.css'
 import {
   ButtonLink,
@@ -125,6 +126,29 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <Section tight labelledBy="industries-heading">
+        <Reveal className={s.reveal} revealedClassName={s.revealed}>
+          <SectionHead
+            eyebrow={home.industriesTeaser.eyebrow}
+            heading={home.industriesTeaser.heading}
+            lede={home.industriesTeaser.blurb}
+            id="industries-heading"
+          />
+        </Reveal>
+        <ul className={s.industryList}>
+          {t.industries.items.map((item) => (
+            <li key={item.id}>
+              <Link to={langPath(`/industries#${item.id}`)}>{item.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <ButtonRow>
+          <ButtonLink to={home.industriesTeaser.cta.to} variant="ghost">
+            {home.industriesTeaser.cta.label}
+          </ButtonLink>
+        </ButtonRow>
+      </Section>
 
       <Section labelledBy="network-heading">
         <div className={s.network}>

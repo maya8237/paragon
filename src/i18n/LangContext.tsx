@@ -19,8 +19,8 @@ export function isLang(value: string | undefined): value is Lang {
 
 /**
  * The language to land on when the visitor hits `/` with no language in the
- * URL: English, unless they have already chosen another with the switch. The
- * browser's own language is deliberately not consulted.
+ * URL: one they chose before with the switch, else the first of the browser's
+ * preferred languages that the site has, else English.
  */
 export function preferredLang(): Lang {
   try {
@@ -28,6 +28,15 @@ export function preferredLang(): Lang {
     if (isLang(stored ?? undefined)) return stored as Lang
   } catch {
     // Private windows and blocked site data both throw here; fall through.
+  }
+  // Also called while pages are rendered at build time, where there is no
+  // browser language to read.
+  if (typeof navigator === 'undefined') return DEFAULT_LANG
+  const candidates = navigator.languages?.length ? navigator.languages : [navigator.language]
+  for (const tag of candidates) {
+    const primary = tag?.toLowerCase().split('-')[0]
+    if (primary === 'iw') return 'he' // the old code for Hebrew
+    if (isLang(primary)) return primary
   }
   return DEFAULT_LANG
 }

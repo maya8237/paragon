@@ -75,6 +75,13 @@ function fullText(t: SiteContent, lang: L): string {
   out.push(prose(l.closing), prose(l.exhibitions))
   out.push(`### ${l.exhibitionsProcess.heading}\n\n${steps(l.exhibitionsProcess.items)}\n${l.exhibitionsClosing}\n`)
 
+  h1(t.industries.meta.title, '/industries')
+  out.push(t.industries.intro.paragraphs.join('\n\n') + '\n')
+  for (const i of t.industries.items) {
+    out.push(`## ${i.title}\n\n${i.lead}\n\n${list(i.points.map((p) => `${p.title}: ${p.body}`))}`)
+  }
+  out.push(prose(t.industries.nx))
+
   h1(t.tracking.meta.title, '/tracking')
   out.push(t.tracking.body.paragraphs.join('\n\n') + '\n')
   out.push(`## ${t.tracking.parameters.heading}\n\n${list(t.tracking.parameters.items)}`)

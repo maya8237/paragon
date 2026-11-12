@@ -123,6 +123,7 @@ export const ROUTE_ICON: Record<string, IconName> = {
   '/global-trade/air': 'plane',
   '/global-trade/drop-shipments': 'boxes',
   '/global-trade/charter': 'route',
+  '/industries': 'boxes',
   '/tracking': 'radar',
   '/nippon': 'handshake',
   '/contact': 'pin',
