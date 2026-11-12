@@ -28,7 +28,7 @@ export default function About() {
 
         <Grid wide>
           {about.sections.map((section) => (
-            <Prose key={section.heading} data={section} as="h3" />
+            <Prose key={section.heading} data={section} />
           ))}
         </Grid>
       </Section>
