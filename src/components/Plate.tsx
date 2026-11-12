@@ -20,7 +20,7 @@ const PHOTOS = {
   // rounded corners baked into the image; separating them is what lets a page
   // size a photograph to its own needs.
   'ocean-berth': { file: 'photos/ocean-berth.webp', width: 1200, height: 800 },
-  'ocean-terminal': { file: 'photos/ocean-terminal.jpg', width: 481, height: 316 },
+  'ocean-terminal': { file: 'photos/ocean-terminal.webp', width: 1200, height: 800 },
   'ocean-craning': { file: 'photos/ocean-craning.jpg', width: 431, height: 319 },
   'air-freighter': { file: 'photos/air-freighter.jpg', width: 319, height: 342 },
   'air-loading': { file: 'photos/air-loading.jpg', width: 638, height: 347 },
