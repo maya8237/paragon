@@ -123,9 +123,9 @@ export interface SiteContent {
   home: {
     meta: PageMeta
     hero: {
-      /** Small mode tag above the display heading. */
-      eyebrow: string
-      /** The company name, shown as a label above the headline. */
+      /** The logo's slogan, in small capitals above the company name. */
+      slogan: string
+      /** The company name, the largest line of the hero heading. */
       heading: string
       /** The two intro paragraphs from the old home page, verbatim in substance. */
       lede: string[]

@@ -48,9 +48,12 @@ export default function Home() {
         <Container>
           <div className={s.heroGrid}>
             <div className={s.heroCopy}>
-              <p className={s.heroBrand}>{home.hero.heading}</p>
+              <p className={s.heroSlogan}>{home.hero.slogan}</p>
+              {/* One heading: the name is what visitors see first, the tagline
+                  keeps the services in the page's main heading for search. */}
               <h1 id="hero-title" className={s.heroTitle}>
-                {t.meta.tagline}
+                <span className={s.heroName}>{home.hero.heading}</span>
+                <span className={s.heroTagline}>{t.meta.tagline}</span>
               </h1>
               <p className={s.heroLede}>{home.hero.lede[0]}</p>
               <div className={s.heroActions}>

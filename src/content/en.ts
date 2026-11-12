@@ -80,7 +80,7 @@ const content: SiteContent = {
         'A dynamic provider of comprehensive logistics, supply chain management and freight operations solutions, with the knowledge and professionalism of industry experts.',
     },
     hero: {
-      eyebrow: 'NETWORK',
+      slogan: 'Supply Chain Solutions',
       heading: 'Paragon Logistics',
       lede: [
         'Paragon is a dynamic provider of comprehensive logistics, supply chain management and freight operations solutions, with the knowledge and professionalism of industry experts.',
