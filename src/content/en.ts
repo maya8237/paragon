@@ -105,7 +105,7 @@ const content: SiteContent = {
     ],
     figures: [
       { value: '3,000 m²', label: 'Logistics centre in central Israel' },
-      { value: '80%', label: 'of Israel’s commercial and industrial activity in reach' },
+      { value: '100%', label: 'of Israel’s commercial and industrial activity in reach' },
       { value: '5', label: 'sites: HQ, logistics centre, air branch, two ports' },
       { value: '24/7', label: 'tracing on airfreight operations' },
     ],
@@ -495,7 +495,7 @@ const content: SiteContent = {
     center: {
       heading: 'The logistic center',
       paragraphs: [
-        'Our 3,000 sqm logistic center is strategically located to access main air and sea ports and 80% of Israel’s commercial and industrial activity. Customers can use our facilities for storage and advanced inventory management, or benefit from well trained, expert teams to execute in- and outbound processes, packaging, general warehousing and shipment activities. All our logistic services are supported by advanced designated software.',
+        'Our 3,000 sqm logistic center is strategically located to access main air and sea ports and 100% of Israel’s commercial and industrial activity. Customers can use our facilities for storage and advanced inventory management, or benefit from well trained, expert teams to execute in- and outbound processes, packaging, general warehousing and shipment activities. All our logistic services are supported by advanced designated software.',
         'Paragon solutions can be tailored to perform all, or some, of the logistic activities in any organization.',
         'All our logistic services customers benefit from our technological infrastructure and human resources to do the job efficiently, cost-effectively and on schedule.',
       ],
