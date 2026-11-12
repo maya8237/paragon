@@ -43,7 +43,7 @@
   block-size: 0.5rem;
   border-radius: 50%;
   background: var(--transit);
-  box-shadow: 0 0 0 4px rgb(108 192 74 / 0.25);
+  box-shadow: 0 0 0 4px rgb(111 176 88 / 0.25);
 }
 
 .heroTitle {
@@ -238,9 +238,9 @@
 }
 
 .trackCard {
-  background: linear-gradient(150deg, #8fd66f 0%, var(--transit) 45%, #4aa22e 100%);
+  background: linear-gradient(150deg, #8cc478 0%, var(--transit) 45%, #5a9a45 100%);
   color: var(--ink);
-  box-shadow: 0 20px 50px rgb(76 160 46 / 0.3);
+  box-shadow: 0 20px 50px rgb(90 154 69 / 0.25);
 }
 
 /* Beats `.inverted h2` / `.inverted p` from the band around it. */
