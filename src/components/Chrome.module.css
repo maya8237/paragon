@@ -602,3 +602,17 @@
   block-size: 3.25rem;
   inline-size: auto;
 }
+
+/* At 320px the Japanese language name ("日本語") would push the menu button
+   off-screen, so below 24em the language button shows only the globe; its
+   aria-label still names the language. */
+@media (max-width: 24em) {
+  .langCode {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
