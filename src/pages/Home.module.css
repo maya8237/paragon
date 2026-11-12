@@ -341,3 +341,8 @@
 .trackCard [role='status'] svg {
   color: var(--ink);
 }
+
+/* With the tracking card hidden, the NX card spans the whole band. */
+.teaserGrid > .nipponCard:only-child {
+  grid-column: 1 / -1;
+}

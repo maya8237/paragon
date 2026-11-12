@@ -17,6 +17,7 @@ import he from '../src/content/he'
 import ja from '../src/content/ja'
 import type { Prose, SiteContent } from '../src/content/types'
 import { pagePath } from '../src/site/routes'
+import { TRACKING_ENABLED } from '../src/site/features'
 import { url } from './site-config'
 
 const DIST = 'dist'
@@ -82,10 +83,12 @@ function fullText(t: SiteContent, lang: L): string {
   }
   out.push(prose(t.industries.nx))
 
-  h1(t.tracking.meta.title, '/tracking')
-  out.push(t.tracking.body.paragraphs.join('\n\n') + '\n')
-  out.push(`## ${t.tracking.parameters.heading}\n\n${list(t.tracking.parameters.items)}`)
-  out.push(`${t.tracking.cta.label}: ${t.tracking.cta.href}\n\n${t.tracking.ctaNote}\n`)
+  if (TRACKING_ENABLED) {
+    h1(t.tracking.meta.title, '/tracking')
+    out.push(t.tracking.body.paragraphs.join('\n\n') + '\n')
+    out.push(`## ${t.tracking.parameters.heading}\n\n${list(t.tracking.parameters.items)}`)
+    out.push(`${t.tracking.cta.label}: ${t.tracking.cta.href}\n\n${t.tracking.ctaNote}\n`)
+  }
 
   h1(t.nippon.meta.title, '/nippon')
   out.push(t.nippon.body.paragraphs.join('\n\n') + '\n')

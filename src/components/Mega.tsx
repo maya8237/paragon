@@ -1,3 +1,4 @@
+import { TRACKING_ENABLED } from '../site/features'
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import s from './Mega.module.css'
@@ -102,7 +103,7 @@ export function buildMenu(t: SiteContent): MenuGroup[] {
         },
       ],
     },
-    { id: 'tracking', label: label('/tracking'), to: '/tracking' },
+    ...(TRACKING_ENABLED ? [{ id: 'tracking', label: label('/tracking'), to: '/tracking' }] : []),
   ]
 }
 

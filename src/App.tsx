@@ -15,6 +15,7 @@ import Charter from './pages/Charter'
 import Logistics from './pages/Logistics'
 import Industries from './pages/Industries'
 import Tracking from './pages/Tracking'
+import { TRACKING_ENABLED } from './site/features'
 import Nippon from './pages/Nippon'
 import Contact from './pages/Contact'
 import Accessibility from './pages/Accessibility'
@@ -70,7 +71,7 @@ function Shell() {
           </Route>
           <Route path="logistics" element={<Logistics />} />
           <Route path="industries" element={<Industries />} />
-          <Route path="tracking" element={<Tracking />} />
+          {TRACKING_ENABLED && <Route path="tracking" element={<Tracking />} />}
           <Route path="nippon" element={<Nippon />} />
           <Route path="contact" element={<Contact />} />
           <Route path="accessibility" element={<Accessibility />} />

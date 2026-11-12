@@ -1,3 +1,4 @@
+import { TRACKING_ENABLED } from './features'
 import type { Lang, PageMeta, SiteContent } from '../content/types'
 
 /**
@@ -5,7 +6,7 @@ import type { Lang, PageMeta, SiteContent } from '../content/types'
  * each one in each language and lists them all in the sitemap — add a route
  * to App.tsx and it must be added here too.
  */
-export const PAGES: { path: string; meta: (t: SiteContent) => PageMeta }[] = [
+const ALL_PAGES: { path: string; meta: (t: SiteContent) => PageMeta }[] = [
   { path: '/', meta: (t) => t.home.meta },
   { path: '/about', meta: (t) => t.about.meta },
   { path: '/scm', meta: (t) => t.scm.meta },
@@ -21,6 +22,8 @@ export const PAGES: { path: string; meta: (t: SiteContent) => PageMeta }[] = [
   { path: '/contact', meta: (t) => t.contact.meta },
   { path: '/accessibility', meta: (t) => t.accessibility.meta },
 ]
+
+export const PAGES = ALL_PAGES.filter((p) => TRACKING_ENABLED || p.path !== '/tracking')
 
 /**
  * A page's address under the site base, with the trailing slash GitHub Pages

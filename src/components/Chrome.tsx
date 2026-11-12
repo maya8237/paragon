@@ -8,6 +8,7 @@ import type { Lang } from '../content/types'
 import { assetPath } from '../lib/assetPath'
 import { ExternalLink } from './bits'
 import { ui } from './ui'
+import { visibleNav } from '../site/features'
 import { useTheme } from '../lib/theme'
 import { MegaNav, MegaAccordion, buildMenu } from './Mega'
 
@@ -358,7 +359,7 @@ export function Footer() {
               {t.meta.companyName}
             </h2>
             <ul className={s.footerList}>
-              {t.nav.footer.map((item) => (
+              {visibleNav(t.nav.footer).map((item) => (
                 <li key={item.to}>
                   <Link to={path(item.to)} className={s.footerLink}>
                     {item.label}

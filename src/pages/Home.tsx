@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import s from './Home.module.css'
 import {
   ButtonLink,
-  UnavailableNote,
   ButtonRow,
   CardLink,
   Container,
@@ -21,6 +20,7 @@ import { Reveal } from '../components/Reveal'
 import { assetPath } from '../lib/assetPath'
 import { CargoPartner } from '../components/CargoPartner'
 import { useLangPath, useT } from '../i18n/useT'
+import { TRACKING_ENABLED } from '../site/features'
 import { usePageMeta } from '../i18n/usePageMeta'
 
 /**
@@ -195,18 +195,21 @@ export default function Home() {
         </div>
       </Section>
 
-      <Section inverted labelledBy="tracking-heading">
+      <Section inverted labelledBy={TRACKING_ENABLED ? 'tracking-heading' : 'nipponteaser-heading'}>
         <div className={s.teaserGrid}>
           {/* Green, as the old site's "Shipment's Tracking" banner was. */}
-          <div className={s.trackCard}>
-            <span className={s.teaserIcon}>
-              <Glyph name="radar" />
-            </span>
-            <h2 id="tracking-heading">{home.trackingTeaser.heading}</h2>
-            <p>{home.trackingTeaser.blurb}</p>
-            {/* The "About tracking" button is hidden while tracking is down. */}
-            <UnavailableNote>{t.tracking.unavailable}</UnavailableNote>
-          </div>
+          {TRACKING_ENABLED && (
+            <div className={s.trackCard}>
+              <span className={s.teaserIcon}>
+                <Glyph name="radar" />
+              </span>
+              <h2 id="tracking-heading">{home.trackingTeaser.heading}</h2>
+              <p>{home.trackingTeaser.blurb}</p>
+              <ButtonRow>
+                <ButtonLink to={home.trackingTeaser.cta.to}>{home.trackingTeaser.cta.label}</ButtonLink>
+              </ButtonRow>
+            </div>
+          )}
 
           <div className={s.nipponCard}>
             {/* NX's own mark, white for the dark band. */}
@@ -219,7 +222,7 @@ export default function Home() {
               loading="lazy"
               decoding="async"
             />
-            <h2>{home.nipponTeaser.heading}</h2>
+            <h2 id="nipponteaser-heading">{home.nipponTeaser.heading}</h2>
             <p>{home.nipponTeaser.blurb}</p>
             <FigureRow>
               {t.nippon.figures.slice(0, 3).map((figure) => (
