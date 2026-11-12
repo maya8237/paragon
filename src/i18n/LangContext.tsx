@@ -15,9 +15,9 @@ export const LANG_NAME: Record<Lang, string> = { en: 'English', he: 'עברית'
 
 /** The suggestion line is written in the language it offers. */
 export const LANG_HINT: Record<Lang, { text: string; cta: string }> = {
-  en: { text: 'This page is also available in English.', cta: 'View in English' },
-  he: { text: 'דף זה זמין גם בעברית.', cta: 'מעבר לעברית' },
-  ja: { text: 'このページは日本語でもご覧いただけます。', cta: '日本語で見る' },
+  en: { text: 'Also available in English', cta: 'Switch' },
+  he: { text: 'זמין גם בעברית', cta: 'מעבר' },
+  ja: { text: '日本語でもご覧いただけます', cta: '切り替え' },
 }
 
 export const DEFAULT_LANG: Lang = 'en'
