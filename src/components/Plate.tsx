@@ -34,7 +34,7 @@ const PHOTOS = {
   // The logistics centre, photographed on site. These are the smallest
   // photographs on the site, so they are only ever placed in a row where each
   // one renders a few hundred pixels wide at most.
-  'centre-forklift': { file: 'photos/centre-forklift.jpg', width: 246, height: 156 },
+  'centre-forklift': { file: 'photos/centre-forklift.webp', width: 1200, height: 800 },
   'centre-racking': { file: 'photos/centre-racking.jpg', width: 207, height: 156 },
 
   'projects-barge': { file: 'photos/projects-barge.jpg', width: 584, height: 405 },
