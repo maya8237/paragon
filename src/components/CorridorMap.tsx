@@ -176,7 +176,7 @@ export function CorridorMap({
                       to={hrefForNode(node.id)}
                       className={s.nodeLink}
                       onClick={() => onNodeClick?.(node.id)}
-                      aria-label={`${node.name} — ${node.role}. ${t.common.jumpToLocation}`}
+                      aria-label={`${node.name} – ${node.role}. ${t.common.jumpToLocation}`}
                     >
                       {marks}
                     </Link>

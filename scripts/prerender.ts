@@ -47,7 +47,7 @@ const entry = bundle.outputs.find((o) => o.kind === 'entry-point')!
 const { render } = (await import(entry.path)) as { render: (path: string) => string }
 
 /* 2. The shell. Bun writes asset URLs relative (`./index-abc.js`), which would
-      resolve against each page's own folder — pin them to the base. */
+      resolve against each page's own folder – pin them to the base. */
 const template = (await Bun.file(`${DIST}/index.html`).text()).replaceAll('="./', `="${BASE}`)
 
 const esc = (s: string) =>

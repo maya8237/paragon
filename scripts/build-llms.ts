@@ -34,7 +34,7 @@ function fullText(t: SiteContent, lang: 'en' | 'he'): string {
 
   h1(t.home.meta.title, '/')
   out.push(`${t.meta.tagline}\n`, ...t.home.hero.lede.map((p) => p + '\n'))
-  out.push(list(t.home.figures.map((f) => `${f.value} — ${f.label}`)))
+  out.push(list(t.home.figures.map((f) => `${f.value} – ${f.label}`)))
   for (const p of t.home.pillars) out.push(`## ${p.title}\n\n${p.blurb}\n`)
   out.push(`${t.home.hero.quoteCta.label}: ${t.home.hero.quoteCta.href}\n`)
 
@@ -80,7 +80,7 @@ function fullText(t: SiteContent, lang: 'en' | 'he'): string {
 
   h1(t.nippon.meta.title, '/nippon')
   out.push(t.nippon.body.paragraphs.join('\n\n') + '\n')
-  out.push(list(t.nippon.figures.map((f) => `${f.value} — ${f.label}`)))
+  out.push(list(t.nippon.figures.map((f) => `${f.value} – ${f.label}`)))
   out.push(prose(t.nippon.history), prose(t.nippon.warehousing))
   out.push(`## ${t.nippon.services.heading}\n`)
   for (const i of t.nippon.services.items) out.push(`### ${i.title}\n\n${i.body}\n`)
@@ -127,7 +127,7 @@ ${he.nav.primary.map((n) => `- [${n.label}](${page('he', n.to)})`).join('\n')}
 - [${he.home.hero.quoteCta.label}](${he.home.hero.quoteCta.href})
 `
 
-const full = `# ${en.meta.companyName} — full site text
+const full = `# ${en.meta.companyName} – full site text
 
 > ${summary}
 

@@ -110,7 +110,7 @@ const content: SiteContent = {
       {
         title: 'Supply Chain Management',
         blurb:
-          'On-site personnel embedded in your operation, and consulting across the complete SCM cycle — from analysing goals to building the infrastructure that supports them.',
+          'On-site personnel embedded in your operation, and consulting across the complete SCM cycle – from analysing goals to building the infrastructure that supports them.',
         to: '/scm',
         imageAlt: 'Interlocking steel chain links.',
       },
@@ -157,7 +157,7 @@ const content: SiteContent = {
     },
     cta: {
       heading: 'Ready to move your next shipment?',
-      blurb: 'Tell us what you are shipping and where — our team will come back with a tailored quote.',
+      blurb: 'Tell us what you are shipping and where – our team will come back with a tailored quote.',
     },
   },
 
@@ -165,7 +165,7 @@ const content: SiteContent = {
     meta: {
       title: 'Company Profile',
       description:
-        'Paragon Logistics Ltd. — industry veterans offering a profound and personal approach to the complete supply chain cycle, from a 3,000 m² logistics centre in central Israel.',
+        'Paragon Logistics Ltd. – industry veterans offering a profound and personal approach to the complete supply chain cycle, from a 3,000 m² logistics centre in central Israel.',
     },
     profile: {
       heading: 'Company Profile',
@@ -174,7 +174,7 @@ const content: SiteContent = {
         'With years of experience in all aspects of the international trade and logistics market we offer a profound and personal approach to the complete supply chain cycle for any size business.',
         'Our diversified service offering includes unique logistic consultation services, material management and warehousing facilities, traditional and tailored freight operations and customs clearance.',
         'We offer our customers a center of excellence they can partner with and benefit from full transparency and a sincere commitment to mutual success.',
-        'Our operations are grouped into three main activity centers — Logistic Center, Freight Operations and Consultation Services — that operate in full synergy to enhance your business through operational advantages and profit.',
+        'Our operations are grouped into three main activity centers – Logistic Center, Freight Operations and Consultation Services – that operate in full synergy to enhance your business through operational advantages and profit.',
       ],
     },
     sections: [
@@ -187,7 +187,7 @@ const content: SiteContent = {
         ],
       },
       {
-        heading: 'Our Logistic Center — an extension to your organization',
+        heading: 'Our Logistic Center – an extension to your organization',
         paragraphs: [
           'Paragon’s unique comprehensive approach to logistics has initiated our 3,000 square meter warehousing facility and logistic center. Strategically located in the center of Israel and easily accessible to importers and exporters alike, this center functions as a material management hub for inbound and outbound goods complementing all the traditional freight operations which we provide as well.',
         ],
@@ -200,7 +200,7 @@ const content: SiteContent = {
         ],
       },
       {
-        heading: 'Consulting — the full SCM Cycle',
+        heading: 'Consulting – the full SCM Cycle',
         paragraphs: [
           'The key to efficient supply chain management can be critical to a company’s operational profit. Paragon offers consultation services for the complete SCM cycle, adhering to thoroughly understanding the industry and company specific requirements then tailoring the required supply chain model to your needs.',
         ],
@@ -219,19 +219,19 @@ const content: SiteContent = {
       items: [
         {
           label:
-            'Authorised Economic Operator (AEO) Certification — Customs Broker and International Shipping',
+            'Authorised Economic Operator (AEO) Certification – Customs Broker and International Shipping',
           href: 'https://drive.google.com/file/d/1askTt-1V4HjjNGdTX-tziW6CUXyM17hQ/view',
         },
         {
-          label: 'Authorised Economic Operator (AEO) Certification — Warehouse',
+          label: 'Authorised Economic Operator (AEO) Certification – Warehouse',
           href: 'https://drive.google.com/file/d/1Qi_ecQnHWTEWQMvKK2FPqEC4I5HpezfR/view',
         },
         {
-          label: 'ISO9001 — English Certification',
+          label: 'ISO9001 – English Certification',
           href: 'https://drive.google.com/file/d/1bg6lKc9TE1Fa4br53aG11YFavHDzL4PU/view',
         },
         {
-          label: 'ISO9001 — Hebrew Certification',
+          label: 'ISO9001 – Hebrew Certification',
           href: 'https://drive.google.com/file/d/1pIC_9BHjrl9Nxrn4B5Wye60tiYxN6Aqg/view',
         },
         {
@@ -255,7 +255,7 @@ const content: SiteContent = {
     meta: {
       title: 'Supply Chain Management',
       description:
-        'On-site logistics personnel and full-cycle supply chain consulting — analysing needs and resources, identifying weak links, and building the infrastructure to support growth.',
+        'On-site logistics personnel and full-cycle supply chain consulting – analysing needs and resources, identifying weak links, and building the infrastructure to support growth.',
     },
     photo: {
       alt: 'Interlocking steel chain links.',
@@ -263,7 +263,7 @@ const content: SiteContent = {
     intro: {
       heading: 'Supply Chain Management',
       paragraphs: [
-        'Paragon offers the services of professionally trained personnel on site, and consulting across the complete supply chain cycle — two ways to bring the same expertise inside your operation.',
+        'Paragon offers the services of professionally trained personnel on site, and consulting across the complete supply chain cycle – two ways to bring the same expertise inside your operation.',
       ],
     },
     synchronizing: {
@@ -306,7 +306,7 @@ const content: SiteContent = {
       heading: 'Consulting Services',
       paragraphs: [
         'The key to successful SCM organization.',
-        'Paragon offers a professional eye that sees the whole picture — analyzes the organizational needs, existing personnel and resources, identifies weak links and strengthens them, and generally helps integrate all functional aspects to create a sound foundation for present operations and future growth.',
+        'Paragon offers a professional eye that sees the whole picture – analyzes the organizational needs, existing personnel and resources, identifies weak links and strengthens them, and generally helps integrate all functional aspects to create a sound foundation for present operations and future growth.',
         'We help assign supply chain personnel with diversified qualifications and tasks to work synergistically to achieve the corporate goals.',
         'Paragon analyzes the SCM organization for functions that may be dispersed, overlap or be overlooked; employees and resources that may be positioned or used ineffectively.',
         'Our services optimize the budget, functionality and results of the supply chain to build an infrastructure and implement processes that will contribute to the company’s business achievements.',
@@ -338,7 +338,7 @@ const content: SiteContent = {
     intro: {
       heading: 'Global Trade',
       paragraphs: [
-        'Paragon sees the globe from all angles making it possible for us to offer the best solution from any perspective — geographic, operational, commercial and political.',
+        'Paragon sees the globe from all angles making it possible for us to offer the best solution from any perspective – geographic, operational, commercial and political.',
         'We gather all the relevant parameters and process them to provide the best route and means of transportation within the schedule and budget limits. We create beneficial long term agreements for our customers’ routine import and export business activities; tailor project specific solutions and keep exploring new possibilities in the dynamic world of forwarding services.',
       ],
     },
@@ -366,7 +366,7 @@ const content: SiteContent = {
       {
         title: 'Air Freight',
         blurb:
-          'The entire scope of airfreight, traced 24/7, priced to cargo type, urgency and destination — including time critical shipments.',
+          'The entire scope of airfreight, traced 24/7, priced to cargo type, urgency and destination – including time critical shipments.',
         to: '/global-trade/air',
       },
       {
@@ -391,7 +391,7 @@ const content: SiteContent = {
       body: {
         heading: 'Ocean Freight',
         paragraphs: [
-          'Paragon is pleased to offer its customers the benefits of our special contacts with leading international ocean carriers worldwide. We operate the full range of shipments — FCL, LCL, consolidations — providing the ideal solution for each and every shipment.',
+          'Paragon is pleased to offer its customers the benefits of our special contacts with leading international ocean carriers worldwide. We operate the full range of shipments – FCL, LCL, consolidations – providing the ideal solution for each and every shipment.',
           'Our service includes a variety of flexible door-to-door multimodal solutions we tailor to your specific need. We customize the details and scope of the solution you require for each shipment, or provide cost-effective long-term fixed price agreements for ongoing business transactions.',
           'Our ocean freight services include all customs clearance requirements at departure and destination ports.',
         ],
@@ -458,7 +458,7 @@ const content: SiteContent = {
         heading: 'Charter Solutions',
         paragraphs: [
           'Paragon offers unconventional solutions for irregular cargo requirements. Standard cost of air and ocean freight to distant, difficult to access destinations may prove very costly and may have to rely on irregular schedules.',
-          'For such cases, and where economical and operational considerations are justified, we offer and operate — as part of our portfolio of services — tailored charter shipment with independent operators.',
+          'For such cases, and where economical and operational considerations are justified, we offer and operate – as part of our portfolio of services – tailored charter shipment with independent operators.',
         ],
       },
       photoAlts: [
@@ -480,7 +480,7 @@ const content: SiteContent = {
     },
     intro: {
       heading: 'Material Management & Distribution',
-      paragraphs: ['Profit from experience — save on resources.'],
+      paragraphs: ['Profit from experience – save on resources.'],
     },
     center: {
       heading: 'The logistic center',
@@ -526,7 +526,7 @@ const content: SiteContent = {
         'Logistics that enhance your marketing efforts.',
         'International exhibitions are an integral part of any company’s marketing and sales efforts. It is a costly venture in terms of time and resources. This is true for any operational activity which is not in the regular course of business, be it a special project or important demonstration.',
         'Exhibitions and special projects require forwarding expertise that goes beyond conventional bookings and routing. It often is multi-modal, the intricate and delicate exhibition structures are irregular in shape and packaging, the equipment is often shipped from various locations, special permits for demo equipment are required, plus logistic coordination for the actual set up. Timing is a key factor for cost-efficiency.',
-        'Experience can significantly reduce the overall costs and contribute to the success in logistic terms — prioritize deliveries, split or consolidate exhibition elements, equipment and material and, most important, get all the inevitable last minute parts on time for the opening.',
+        'Experience can significantly reduce the overall costs and contribute to the success in logistic terms – prioritize deliveries, split or consolidate exhibition elements, equipment and material and, most important, get all the inevitable last minute parts on time for the opening.',
       ],
     },
     exhibitionsPhotoAlts: [
@@ -579,7 +579,7 @@ const content: SiteContent = {
   nippon: {
     meta: {
       title: 'Nippon Express',
-      description: `Paragon Logistics Ltd. is proud to be an agent of NX Group (formerly Nippon Express Group) in Israel — the world’s ${nx.worldRank}th-largest freight forwarder, active in ${nx.countries} countries and regions with ${nx.employees} employees.`,
+      description: `Paragon Logistics Ltd. is proud to be an agent of NX Group (formerly Nippon Express Group) in Israel – the world’s ${nx.worldRank}th-largest freight forwarder, active in ${nx.countries} countries and regions with ${nx.employees} employees.`,
     },
     photo: {
       alt: 'A Nippon Cargo Airlines Boeing 747 freighter on the taxiway.',
@@ -590,7 +590,7 @@ const content: SiteContent = {
       heading: 'Nippon Express',
       paragraphs: [
         'Paragon Logistics Ltd. is proud to be an agent of Nippon Express in Israel.',
-        `NX Group — the Nippon Express Group, trading internationally under that name since 2022 — is one of the world’s largest logistics companies. It ranks ${nx.worldRank}th among the world’s freight forwarders, spans ${nx.countries} countries and regions through ${nx.locations} locations and ${nx.groupCompanies} group companies, and employs ${nx.employees} professionals — allowing it to offer highly competitive services and rates and to achieve economies of scale. Moreover, constantly looking for innovation, NX Group is ready to design “tailor made” services to fit any request of the customers and to increase the competitiveness of their products.`,
+        `NX Group – the Nippon Express Group, trading internationally under that name since 2022 – is one of the world’s largest logistics companies. It ranks ${nx.worldRank}th among the world’s freight forwarders, spans ${nx.countries} countries and regions through ${nx.locations} locations and ${nx.groupCompanies} group companies, and employs ${nx.employees} professionals – allowing it to offer highly competitive services and rates and to achieve economies of scale. Moreover, constantly looking for innovation, NX Group is ready to design “tailor made” services to fit any request of the customers and to increase the competitiveness of their products.`,
       ],
     },
     // Values come from NX Group's own published figures; the labels are ours.
@@ -611,7 +611,7 @@ const content: SiteContent = {
     warehousing: {
       heading: 'Warehousing and distribution',
       paragraphs: [
-        `NX Group’s Warehouse & Distribution service uses its network across ${nx.countries} countries and regions to combine inventory-based and cross-dock operations, just-in-time factory warehousing, service parts warehousing, reverse logistics, e-commerce fulfilment and integrated delivery — tailored to each customer’s business model.`,
+        `NX Group’s Warehouse & Distribution service uses its network across ${nx.countries} countries and regions to combine inventory-based and cross-dock operations, just-in-time factory warehousing, service parts warehousing, reverse logistics, e-commerce fulfilment and integrated delivery – tailored to each customer’s business model.`,
         'The group also invests in warehouse digital transformation, applying automation and digital tools to reduce manual handling and give customers visibility across the supply chain from procurement to final delivery.',
       ],
     },
@@ -628,7 +628,7 @@ const content: SiteContent = {
         },
         {
           title: 'Logistics solutions',
-          body: `Warehouse and delivery services covering ${nx.countries} countries and regions — inventory control, distribution processing, transport and delivery across the full supply chain.`,
+          body: `Warehouse and delivery services covering ${nx.countries} countries and regions – inventory control, distribution processing, transport and delivery across the full supply chain.`,
         },
         {
           title: 'Industries',
@@ -653,10 +653,10 @@ const content: SiteContent = {
     meta: {
       title: 'Contact us',
       description:
-        'Paragon Logistics — headquarters in Or Yehuda, logistics centre in Ramla, air branch at Ben Gurion Airport, ocean branch at Ashdod Port and ocean representative at Haifa Port.',
+        'Paragon Logistics – headquarters in Or Yehuda, logistics centre in Ramla, air branch at Ben Gurion Airport, ocean branch at Ashdod Port and ocean representative at Haifa Port.',
     },
     intro:
-      'Five sites across Israel — headquarters, the logistics centre, the air branch and two ports.',
+      'Five sites across Israel – headquarters, the logistics centre, the air branch and two ports.',
     locations: [
       {
         id: 'hq',
@@ -679,7 +679,7 @@ const content: SiteContent = {
       },
       {
         id: 'tlv',
-        name: 'Paragon Air Branch — Ben Gurion Airport, TLV',
+        name: 'Paragon Air Branch – Ben Gurion Airport, TLV',
         address: ['Swissport building', 'Derekh Khativa 8', 'Ben Gurion Airport (TLV)'],
         phones: [
           { label: 'Air Freight Services Tel', value: '+972-3-5369012' },
@@ -689,7 +689,7 @@ const content: SiteContent = {
       },
       {
         id: 'ashdod',
-        name: 'Paragon Ocean Branch — Ashdod Port',
+        name: 'Paragon Ocean Branch – Ashdod Port',
         address: ['4 Derech Laskov', 'Ashdod Port', 'Ashdod, 7749204', 'Israel'],
         phones: [
           { label: 'Tel', value: '+972-8-6717786' },
@@ -698,7 +698,7 @@ const content: SiteContent = {
       },
       {
         id: 'haifa',
-        name: 'Paragon Ocean Rep. — Haifa Port',
+        name: 'Paragon Ocean Rep. – Haifa Port',
         address: ['Haifa Port', 'Israel'],
         phones: [
           { label: 'Tel', value: '+972-3-7586470' },
@@ -733,9 +733,9 @@ const content: SiteContent = {
     features: {
       heading: 'What this site does',
       items: [
-        'Semantic landmarks — header, navigation, main and footer regions that screen readers can jump between, plus a “Skip to content” link as the first stop on the page.',
+        'Semantic landmarks – header, navigation, main and footer regions that screen readers can jump between, plus a “Skip to content” link as the first stop on the page.',
         'A visible focus outline on every interactive element, so keyboard-only navigation is always traceable.',
-        'Full keyboard operation — every link, button and language switch is reachable and operable without a mouse.',
+        'Full keyboard operation – every link, button and language switch is reachable and operable without a mouse.',
         'Text contrast meeting WCAG 2.1 AA against its background throughout.',
         'Respect for your operating system’s “reduce motion” setting: with it on, the animated network diagram renders immediately in its final state and no motion plays.',
         'Text that reflows without horizontal scrolling down to a 320 px viewport, and that survives browser zoom and enlarged text settings.',
