@@ -706,7 +706,7 @@ const content: SiteContent = {
         blurb:
           'High-value, time-critical shipments for fabs, equipment makers and their suppliers – moved securely and traced end to end.',
         lead: 'Semiconductor operations have no room for delay or damage. Tooling, equipment and spare parts are costly and urgent, and a day lost can stop a line.',
-        photoAlt: 'Two airfreight handlers in hi-vis vests moving a shrink-wrapped equipment crate on a pallet jack, with a cargo aircraft behind them',
+        photoAlt: 'A microprocessor on a circuit board, with the edge of a silicon wafer beside it',
         points: [
           {
             title: 'Time-critical delivery',
