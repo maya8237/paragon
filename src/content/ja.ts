@@ -28,7 +28,7 @@ const content: SiteContent = {
       { label: 'グローバル貿易', to: '/global-trade' },
       { label: 'ロジスティクス', to: '/logistics' },
       { label: '貨物追跡', to: '/tracking' },
-      { label: 'NX – Nippon Express', to: '/nippon' },
+      { label: 'NX – 日本通運', to: '/nippon' },
       { label: 'お問い合わせ', to: '/contact' },
     ],
     footer: [
@@ -147,18 +147,18 @@ const content: SiteContent = {
       cta: { label: '貨物追跡について', to: '/tracking' },
     },
     nipponTeaser: {
-      heading: 'NX – Nippon Express のイスラエル代理店',
+      heading: 'NX – 日本通運のイスラエル代理店',
       blurb: `世界第${nx.worldRank}位のフォワーダー。${nx.countries}の国と地域に${nx.locations}拠点、従業員は${nx.employees}名。`,
       cta: { label: 'パートナーシップについて', to: '/nippon' },
     },
     cargoPartner: {
       heading: 'cargo-partner のイスラエル代理店',
       blurb:
-        'NX – Nippon Express グループの一員である cargo-partner は、1983年から物流サービスを提供しています。航空・海上・陸上輸送と倉庫サービスに加え、情報技術とサプライチェーンの最適化に強みがあります。',
-      logoAlt: 'cargo-partner、NX – Nippon Express グループの一員',
+        'NX – 日本通運グループの一員である cargo-partner は、1983年から物流サービスを提供しています。航空・海上・陸上輸送と倉庫サービスに加え、情報技術とサプライチェーンの最適化に強みがあります。',
+      logoAlt: 'cargo-partner、NX – 日本通運グループの一員',
       cta: { label: 'www.cargo-partner.com', href: 'https://www.cargo-partner.com' },
     },
-    trust: ['AEO認証取得', 'ISO9001 & IQNET', 'NX – Nippon Express 代理店', 'cargo-partner 代理店'],
+    trust: ['AEO認証取得', 'ISO9001 & IQNET', 'NX – 日本通運代理店', 'cargo-partner 代理店'],
     sections: {
       servicesEyebrow: '事業内容',
       servicesHeading: 'サプライチェーン全体を、ひとつのパートナーで',
@@ -590,18 +590,18 @@ const content: SiteContent = {
 
   nippon: {
     meta: {
-      title: 'NX – Nippon Express',
+      title: 'NX – 日本通運',
       description: `パラゴン・ロジスティクス社は、NXグループ(旧 日本通運グループ)のイスラエル代理店です。世界第${nx.worldRank}位のフォワーダーで、${nx.countries}の国と地域で事業を展開し、従業員は${nx.employees}名です。`,
     },
     photo: {
       alt: '誘導路にいる日本貨物航空のボーイング747貨物機。',
       caption: '日本貨物航空の貨物機',
     },
-    logoAlt: 'NX – Nippon Express',
+    logoAlt: 'NX – 日本通運',
     body: {
-      heading: 'NX – Nippon Express',
+      heading: 'NX – 日本通運',
       paragraphs: [
-        'パラゴン・ロジスティクス社は、NX – Nippon Express のイスラエル代理店であることを誇りに思います。',
+        'パラゴン・ロジスティクス社は、NX – 日本通運のイスラエル代理店であることを誇りに思います。',
         `NXグループ(日本通運グループ、2022年から国際的にこの名称で事業を展開)は、世界有数の大手物流企業のひとつです。世界のフォワーダーの中で第${nx.worldRank}位に位置し、${nx.locations}拠点と${nx.groupCompanies}のグループ会社で${nx.countries}の国と地域に展開し、${nx.employees}名の専門人材を擁しています。これにより、競争力の高いサービスと料金を提供し、規模の経済を実現しています。さらに、常に革新を追い求め、お客様のあらゆるご要望に合わせた「オーダーメイド」のサービスを設計し、お客様の製品の競争力向上に取り組んでいます。`,
       ],
     },
