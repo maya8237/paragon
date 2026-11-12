@@ -10,7 +10,7 @@ import s from './CargoPartner.module.css'
  */
 export function CargoPartner({ data }: { data: SiteContent['home']['cargoPartner'] }) {
   return (
-    <aside className={s.band} aria-label={data.heading}>
+    <div className={s.band} role="group" aria-label={data.heading}>
       <img
         className={s.logo}
         src={assetPath('cargo-partner-logo.svg')}
@@ -25,6 +25,6 @@ export function CargoPartner({ data }: { data: SiteContent['home']['cargoPartner
         <p>{data.blurb}</p>
         <ExternalLink href={data.cta.href}>{data.cta.label}</ExternalLink>
       </div>
-    </aside>
+    </div>
   )
 }
