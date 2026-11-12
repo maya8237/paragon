@@ -107,6 +107,8 @@ export interface SiteContent {
     quote: string
     menu: string
     close: string
+    /** Accessible name for the language menu. */
+    language: string
   }
 
   footer: {

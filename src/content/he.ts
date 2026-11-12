@@ -68,6 +68,7 @@ const content: SiteContent = {
     darkMode: 'כהה',
     skipToContent: 'דילוג לתוכן',
     menu: 'תפריט',
+    language: 'שפה',
     close: 'סגירה',
   },
 

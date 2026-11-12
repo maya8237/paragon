@@ -61,6 +61,7 @@ const content: SiteContent = {
     darkMode: 'Dark',
     skipToContent: 'Skip to content',
     menu: 'Menu',
+    language: 'Language',
     close: 'Close',
   },
 

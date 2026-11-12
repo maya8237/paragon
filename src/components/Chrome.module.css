@@ -184,37 +184,115 @@
   }
 }
 
-/* Language switch */
-.langSwitch {
+/* Language menu: globe + current code, opening a short list. */
+.langMenu {
+  position: relative;
   flex: none;
   margin-inline-start: auto;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2xs);
 }
 
 @media (min-width: 64em) {
-  .langSwitch {
+  .langMenu {
     margin-inline-start: 0;
     padding-inline-start: var(--space-s);
     border-inline-start: var(--border);
   }
 }
 
-.langLink {
+.langButton {
   display: inline-flex;
   align-items: center;
+  gap: 0.4em;
   min-block-size: 2.75rem;
+  padding: var(--space-3xs) var(--space-xs);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  font: inherit;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--paragon);
-  text-decoration: none;
-  padding: var(--space-3xs) var(--space-2xs);
-  border-radius: var(--radius);
+  cursor: pointer;
 }
 
-.langLink:hover {
+.langButton:hover,
+.langButton[aria-expanded='true'] {
   background: var(--tint-soft);
+}
+
+.langButton svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+.langPanel {
+  position: absolute;
+  inset-block-start: calc(100% + 0.25rem);
+  inset-inline-end: 0;
+  z-index: 60;
+  min-inline-size: 11rem;
+  padding: var(--space-3xs);
+  background: var(--surface);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.langOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  min-block-size: 2.75rem;
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius);
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.langOption:hover {
+  background: var(--tint-soft);
+  color: var(--paragon);
+}
+
+.langOption[aria-current='true'] {
+  color: var(--paragon);
+  background: var(--tint);
+}
+
+/* Suggestion line above the header. */
+.hint {
+  background: var(--tint);
+  color: var(--text);
+  font-size: var(--step--1);
+  border-block-end: var(--border);
+}
+
+.hintInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-s);
+  min-block-size: 2.75rem;
+  padding-block: var(--space-3xs);
+}
+
+.hintCta {
+  font-weight: 700;
+  color: var(--paragon);
+}
+
+.hintClose {
+  min-inline-size: 2.75rem;
+  min-block-size: 2.75rem;
+  border: 0;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
 }
 
 /* Quote button — hidden on the narrowest phones, where it lives in the menu. */
@@ -318,18 +396,6 @@
 @media (min-width: 64em) {
   .mobileNav {
     display: none;
-  }
-}
-
-/* Two language links sit in the header: keep them compact on phones. */
-@media (max-width: 30em) {
-  .langLink {
-    padding-inline: 0.3rem;
-    font-size: 0.875rem;
-  }
-
-  .langSwitch {
-    gap: 0;
   }
 }
 

@@ -64,6 +64,7 @@ const content: SiteContent = {
     darkMode: 'ダーク',
     skipToContent: '本文へスキップ',
     menu: 'メニュー',
+    language: '言語',
     close: '閉じる',
   },
 
