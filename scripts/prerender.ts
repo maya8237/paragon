@@ -56,9 +56,12 @@ const template = (await Bun.file(`${DIST}/index.html`).text()).replaceAll('="./'
 const esc = (s: string) =>
   s.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
 
+const ORG_ID = url('#organization')
+const SITE_ID = url('#website')
+
 const organization = {
-  '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': ORG_ID,
   name: en.meta.companyName,
   alternateName: [he.meta.companyName, ja.meta.companyName],
   url: url(),
@@ -77,6 +80,64 @@ const organization = {
     ...(loc.phones[0] ? { telephone: loc.phones[0].value } : {}),
   })),
   hasCredential: en.about.certifications.items.map((c) => c.label),
+}
+
+const website = {
+  '@type': 'WebSite',
+  '@id': SITE_ID,
+  url: url(),
+  name: en.meta.companyName,
+  alternateName: [he.meta.companyName, ja.meta.companyName],
+  inLanguage: langs,
+  publisher: { '@id': ORG_ID },
+}
+
+/**
+ * Structured data for one page: the company, the site, the page itself and
+ * where it sits (Home › Global Trade › Air Freight), so search engines and AI
+ * tools can tell who the page is from and how the pages relate.
+ */
+function structuredData(lang: Lang, path: string, title: string, description: string): string {
+  const t = content[lang]
+  const self = url(pagePath(lang, path))
+  // '/global-trade/air' → ['/', '/global-trade', '/global-trade/air']
+  const trail = ['/', ...path.split('/').filter(Boolean).map((_, i, a) => '/' + a.slice(0, i + 1).join('/'))]
+    .filter((p, i) => i === 0 || p !== '/')
+    .map((p) => PAGES.find((d) => d.path === p))
+    .filter((d): d is (typeof PAGES)[number] => !!d)
+  const breadcrumb =
+    path === '/'
+      ? undefined
+      : {
+          '@type': 'BreadcrumbList',
+          '@id': `${self}#breadcrumb`,
+          itemListElement: trail.map((d, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: d.path === '/' ? t.meta.companyName : d.meta(t).title,
+            item: url(pagePath(lang, d.path)),
+          })),
+        }
+  const graph = [
+    organization,
+    website,
+    {
+      '@type': path === '/contact' ? 'ContactPage' : path === '/about' ? 'AboutPage' : 'WebPage',
+      '@id': self,
+      url: self,
+      name: title,
+      description,
+      inLanguage: lang,
+      isPartOf: { '@id': SITE_ID },
+      about: { '@id': ORG_ID },
+      publisher: { '@id': ORG_ID },
+      primaryImageOfPage: url('og.png'),
+      ...(breadcrumb ? { breadcrumb: { '@id': breadcrumb['@id'] } } : {}),
+    },
+    ...(breadcrumb ? [breadcrumb] : []),
+  ]
+  const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })
+  return `<script type="application/ld+json">${json.replaceAll('<', '\\u003c')}</script>`
 }
 
 function page({
@@ -119,10 +180,12 @@ function page({
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
     `<meta property="og:locale" content="${LOCALE[lang]}" />`,
+    ...langs.filter((l) => l !== lang).map((l) => `<meta property="og:locale:alternate" content="${LOCALE[l]}" />`),
     `<meta name="twitter:card" content="summary_large_image" />`,
-    isHome
-      ? `<script type="application/ld+json">${JSON.stringify(organization).replaceAll('<', '\\u003c')}</script>`
-      : '',
+    `<meta name="twitter:title" content="${esc(title)}" />`,
+    `<meta name="twitter:description" content="${esc(meta.description)}" />`,
+    `<meta name="twitter:image" content="${url('og.png')}" />`,
+    def ? structuredData(lang, path, title, meta.description) : '',
   ]
     .filter(Boolean)
     .join('\n    ')
@@ -155,13 +218,17 @@ await write(`${DIST}/404.html`, page({ lang: 'en', path: '/404', routePath: '/en
 
 /* 4. Sitemap and robots.txt — for the real site only. */
 if (!NOINDEX) {
-  const today = new Date().toISOString().slice(0, 10)
+  /*
+   * lastmod is when the site's content last changed, from git — not the build
+   * date, which changes on every deploy and teaches crawlers to ignore it.
+   */
+  const git = Bun.spawnSync(['git', 'log', '-1', '--format=%cs', '--', 'src', 'public'])
+  const changed = git.success ? git.stdout.toString().trim() : ''
   const entries = PAGES.flatMap(({ path }) =>
     langs.map(
       (lang) => `  <url>
     <loc>${url(pagePath(lang, path))}</loc>
-    <lastmod>${today}</lastmod>
-${langs.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url(pagePath(l, path))}" />`).join('\n')}
+${changed ? `    <lastmod>${changed}</lastmod>\n` : ''}${langs.map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${url(pagePath(l, path))}" />`).join('\n')}
     <xhtml:link rel="alternate" hreflang="x-default" href="${url(pagePath('en', path))}" />
   </url>`,
     ),
