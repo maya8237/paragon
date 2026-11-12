@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import s from './Home.module.css'
 import {
   ButtonLink,
-  DisabledButton,
   UnavailableNote,
   ButtonRow,
   CardLink,
@@ -205,9 +204,7 @@ export default function Home() {
             </span>
             <h2 id="tracking-heading">{home.trackingTeaser.heading}</h2>
             <p>{home.trackingTeaser.blurb}</p>
-            <ButtonRow>
-              <DisabledButton>{home.trackingTeaser.cta.label}</DisabledButton>
-            </ButtonRow>
+            {/* The "About tracking" button is hidden while tracking is down. */}
             <UnavailableNote>{t.tracking.unavailable}</UnavailableNote>
           </div>
 
