@@ -19,7 +19,7 @@ const PHOTOS = {
   // them in. Each was one frame of a two- or three-up collage with the gaps and
   // rounded corners baked into the image; separating them is what lets a page
   // size a photograph to its own needs.
-  'ocean-berth': { file: 'photos/ocean-berth.jpg', width: 425, height: 316 },
+  'ocean-berth': { file: 'photos/ocean-berth.webp', width: 1200, height: 800 },
   'ocean-terminal': { file: 'photos/ocean-terminal.jpg', width: 481, height: 316 },
   'ocean-craning': { file: 'photos/ocean-craning.jpg', width: 431, height: 319 },
   'air-freighter': { file: 'photos/air-freighter.jpg', width: 319, height: 342 },
