@@ -3,7 +3,7 @@ import createGlobe from 'cobe'
 import s from './HeroGlobe.module.css'
 
 /**
- * The hero illustration: the Earth turning slowly, drawn by COBE
+ * The hero illustration: the Earth swaying slowly east and west across Israel, drawn by COBE
  * (https://github.com/shuding/cobe, MIT, ~5 KB) in the site's blues, with
  * Tel Aviv marked in green and trade lanes arcing out to major hubs.
  *
@@ -134,7 +134,16 @@ function drawOverlay(ctx: CanvasRenderingContext2D, size: number, phi: number) {
 
 /** COBE's rotation that puts a longitude at the centre of the globe. */
 const facing = (lng: number) => (3 * Math.PI) / 2 - (lng * Math.PI) / 180
-const TURN_PER_SECOND = (Math.PI * 2) / 60 // one turn a minute
+/**
+ * The globe sways east and west across Israel rather than turning all the way
+ * round: a full turn leaves Israel, the lanes and the point of it all on the
+ * far side for half of every minute. This keeps them in view, and still reads
+ * as the Earth turning.
+ */
+const SWAY = 1.25 // radians each side of Tel Aviv (about 72°)
+const SWAY_PERIOD = 44 // seconds for a full there-and-back
+const swayPhi = (seconds: number) =>
+  facing(TEL_AVIV[1]) + SWAY * Math.sin((seconds / SWAY_PERIOD) * Math.PI * 2)
 
 export function HeroGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -149,8 +158,9 @@ export function HeroGlobe() {
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const px = () => Math.round(canvas.clientWidth * dpr)
-    // Start with Israel a little west of centre, so it turns into view.
-    let phi = facing(TEL_AVIV[1]) - 0.5
+    // Start a little west of centre, already turning east.
+    let clock = (Math.asin(-0.4 / SWAY) / (Math.PI * 2)) * SWAY_PERIOD
+    let phi = swayPhi(clock)
     const paint = () => {
       const size = px()
       if (overlay.width !== size) overlay.width = overlay.height = size
@@ -186,7 +196,8 @@ export function HeroGlobe() {
       const dt = last ? Math.min(now - last, 100) : 0
       last = now
       // West to east, as the real Earth turns.
-      phi += (dt / 1000) * TURN_PER_SECOND
+      clock += dt / 1000
+      phi = swayPhi(clock)
       globe.update({ phi })
       paint()
       frame = requestAnimationFrame(tick)
