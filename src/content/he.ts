@@ -596,8 +596,8 @@ const content: SiteContent = {
       description: `פראגון לוגיסטיקה גאה להיות סוכנת של קבוצת NX (לשעבר קבוצת Nippon Express) בישראל — שורשיה משנת 1872, פועלת ב-${nx.countries} מדינות ואזורים ומעסיקה ${nx.employees} עובדים.`,
     },
     photo: {
-      alt: 'מטוס מטען בואינג 747 של ניפון קרגו איירליינס על מסלול ההסעה.',
-      caption: 'מטוס מטען של ניפון קרגו איירליינס',
+      alt: 'מטוס מטען בואינג 747 של Nippon Cargo Airlines על מסלול ההסעה.',
+      caption: 'מטוס מטען של Nippon Cargo Airlines',
     },
     body: {
       heading: 'Nippon Express',
