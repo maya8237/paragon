@@ -28,7 +28,7 @@ const PHOTOS = {
   'drop-landing-craft': { file: 'photos/drop-landing-craft.webp', width: 1200, height: 800 },
   'drop-beach': { file: 'photos/drop-beach.webp', width: 1200, height: 800 },
   'charter-air': { file: 'photos/charter-air.jpg', width: 986, height: 519 },
-  'charter-road': { file: 'photos/charter-road.jpg', width: 349, height: 268 },
+  'charter-road': { file: 'photos/charter-road.webp', width: 1200, height: 800 },
   'charter-ocean': { file: 'photos/charter-ocean.jpg', width: 359, height: 255 },
 
   // The logistics centre, photographed on site. These are the smallest
